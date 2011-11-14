@@ -31,6 +31,9 @@ body {font: 12px Verdana, Sans-serif; background: #111; color: #000;}
             .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
                 .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
                 .mes th {display: none;}
-                .mes td:hover {background-color: #000; color: #fff; cursor: default;}
-                .mes td.editable {cursor: pointer !important;}
+                .mes td:hover {background-color: #000; color: #fff; cursor: pointer;}
+                .actividad1 {background-color: #f00;}
+                .actividad2 {background-color: #00f;}
+                .actividad3 {background-color: #0f0;}
+                .actividad4 {background-color: #0ff;}
 

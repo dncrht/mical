@@ -11,7 +11,8 @@ class HomeController < ApplicationController
       @año = params[:anyo].to_i
     end
 
-    @efemerides = Efemeride.order('dia')
+    efemerides = Efemeride.where('dia >= ? AND dia <= ?', "#@año-01-01", "#@año-12-31").order('dia')
+    @efemerides = Hash[*efemerides.collect { |e| [e.dia.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
   end
   
   def replace
