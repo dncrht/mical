@@ -1,6 +1,20 @@
-      <div class="field clearfix">
-        <%= label_tag :anyo, 'Año' %>
-        <%= select_tag :anyo, options_for_select(@años, @año) %>
-      </div>
-
-<%= pintar_calendario %>
+        <div id="centrador">
+            <div id="cabecera">
+                <!--span style="background-color: #f00">SNOW</span>
+                <span style="background-color: #00f">SURF</span>
+                <span style="background-color: #0f0">SKATE</span>
+                <span style="background-color: #0ff">SKIM</span-->
+                <h1>
+                <%= @hoy %>
+                </h1>
+                <h5></h5>
+                <%= form_tag replace_path, :method => :post do %>
+                    <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
+                    <%= hidden_field_tag :hoy %>
+                <% end %>
+            </div>
+            
+            <div id="cuerpo" class="clearfix">
+<%= pintar_calendario %>            
+            </div>
+        </div>

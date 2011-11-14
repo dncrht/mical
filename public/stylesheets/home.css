@@ -1,0 +1,36 @@
+/****************************************************************************/
+/* reset de propiedades */
+
+* {margin: 0; padding: 0;}
+img, a {border: none;}
+a:hover {text-decoration: none;}
+*:focus {outline: none;}
+em {text-decoration: underline; font-style: normal;}
+kbd {border: outset; font-size: 160%; line-height: 3em; padding: 0.3em 0 0.3em 0.5em; font-weight: bold;}
+
+/* propociona altura a divs sin altura con contenido flotado */
+/* http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+
+legend, hr {display: none;}
+ul {list-style: none;}
+
+/****************************************************************************/
+/* estilo del documento */
+
+body {font: 12px Verdana, Sans-serif; background: #111; color: #000;}
+    #centrador {margin: 40px auto; width: 696px;}
+        #cabecera {height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
+            h1 {color: #fff; position: absolute; bottom: 26px; left: 40px;}
+            h5 {color: #fff; position: absolute; bottom: 10px; left: 40px;}
+            select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
+        #cuerpo {background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
+            .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
+                .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
+                .mes th {display: none;}
+                .mes td:hover {background-color: #000; color: #fff; cursor: default;}
+                .mes td.editable {cursor: pointer !important;}
+

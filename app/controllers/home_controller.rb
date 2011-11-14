@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @año = Date.today.year
+    hoy = Date.today
+    @nombres_mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    @hoy = "#{hoy.day} de #{@nombres_mes[hoy.month]}"
+
+    @año = hoy.year
     @años = (1996..@año).to_a
 
     if params[:anyo].to_i >= 1996
@@ -9,12 +13,30 @@ class HomeController < ApplicationController
 
     @efemerides = Efemeride.order('dia')
   end
+  
+  def replace
+    unless params[:hoy].blank?
+      dia, actividad_id, resumen = params[:hoy].split "\t"
+      e = Efemeride.new #TODO ¿no funciona .create?
+      e.dia = dia
+      e.actividad_id = actividad_id
+      e.resumen = resumen
+      e.save
+
+      if params[:anyo].to_i >= 1996
+        redirect_to root_path << "?anyo=" << params[:anyo]
+        return
+      end
+    end
+    
+    redirect_to root_path
+  end
 
   def export
     out = ''
 
     Efemeride.order('dia').each do |e|
-      out << "#{e.dia}\t#{e.actividad}\t#{e.resumen}\n"
+      out << "#{e.dia}\t#{e.actividad_id}\t#{e.resumen}\n"
     end
 
     render :text => out #TODO csv attachment

@@ -16,12 +16,9 @@ def pintar_calendario
       dias_mes[2] = 29 #los años múltiplos de 4, son bisiestos
     end
 
-    #nombres de cada mes
-    nombres_mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-
     12.times do |mes|
 
-      out << "<table class='mes'><caption>#{nombres_mes[mes + 1]}</caption>"
+      out << "<table class='mes'><caption>#{@nombres_mes[mes + 1]}</caption>"
       out << '<tr><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sá</th><th>Do</th></tr><tr>'
 
       #deja tantos huecos como días del anterior mes sobraron
