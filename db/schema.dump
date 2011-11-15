@@ -1,0 +1,32 @@
+CREATE TABLE actividad
+(
+  id serial primary key,
+  nombre varchar
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE actividad OWNER TO pruebas;
+
+CREATE TABLE usuario
+(
+  id serial primary key,
+  email varchar,
+  clave varchar
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE usuario OWNER TO pruebas;
+
+CREATE TABLE efemeride
+(
+  dia date NOT NULL,
+  actividad_id integer,
+  resumen varchar,
+  CONSTRAINT efemeride_pkey PRIMARY KEY (dia)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE efemeride OWNER TO pruebas;
