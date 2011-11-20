@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Can I edit events?</th>
+    <th>Can I modify days?</th>
+    <th>Can I see the legend?</th>
+    <th>Can I see the description?</th>
+    <th>Can I export to CSV?</th>
+  </tr>
+  <% @usuarios.each do |u| %>
+    <tr>
+      <td><%= link_to u.email, edit_admin_usuario_path(u.id) %></td>
+      <td><%= u.can_edit_actividad %></td>
+      <td><%= u.can_edit_efemeride %></td>
+      <td><%= u.can_see_leyenda %></td>
+      <td><%= u.can_see_resumen %></td>
+      <td><%= u.can_download %></td>
+    </tr>
+  <% end %>
+</table>

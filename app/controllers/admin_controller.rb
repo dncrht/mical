@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
-  def index
-    @usuarios = Usuario.order('email')
+  before_filter :who_am_i
 
-    @actividades = Actividad.order('nombre')
+  def who_am_i
   end
 end

@@ -1,0 +1,22 @@
+<%= form_for(:admin, @usuario) do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :clave %>
+  <%= f.text_field :clave %>
+
+  <%= f.label :can_edit_actividad %>
+  <%= f.check_box :can_edit_actividad %>
+
+  <%= f.label :can_edit_efemeride %>
+  <%= f.check_box :can_edit_efemeride %>
+
+  <%= f.label :can_see_leyenda %>
+  <%= f.check_box :can_see_leyenda %>
+
+  <%= f.label :can_see_resumen %>
+  <%= f.check_box :can_see_resumen %>
+
+  <%= f.label :can_download %>
+  <%= f.check_box :can_download %>
+<% end %>
