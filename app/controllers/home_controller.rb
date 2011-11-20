@@ -39,14 +39,17 @@ class HomeController < ApplicationController
   def replace
     unless params[:hoy].blank?
       dia, actividad_id, resumen = params[:hoy].split "\t"
-      e = Efemeride.new #TODO ¿no funciona .create?
-      e.dia = dia
-      e.actividad_id = actividad_id
+      e = Efemeride.find_by_dia(dia)
+      if e.nil?
+        e = Efemeride.new #TODO ¿no funciona .create?
+        e.dia = dia
+      end
+      e.actividad_id = actividad_id #sólo permite una actividad por día
       e.resumen = resumen
       e.save
 
       if params[:anyo].to_i >= 1996
-        redirect_to root_path << "?anyo=" << params[:anyo]
+        redirect_to root_path << params[:anyo]
         return
       end
     end
