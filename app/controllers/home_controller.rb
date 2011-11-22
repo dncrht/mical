@@ -37,6 +37,8 @@ class HomeController < ApplicationController
 
   # POST /replace
   def replace
+    redirect_to root_path and return unless @logged_as.can_edit_efemeride
+
     unless params[:hoy].blank?
       dia, actividad_id, resumen = params[:hoy].split "\t"
       e = Efemeride.find_by_dia(dia)

@@ -33,7 +33,7 @@ def pintar_calendario
         clase = []
         if @efemerides.kind_of? Hash and @efemerides.include? hoy
           clase << "actividad#{@efemerides[hoy].actividad_id}"
-          titulo << @efemerides[hoy].resumen
+          titulo << @efemerides[hoy].resumen if @logged_as.can_see_resumen
         end
 
         unless titulo.empty?

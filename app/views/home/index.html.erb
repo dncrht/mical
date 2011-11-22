@@ -13,8 +13,10 @@
       <%= @hoy %>
     </h1>
     <h5></h5>
-    <%= form_tag replace_path, :method => :post do %>
-      <%= hidden_field_tag :hoy %>
+    <% if @logged_as.can_edit_efemeride %>
+      <%= form_tag replace_path, :method => :post do %>
+        <%= hidden_field_tag :hoy %>
+      <% end %>
     <% end %>
     <%= form_tag root_path, :method => :get do %>
       <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
