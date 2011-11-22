@@ -1,0 +1,23 @@
+<fieldset>
+  <%= form_tag login_path, :method => :post do %>
+
+    <% unless notice.blank? %>
+      <p class="error_explanation">
+        <%= notice %>
+      </p>
+    <% end %>
+
+    <p>
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+    </p>
+
+    <p>
+      <%= label_tag :clave %>
+      <%= text_field_tag :clave %>
+    </p>
+
+    <button type="submit">Entrar</button>
+
+  <% end %>
+</fieldset>

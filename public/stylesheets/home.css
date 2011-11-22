@@ -22,12 +22,14 @@ ul {list-style: none;}
 /* estilo del documento */
 
 body {font: 12px Verdana, Sans-serif; background: #111; color: #000;}
-    #centrador {margin: 40px auto; width: 696px;}
-        #cabecera {height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
+    #centrador {position: relative; margin: 0 auto; width: 696px;}
+        #logged_as {position: absolute; top: -40px; right: 30px; color: #fff;}
+            #logged_as a {color: #fff;}
+        #cabecera {margin-top: 40px; height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
             h1 {color: #fff; position: absolute; bottom: 26px; left: 40px;}
             h5 {color: #fff; position: absolute; bottom: 10px; left: 40px;}
             select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
-        #cuerpo {background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
+        #cuerpo {margin-bottom: 40px; background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
             .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
                 .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
                 .mes th {display: none;}

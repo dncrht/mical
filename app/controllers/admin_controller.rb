@@ -1,6 +1,12 @@
 class AdminController < ApplicationController
-  before_filter :who_am_i
+  before_filter :guest_restricted
 
-  def who_am_i
+  def guest_restricted
+    if @logged_as.email == 'guest'
+      render '/login', :layout => nil, :status => 403
+      return
+    end
+
+    #go on
   end
 end

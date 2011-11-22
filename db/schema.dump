@@ -24,7 +24,7 @@ WITH (
 );
 ALTER TABLE usuario OWNER TO pruebas;
 
-INSERT INTO usuario (id, email, clave, can_download, can_edit_actividad, cat_edit_efemeride, can_see_leyenda, can_see_resumen) VALUES (default, 'admin', 'admin', true, true, true, true, true);
+INSERT INTO usuario (id, email, clave, can_download, can_edit_actividad, cat_edit_efemeride, can_see_leyenda, can_see_resumen) VALUES (default, 'admin', '21232f297a57a5a743894a0e4a801fc3', true, true, true, true, true);
 INSERT INTO usuario (id, email, clave, can_download, can_edit_actividad, cat_edit_efemeride, can_see_leyenda, can_see_resumen) VALUES (default, 'guest', null, false, false, false, false, false);
 
 CREATE TABLE efemeride

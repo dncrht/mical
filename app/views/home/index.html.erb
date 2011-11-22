@@ -1,4 +1,13 @@
 <div id="centrador">
+  <p id="logged_as">
+    Welcome, <%= @logged_as.email %>.
+    <% if @logged_as.email == 'guest' %>
+      <a href="/admin/usuarios">Log in</a>
+    <% else %>
+      <%= link_to 'Logout', logout_path %>
+    <% end %>
+  </p>
+
   <div id="cabecera">
     <h1>
       <%= @hoy %>
