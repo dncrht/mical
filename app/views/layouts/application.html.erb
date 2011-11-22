@@ -3,34 +3,11 @@
   <head>
     <title>iCal</title>
     <%= stylesheet_link_tag :all %>
-    <%= javascript_include_tag :defaults %>
     <%= csrf_meta_tag %>
   </head>
   <body>
     <%= yield %>
-    <script type="text/javascript" src="/javascripts/jquery.js"></script>
-    <script type="text/javascript">
-      <!--
-      $(document).ready(function(){
-        $('td').mouseover(function(){
-          if ($(this).html() != '') {
-            var m = $(this).parents('table').children('caption').html();
-            $('h1').html( $(this).html() + ' de ' + m );
-            $('h5').html( $(this).attr('title') );
-          }
-        });
-        $('td').click(function(){
-          var dia = $(this).attr('data-dia');
-          actividad = prompt('Actividad (1 a 4) realizada el ' + dia);
-          if (actividad == null || actividad == '') return;
-          resumen = prompt('Resumen del ' + dia);
-          if (resumen == null || resumen == '') return;
-          $('#hoy').val(dia + "\t" + actividad + "\t" + resumen);
-          document.forms[0].submit();
-        });
-      });
-      -->
-    </script>
 
+    <%= javascript_include_tag 'jquery', 'home' %>
   </body>
 </html>
