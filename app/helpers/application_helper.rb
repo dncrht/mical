@@ -25,7 +25,7 @@ def pintar_calendario
       (wday - 1).times { out << '<td></td>' }
 
       dias_mes[mes + 1].times do |dia|
-        hoy = '%02d/%02d/%s' % [dia + 1, mes + 1, año]
+        hoy = '%s-%02d-%02d' % [año, mes +1, dia + 1]
 
         out << %(<td data-dia="#{hoy}")
 
