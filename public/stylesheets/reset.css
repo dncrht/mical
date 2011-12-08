@@ -1,0 +1,22 @@
+/****************************************************************************/
+/* reset de propiedades */
+
+* {margin: 0; padding: 0;}
+img, a {border: none;}
+a:hover {text-decoration: none;}
+*:focus {outline: none;}
+em {text-decoration: underline; font-style: normal;}
+kbd {border: outset; font-size: 160%; line-height: 3em; padding: 0.3em 0 0.3em 0.5em; font-weight: bold;}
+
+/* propociona altura a divs sin altura con contenido flotado */
+/* http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+
+legend, hr {display: none;}
+ul {list-style: none;}
+
+body {font: 14px Verdana, Sans-serif; background: #111; color: #000;}
+    #centerer {position: relative; margin: 0 auto; padding-top: 100px; width: 696px;}

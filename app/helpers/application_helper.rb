@@ -1,5 +1,5 @@
 module ApplicationHelper
-def pintar_calendario
+  def pintar_calendario
     out = ''
 
     dia1 = Date.new(@año, 1, 1)
@@ -32,7 +32,7 @@ def pintar_calendario
         titulo = []
         clase = []
         if @efemerides.kind_of? Hash and @efemerides.include? hoy
-          clase << "actividad#{@efemerides[hoy].actividad_id}"
+          clase << "activity#{@efemerides[hoy].actividad_id}"
           titulo << @efemerides[hoy].resumen if @logged_as.can_see_resumen
         end
 
@@ -54,6 +54,10 @@ def pintar_calendario
         wday += 1
 
       end
+
+      #rellena huecos como días faltan
+      (8 - wday).times { out << '<td></td>' }
+
       out << "</tr></table>\n"
     end
 

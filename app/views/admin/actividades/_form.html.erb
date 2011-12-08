@@ -1,0 +1,19 @@
+<%= form_for([:admin, @actividad]) do |f| %>
+  <% if @actividad.errors.any? %>
+    <p id="noticeAlert">Activity has <%= pluralize(@actividad.errors.count, 'error') %></p>
+  <% end %>
+
+  <p>
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </p>
+
+  <p>
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+  </p>
+
+  <p>
+    <%= submit_tag 'Save' %>
+  </p>
+<% end %>

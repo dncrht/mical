@@ -14,17 +14,17 @@
     <th>Can I export to CSV?</th>
     <th></th>
   </tr>
-  <% @usuarios.each do |u| %>
+  <% @usuarios.each do |i| %>
     <tr>
-      <td><%= link_to u.email, edit_admin_usuario_path(u.id) %></td>
-      <td><%= u.can_edit_actividad %></td>
-      <td><%= u.can_edit_efemeride %></td>
-      <td><%= u.can_see_leyenda %></td>
-      <td><%= u.can_see_resumen %></td>
-      <td><%= u.can_download %></td>
+      <td><%= link_to i.email, edit_admin_usuario_path(i.id) %></td>
+      <td><%= i.can_edit_actividad %></td>
+      <td><%= i.can_edit_efemeride %></td>
+      <td><%= i.can_see_leyenda %></td>
+      <td><%= i.can_see_resumen %></td>
+      <td><%= i.can_download %></td>
       <td>
-        <%= form_tag(admin_usuario_path(u.id), :method => :delete) do |f| %>
-          <%= submit_tag 'borrar', :confirm => "Clicking 'Yes' will delete user #{u.email}. Are you sure?" %>
+        <%= form_tag(admin_usuario_path(i.id), :method => :delete) do |f| %>
+          <%= submit_tag 'borrar', :confirm => "Clicking 'Yes' will delete user #{i.email}. Are you sure?" %>
         <% end %>
       </td>
     </tr>

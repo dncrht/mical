@@ -8,5 +8,6 @@ class AdminController < ApplicationController
     end
 
     #go on
+    @actividades = Actividad.all
   end
 end

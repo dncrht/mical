@@ -1,0 +1,24 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<%= link_to 'new activity', new_admin_actividad_path %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th></th>
+  </tr>
+  <% @actividades.each do |i| %>
+    <tr>
+      <td><%= link_to i.nombre, edit_admin_actividad_path(i.id) %></td>
+      <td><%= i.color %></td>
+      <td>
+        <%= form_tag(admin_actividad_path(i.id), :method => :delete) do |f| %>
+          <%= submit_tag 'borrar', :confirm => "Clicking 'Yes' will delete activity #{i.nombre}. Are you sure?" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

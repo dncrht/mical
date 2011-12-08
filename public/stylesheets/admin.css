@@ -1,0 +1,10 @@
+/****************************************************************************/
+/* estilo del documento */
+
+#logged_as {position: absolute; top: 0; right: 0; color: #fff;}
+    #logged_as a {color: #fff;}
+#tabs {}
+    #tabs a {float: left; margin-right: 5px; background: #ccc; padding: 5px 15px; color: #666; text-decoration: none;}
+    #tabs a.on {background: #fff; color: #111;}
+    #tabs a:hover {color: #111;}
+#content {background: #fff; padding: 20px;}

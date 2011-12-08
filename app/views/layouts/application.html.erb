@@ -2,8 +2,13 @@
 <html>
   <head>
     <title>iCal</title>
-    <%= stylesheet_link_tag :all %>
+    <%= stylesheet_link_tag 'reset', 'home' %>
     <%= csrf_meta_tag %>
+    <style>
+    <% @actividades.each do |i| %>
+      .activity<%= i.id %> {background: #<%= i.color %>;}
+    <% end %>
+    </style>
   </head>
   <body>
     <%= yield %>

@@ -3,7 +3,6 @@ $(document).ready(function(){
         if ($(this).html() != '') {
             var m = $(this).parents('table').children('caption').html();
             $('h1').html( $(this).html() + ' de ' + m );
-            $('h5').html( $(this).attr('title') );
         }
     });
     $('td').click(function(){

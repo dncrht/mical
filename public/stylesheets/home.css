@@ -1,41 +1,16 @@
 /****************************************************************************/
-/* reset de propiedades */
-
-* {margin: 0; padding: 0;}
-img, a {border: none;}
-a:hover {text-decoration: none;}
-*:focus {outline: none;}
-em {text-decoration: underline; font-style: normal;}
-kbd {border: outset; font-size: 160%; line-height: 3em; padding: 0.3em 0 0.3em 0.5em; font-weight: bold;}
-
-/* propociona altura a divs sin altura con contenido flotado */
-/* http://www.positioniseverything.net/easyclearing.html */
-.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
-.clearfix {display: inline-block;}
-* html .clearfix {height: 1%;}
-.clearfix {display: block;}
-
-legend, hr {display: none;}
-ul {list-style: none;}
-
-/****************************************************************************/
 /* estilo del documento */
 
-body {font: 12px Verdana, Sans-serif; background: #111; color: #000;}
-    #centrador {position: relative; margin: 0 auto; width: 696px;}
-        #logged_as {position: absolute; top: -40px; right: 30px; color: #fff;}
-            #logged_as a {color: #fff;}
-        #cabecera {margin-top: 40px; height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
-            h1 {color: #fff; position: absolute; bottom: 26px; left: 40px;}
-            h5 {color: #fff; position: absolute; bottom: 10px; left: 40px;}
-            select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
-        #cuerpo {margin-bottom: 40px; background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
-            .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
-                .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
-                .mes th {display: none;}
-                .mes td:hover {background-color: #000; color: #fff; cursor: pointer;}
-                .actividad1 {background-color: #f00;}
-                .actividad2 {background-color: #00f;}
-                .actividad3 {background-color: #0f0;}
-                .actividad4 {background-color: #0ff;}
-
+#logged_as {position: absolute; top: 0; right: 30px; color: #fff;}
+    #logged_as a {color: #fff;}
+#cabecera {height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
+    h1 {color: #fff; position: absolute; bottom: 26px; left: 40px;}
+    select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
+#cuerpo {position: relative; background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
+    .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
+        .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
+        .mes th {display: none;}
+        .mes td:hover {background-color: #000; color: #fff; cursor: pointer;}
+#leyenda {position: absolute; background: #fff; top: 100px;; left: -150px; width: 150px; padding: 20px; z-index: -1;}
+    #leyenda li {line-height: 1.5em;}
+    #leyenda span {float: left; width: 12px; height: 12px; margin-top: 6px; margin-right: 8px;}

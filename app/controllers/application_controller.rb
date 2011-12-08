@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     end
 
     #sigue con lo que estaba haciendo
+    @actividades = Actividad.all
   end
   
   def logout
