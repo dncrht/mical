@@ -16,6 +16,7 @@ class Admin::UsuariosController < AdminController
     if @usuario.save
       redirect_to admin_usuarios_path, :notice => 'User created'
     else
+      @usuario.clave = ''
       render 'new'
     end
   end
