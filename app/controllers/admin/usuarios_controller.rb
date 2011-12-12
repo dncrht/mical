@@ -2,7 +2,7 @@ class Admin::UsuariosController < AdminController
   before_filter :restricted
 
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.order('email')
   end
 
   def new

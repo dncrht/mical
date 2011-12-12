@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>iCal</title>
     <%= stylesheet_link_tag 'reset', 'home' %>
     <%= csrf_meta_tag %>
@@ -13,6 +14,6 @@
   <body>
     <%= yield %>
 
-    <%= javascript_include_tag 'jquery', 'home' %>
+    <%= javascript_include_tag 'jquery.min', 'rails', 'home' %>
   </body>
 </html>

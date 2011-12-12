@@ -1,62 +1,57 @@
 module ApplicationHelper
-  def pintar_calendario
+  def compose_calendar
     out = ''
 
-    dia1 = Date.new(@año, 1, 1)
-    año = @año
+    day1 = Date.new(@año, 1, 1)
+    year = @año
 
+    week_day = day1.wday
+    week_day = 7 if week_day == 0
 
-    wday = dia1.wday
-    wday = 7 if wday == 0
+    #number of days of each month
+    days_month = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    #días de cada mes
-    dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    if año % 4 == 0
-      dias_mes[2] = 29 #los años múltiplos de 4, son bisiestos
+    if year % 4 == 0
+      days_month[2] = 29 #los años múltiplos de 4, son bisiestos
     end
 
-    12.times do |mes|
+    12.times do |month|
 
-      out << "<table class='mes'><caption>#{@nombres_mes[mes + 1]}</caption>"
+      out << "<table class='month'><caption>#{@nombres_mes[month + 1]}</caption>"
       out << '<tr><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sá</th><th>Do</th></tr><tr>'
 
-      #deja tantos huecos como días del anterior mes sobraron
-      (wday - 1).times { out << '<td></td>' }
+      #we left as many blanks as last month's days are left
+      (week_day - 1).times { out << '<td></td>' }
 
-      dias_mes[mes + 1].times do |dia|
-        hoy = '%s-%02d-%02d' % [año, mes +1, dia + 1]
+      days_month[month + 1].times do |day|
+        hoy = '%s-%02d-%02d' % [year, month +1, day + 1]
 
-        out << %(<td data-dia="#{hoy}")
+        out << %(<td data-day="#{hoy}")
 
-        titulo = []
-        clase = []
+        classes = ['day']
         if @efemerides.kind_of? Hash and @efemerides.include? hoy
-          clase << "activity#{@efemerides[hoy].actividad_id}"
-          titulo << @efemerides[hoy].resumen if @logged_as.can_see_resumen
+          classes << "activity#{@efemerides[hoy].actividad_id}"
+          out << %( data-activity="#{@efemerides[hoy].actividad_id}")
+          out << %( title="#{@efemerides[hoy].resumen}") if @logged_as.can_see_resumen
         end
 
-        unless titulo.empty?
-          out << %( title="#{titulo.join(', ')}")
+        unless classes.empty?
+          out << %( class="#{classes.join(' ')}")
         end
 
-        unless clase.empty?
-          out << %( class="#{clase.join(' ')}")
-        end
+        out << ">#{day + 1}</td>"
 
-        out << ">#{dia + 1}</td>"
-
-        if wday == 7
+        if week_day == 7
           out << "</tr>\n<tr>"
-          wday = 0
+          week_day = 0
         end
 
-        wday += 1
+        week_day += 1
 
       end
 
-      #rellena huecos como días faltan
-      (8 - wday).times { out << '<td></td>' }
+      #we fill with as many blanks as days are left
+      (8 - week_day).times { out << '<td></td>' }
 
       out << "</tr></table>\n"
     end

@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>iCal - Administration</title>
     <%= stylesheet_link_tag 'reset', 'admin' %>
     <%= csrf_meta_tag %>
-    <style type="text/css">
-<% @actividades.each do |i| %>
-        .activity<%= i.id %> {background: #<%#= i.color %>;}
-<% end %>
-    </style>
   </head>
   <body>
     <div id="centerer">
       <p id="logged_as">
-        Welcome, <%= @logged_as.email %> |
+        Welcome, <strong><%= @logged_as.email %></strong> |
         <%= link_to 'Back to calendar', root_path %> |
         <%= link_to 'Logout', logout_path %>
       </p>
+
       <ul id="tabs" class="clearfix">
         <li><%= link_to 'Information', admin_path, :class => ((@tab.nil?) ? 'on' : nil) %></li>
         <% if @logged_as.email == 'admin' %>
@@ -24,6 +21,7 @@
         <% end %>
         <li><%= link_to 'Activities', admin_actividades_path, :class => ((@tab == :activities) ? 'on' : nil) %></li>
       </ul>
+
       <div id="content">
         <%= yield %>
       </div>

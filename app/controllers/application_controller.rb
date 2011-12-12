@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
 
     #sigue con lo que estaba haciendo
-    @actividades = Actividad.all
+    @actividades = Actividad.order('nombre')
   end
   
   def logout
@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
       return
     end
 
-    redirect_to root_path
+    redirect_to admin_path
   end
 end

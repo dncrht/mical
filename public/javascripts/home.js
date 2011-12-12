@@ -1,17 +1,35 @@
 $(document).ready(function(){
-    $('td').mouseover(function(){
-        if ($(this).html() != '') {
-            var m = $(this).parents('table').children('caption').html();
-            $('h1').html( $(this).html() + ' de ' + m );
+    $('.day').click(function(e){
+        $('#replace').css('top', e.pageY);
+        $('#replace').css('left', e.pageX);
+
+        if ($(this).attr('data-activity')) {
+            $('.delete').show();
+        } else {
+            $('.delete').hide();
         }
+        
+        $('#replace').toggle();
+        if (!$('#replace').is(':visible')) return;
+
+        $('#activity_id option[value=' + $(this).attr('data-activity') + ']').attr('selected', true);
+        $('#resumen').html($(this).attr('title'));
+        $('#day').val($(this).attr('data-day'));
     });
-    $('td').click(function(){
-        var dia = $(this).attr('data-dia');
-        actividad = prompt('Actividad (1 a 4) realizada el ' + dia);
-        if (actividad == null || actividad == '') return;
-        resumen = prompt('Resumen del ' + dia);
-        if (resumen == null || resumen == '') return;
-        $('#hoy').val(dia + "\t" + actividad + "\t" + resumen);
-        document.forms[0].submit();
+
+    $('#cancel').click(function(){
+        $('#replace').hide();
+    });
+
+    $('input.delete').click(function(){
+        $('button.delete').attr('disabled', null);
+    });
+
+    $('button.delete').click(function(){
+        if (!confirm('Are you sure?')) {
+            return;
+        }
+        $('input[name=_method]').val('delete');
+        $('#replace form').submit();
     });
 });

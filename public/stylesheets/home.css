@@ -5,12 +5,19 @@
     #logged_as a {color: #fff;}
 #cabecera {height: 110px; background: url(/images/cabecera.png) no-repeat; position: relative; -moz-border-radius-topleft: 30px; -moz-border-radius-topright: 30px;}
     h1 {color: #fff; position: absolute; bottom: 26px; left: 40px;}
-    select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
+    #cabecera select {border: none; background: #fff; color: #000; position: absolute; bottom: 31px; right: 40px;}
 #cuerpo {position: relative; background: #fff url(/images/hoja.png) repeat-x; padding: 40px 0 0 40px;}
-    .mes {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
-        .mes caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
-        .mes th {display: none;}
-        .mes td:hover {background-color: #000; color: #fff; cursor: pointer;}
+    .month {margin: 0 auto; float: left; height: 160px; width: 162px; display: block;}
+        .month caption {border-bottom: 1px solid #000; text-align: left; font-style: italic; font-weight: bold; font-size: 20px;}
+        .month th {display: none;}
+        td.day:hover {background-color: #000; color: #fff; cursor: pointer;}
 #leyenda {position: absolute; background: #fff; top: 100px;; left: -150px; width: 150px; padding: 20px; z-index: -1;}
     #leyenda li {line-height: 1.5em;}
     #leyenda span {float: left; width: 12px; height: 12px; margin-top: 6px; margin-right: 8px;}
+#replace {position: absolute; display: none; border: 2px solid #111; background: #fff; padding: 10px;}
+    #replace span {float: right; cursor: pointer;}
+    #replace p {margin: 10px;}
+    label, textarea, input {width: 200px; display: inline-block;}
+    textarea {vertical-align: top;}
+    .button {width: 120px; display: inline-block;}
+    .delete {display: none;}

@@ -35,19 +35,18 @@ class HomeController < ApplicationController
     end
   end
 
-  # POST /replace
+  # PUT /action
   def replace
     redirect_to root_path and return unless @logged_as.can_edit_efemeride
 
-    unless params[:hoy].blank?
-      dia, actividad_id, resumen = params[:hoy].split "\t"
-      e = Efemeride.find_by_dia(dia)
+    unless params[:day].blank?
+      e = Efemeride.find_by_dia(params[:day])
       if e.nil?
-        e = Efemeride.new #TODO ¿no funciona .create?
-        e.dia = dia
+        e = Efemeride.new #TODO .create doesn't work?
+        e.dia = params[:day]
       end
-      e.actividad_id = actividad_id #sólo permite una actividad por día
-      e.resumen = resumen
+      e.actividad_id = params[:activity_id] #there is only one activity per day
+      e.resumen = params[:resumen]
       e.save
 
       if params[:anyo].to_i >= 1996
@@ -55,7 +54,24 @@ class HomeController < ApplicationController
         return
       end
     end
-    
+
+    redirect_to root_path
+  end
+
+  # DELETE /action
+  def destroy
+    redirect_to root_path and return unless @logged_as.can_edit_efemeride
+
+    unless params[:day].blank?
+      e = Efemeride.find_by_dia(params[:day])
+      e.delete
+    end
+
+    if params[:anyo].to_i >= 1996
+      redirect_to root_path << params[:anyo]
+      return
+    end
+
     redirect_to root_path
   end
 
