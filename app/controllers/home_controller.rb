@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   # GET /:anyo
   def index
     hoy = Date.today
+    @today = hoy
     @año = hoy.year
 
     if params[:anyo].to_i == @año #redirigir a / si el año es el actual

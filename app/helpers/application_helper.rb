@@ -17,8 +17,10 @@ module ApplicationHelper
 
     12.times do |month|
 
-      out << "<table class='month'><caption>#{@nombres_mes[month + 1]}</caption>"
-      out << '<tr><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sá</th><th>Do</th></tr><tr>'
+      out << %(<table class="month)
+      out << ' current' if (month + 1) == @today.month
+      out << %("><caption>#{@nombres_mes[month + 1]}</caption>)
+      out << '<tr><th>lu</th><th>ma</th><th>mi</th><th>ju</th><th>vi</th><th>sá</th><th>do</th></tr><tr>'
 
       #we left as many blanks as last month's days are left
       (week_day - 1).times { out << '<td></td>' }
@@ -34,6 +36,8 @@ module ApplicationHelper
           out << %( data-activity="#{@efemerides[hoy].actividad_id}")
           out << %( title="#{@efemerides[hoy].resumen}") if @logged_as.can_see_resumen
         end
+
+        classes << 'current' if day == @today.day and (month + 1) == @today.month
 
         unless classes.empty?
           out << %( class="#{classes.join(' ')}")

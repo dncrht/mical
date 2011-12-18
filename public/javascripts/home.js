@@ -1,15 +1,12 @@
 $(document).ready(function(){
     $('.day').click(function(e){
-        $('#replace').css('top', e.pageY);
-        $('#replace').css('left', e.pageX);
-
         if ($(this).attr('data-activity')) {
             $('.delete').show();
         } else {
             $('.delete').hide();
         }
         
-        $('#replace').toggle();
+        $('#replace').slideToggle();
         if (!$('#replace').is(':visible')) return;
 
         $('#activity_id option[value=' + $(this).attr('data-activity') + ']').attr('selected', true);
@@ -18,7 +15,7 @@ $(document).ready(function(){
     });
 
     $('#cancel').click(function(){
-        $('#replace').hide();
+        $('#replace').slideToggle();
     });
 
     $('input.delete').click(function(){
