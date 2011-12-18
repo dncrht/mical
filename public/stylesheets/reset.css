@@ -7,6 +7,7 @@ a:hover {text-decoration: none;}
 *:focus {outline: none;}
 em {text-decoration: underline; font-style: normal;}
 kbd {border: outset; font-size: 160%; line-height: 3em; padding: 0.3em 0 0.3em 0.5em; font-weight: bold;}
+table {border-spacing: 0; border-collapse: 0;}
 
 /* propociona altura a divs sin altura con contenido flotado */
 /* http://www.positioniseverything.net/easyclearing.html */
@@ -18,5 +19,5 @@ kbd {border: outset; font-size: 160%; line-height: 3em; padding: 0.3em 0 0.3em 0
 legend, hr {display: none;}
 ul {list-style: none;}
 
-body {font: 14px Verdana, Sans-serif; background: #111; color: #000;}
-    #centerer {position: relative; margin: 0 auto; padding-top: 100px; width: 696px;}
+body {font: 14px Helvetica, Arial, Sans-serif; background: #111; color: #000;}
+    #centerer {position: relative; margin: 0 auto; width: 748px;}
