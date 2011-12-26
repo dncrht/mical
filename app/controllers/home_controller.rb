@@ -12,7 +12,6 @@ class HomeController < ApplicationController
     end
 
     @nombres_mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    @hoy = "#{hoy.day} de #{@nombres_mes[hoy.month]}"
     @años = (1996..@año).to_a
 
     if params[:anyo].to_i >= 1996 #mejorar validación

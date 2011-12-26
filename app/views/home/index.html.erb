@@ -10,9 +10,10 @@
   </p>
 
   <div id="cabecera">
-    <h1>
-      <%= @hoy %>
-    </h1>
+    <div id="today">
+      <h1><%= @today.day %></h1><h2><%= @nombres_mes[@today.month] %></h2>
+    </div>
+    
     <%= form_tag root_path, :method => :get do %>
       <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
     <% end %>
