@@ -13,7 +13,7 @@
     <div id="today">
       <h1><%= @today.day %></h1><h2><%= @nombres_mes[@today.month] %></h2>
     </div>
-    
+
     <%= form_tag root_path, :method => :get do %>
       <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
     <% end %>
@@ -33,27 +33,23 @@
     <% if @logged_as.can_edit_efemeride %>
       <div id="replace">
         <%= form_tag action_path, :method => :put do %>
-          <p>
-            <%= label_tag :activity_id %>
-            <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
-          </p>
-          <p>
-            <%= label_tag :resumen %>
-            <%= text_area_tag :resumen %>
-          </p>
+          <div id="input">
+            <p>
+              <%= label_tag :activity_id %>
+              <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
+            </p>
+            <p>
+              <%= label_tag :resumen %>
+              <%= text_area_tag :resumen %>
+            </p>
 
-          <%= hidden_field_tag :day %>
-
-          <p class="button">
-            <button type="submit" id="save">Save</button>
-          </p>
-          <p class="button">
-            <button type="button" id="cancel">Cancel</button>
-          </p>
-          <p class="button">
-            <input type="checkbox" class="delete">
-            <button type="button" class="delete" disabled="true">Delete</button>
-          </p>
+            <%= hidden_field_tag :day %>
+          </div>
+          <div id="buttons">
+              <button type="submit" id="save">Save</button>
+              <button type="button" id="cancel">Cancel</button>
+              <button type="button" id="delete">Delete</button>
+          </div>
         <% end %>
       </div>
     <% end %>

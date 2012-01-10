@@ -17,6 +17,8 @@ module ApplicationHelper
 
     12.times do |month|
 
+      out << '<div class="clearfix">' if month % 4 == 0
+
       out << %(<table class="month)
       out << ' current' if (month + 1) == @today.month
       out << %("><tr class="caption"><th colspan="7">#{@nombres_mes[month + 1]}</th></tr>)
@@ -58,8 +60,31 @@ module ApplicationHelper
       (8 - week_day).times { out << '<td></td>' }
 
       out << "</tr></table>\n"
-    end
 
+      out << '</div>' if (month + 1) % 4 == 0
+    end
+    out << '</div>'
+
+    out.html_safe
+  end
+
+  # Cose un bloque en DIVs, cada X iteraciones
+  # No podemos redefinirlo como un método de Array ya que no tiene disponible with_output_buffer
+  # http://blog.agile-pandas.com/2011/01/13/rails-capture-vs-with-output-buffer
+  # http://asciicasts.com/episodes/208-erb-blocks-in-rails-3
+  def each_with_wrapper(object, per_row=4, clazz='') #el último parámetro &block) es opcional
+    return if object.nil?
+
+    out = ''
+    i = 0
+    object.each do |o|
+      out << %(<div class="#{clazz}">) if i % per_row == 0
+      out << with_output_buffer { yield o } #with_output_buffer(&block) : requiere un bloque pero nuestro código necesita i así que usamos block.call(i) oséase, yield
+      i += 1
+      out << '</div>' if i % per_row == 0
+    end
+    out << '</div>' if i % per_row != 0
+    
     out.html_safe
   end
 end

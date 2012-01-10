@@ -10,4 +10,8 @@ class AdminController < ApplicationController
     #go on
     @actividades = Actividad.all
   end
+
+  def index
+    @usuarios = Usuario.all
+  end
 end

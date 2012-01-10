@@ -14,12 +14,12 @@
         <%= link_to 'Logout', logout_path %>
       </p>
 
-      <ul id="tabs" class="clearfix">
-        <li><%= link_to 'Information', admin_path, :class => ((@tab.nil?) ? 'on' : nil) %></li>
+      <ul class="tabrow">
+        <li class="<%= ((@tab.nil?) ? 'selected' : nil) %>"><%= link_to 'Information', admin_path %></li>
         <% if @logged_as.email == 'admin' %>
-          <li><%= link_to 'Users', admin_usuarios_path, :class => ((@tab == :users) ? 'on' : nil) %></li>
+          <li class="<%= ((@tab == :users) ? 'selected' : nil) %>"><%= link_to 'Users', admin_usuarios_path %></li>
         <% end %>
-        <li><%= link_to 'Activities', admin_actividades_path, :class => ((@tab == :activities) ? 'on' : nil) %></li>
+        <li class="<%= ((@tab == :activities) ? 'selected' : nil) %>"><%= link_to 'Activities', admin_actividades_path %></li>
       </ul>
 
       <div id="content">

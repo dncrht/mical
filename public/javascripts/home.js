@@ -1,9 +1,9 @@
 $(document).ready(function(){
     $('.day').click(function(e){
         if ($(this).attr('data-activity')) {
-            $('.delete').show();
+            $('#delete').show();
         } else {
-            $('.delete').hide();
+            $('#delete').hide();
         }
         
         $('#replace').slideToggle();
@@ -18,11 +18,7 @@ $(document).ready(function(){
         $('#replace').slideToggle();
     });
 
-    $('input.delete').click(function(){
-        $('button.delete').attr('disabled', null);
-    });
-
-    $('button.delete').click(function(){
+    $('#delete').click(function(){
         if (!confirm('Are you sure?')) {
             return;
         }
