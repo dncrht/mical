@@ -1,6 +1,3 @@
-/****************************************************************************/
-/* estilo del documento */
-
 #logged_as {margin-right: 30px; color: #fff; text-align: right;}
     #logged_as a {color: #fff;}
 #cabecera {margin-top: 20px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
@@ -15,28 +12,27 @@
         .caption th {padding: 4px; background: #dedede; text-align: left; font-weight: bold; font-size: 16px; color: #1c1c1c; border-right: 1px solid #d5d5d5;}
         .weekdays th {color: #b6b6b6; background: #dedede; font-weight: normal; font-size: 11px; border-bottom: 1px solid #d5d5d5;}
             .last {border-right: 1px solid #d5d5d5;}
-        .current th {background: #63a4e6; color: #fff;}
+        .current .caption th {background: #4fabee; color: #fff;}
+        .current .caption th {background: -moz-linear-gradient(top, #4fabee, #5283df);}
+        .current .caption th {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
+        .current .weekdays th {background: #5283df; color: #fff;}
         td {border: 1px solid #d5d5d5; border-top: 0; border-left: 0; color: #7b7b7b; text-align: center;}
-        td.current {font-weight: bold; color: #1c1c1c;}
-        td.day:hover {background-color: #1c1c1c; color: #fff; cursor: pointer;}
-#leyenda {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 20px; border-radius: 14px 0 0 14px;}
+        td.current {font-weight: bold; color: #4f97e0;}
+        td.day:hover {background: #4fabee; color: #fff; cursor: pointer;}
+        td.day:hover {background: -moz-linear-gradient(top, #4fabee, #5283df);}
+        td.day:hover {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
+        #leyenda {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 20px; border-radius: 14px 0 0 14px;}
 #leyenda {background: -moz-linear-gradient(right, #363636 0px, #fff 10px);}
 #leyenda {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
     #leyenda li {line-height: 1.5em;}
     #leyenda span {float: left; width: 12px; height: 12px; margin-top: 6px; margin-right: 8px;}
-#replace {position: absolute; display: xnone; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #111; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
+#replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #111; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
     #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
         #replace p {margin-bottom: 10px;}
         label {line-height: 2em; display: block;}
         textarea, #replace select {width: 270px; display: block; padding: 6px; border: 1px solid #d5d5d5;}
     #buttons {float: right; width: 100px; padding: 10px;}
-        button {width: 100px; height: 40px; margin-bottom: 15px; font-weight: bold; display: block; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); border-style: solid; border-width: 1px; border-radius: 6px; border-color: #50A3C8 #297CB4 #083F6F; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); color: #fff; box-sizing: border-box;}
-button {background: -moz-linear-gradient(top,white,#72C6E4 4%,#0C5FA5);}
-button {background: -webkit-gradient(linear,left top, left bottom,from(white),to(#0C5FA5),color-stop(0.03, #72C6E4));}
-button:hover {border-color: #1EAFDC #1193D5 #035592;}
-button:hover {background: -moz-linear-gradient(top,white,#2BCEF3 4%,#057FDB);}
-button:hover {background: -webkit-gradient(linear,left top, left bottom,from(white),to(#057FDB),color-stop(0.03, #2BCEF3));}
-
-
-}
-
+        button {width: 100px; height: 40px; margin-bottom: 15px; font-weight: bold; display: block; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); border-style: solid; border-width: 1px; border-radius: 6px; border-color: #c5372f #a23027 #7b301f; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); color: #fff;}
+button {background: -moz-linear-gradient(top,#d54e49 4%,#a23027);}
+button {background: -webkit-gradient(linear,left top, left bottom,from(#d54e49),to(#a23027));}
+button:hover {background: #c5372f;}

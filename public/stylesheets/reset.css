@@ -1,13 +1,9 @@
-/****************************************************************************/
-/* reset de propiedades */
-
 * {margin: 0; padding: 0;}
 img, a {border: none;}
 a:hover {text-decoration: none;}
 *:focus {outline: none;}
 table {border-spacing: 0; border-collapse: 0;}
 
-/* propociona altura a divs sin altura con contenido flotado */
 /* http://www.positioniseverything.net/easyclearing.html */
 .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .clearfix {display: inline-block;}
