@@ -1,44 +1,66 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
-
 <%= form_for([:admin, @usuario]) do |f| %>
-  <p>
+  <% if notice %>
+    <div class="alert-message warning"><%= notice %></div>
+  <% end %>
+
+  <% if @usuario.errors.any? %>
+    <div class="alert-message block-message error">User has <%= pluralize(@usuario.errors.count, 'error') %></div>
+  <% end %>
+
+  <div class="clearfix">
     <%= f.label :email %>
-    <%= f.text_field :email %>
-  </p>
+    <div class="input">
+      <%= f.text_field :email %>
+    </div>
+  </div>
 
-  <p>
+  <div class="clearfix">
     <%= f.label :clave %>
-    <%= f.password_field :clave %>
-  </p>
+    <div class="input">
+      <%= f.password_field :clave %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.check_box :can_edit_actividad %>
-    <%= f.label :can_edit_actividad %>
-  </p>
+  <div class="clearfix">
+    <label>Permissions</label>
+    <div class="input">
+      <ul class="inputs-list">
+        <li>
+          <label>
+            <%= f.check_box :can_edit_actividad %>
+            <span>Can edit activity</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= f.check_box :can_edit_efemeride %>
+            <span>Can edit day</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= f.check_box :can_see_leyenda %>
+            <span>Can see legend</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= f.check_box :can_see_resumen %>
+            <span>Can see resumen</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= f.check_box :can_download %>
+            <span>Can download</span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <p>
-    <%= f.check_box :can_edit_efemeride %>
-    <%= f.label :can_edit_efemeride %>
-  </p>
-
-  <p>
-    <%= f.check_box :can_see_leyenda %>
-    <%= f.label :can_see_leyenda %>
-  </p>
-
-  <p>
-    <%= f.check_box :can_see_resumen %>
-    <%= f.label :can_see_resumen %>
-  </p>
-
-  <p>
-    <%= f.check_box :can_download %>
-    <%= f.label :can_download %>
-  </p>
-
-  <p>
-    <%= submit_tag 'Save' %>
-  </p>
+  <div class="actions">
+    <%= submit_tag 'Save', :class => 'btn primary' %>
+    <%= link_to 'Cancel', admin_usuarios_path, :class => 'btn' %>
+  </div>
 <% end %>

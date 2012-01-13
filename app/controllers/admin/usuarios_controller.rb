@@ -31,8 +31,8 @@ class Admin::UsuariosController < AdminController
   def update
     @usuario = Usuario.find(params[:id])
 
-    if @usuario.email == 'admin' or @usuario.email == 'guest'
-      params[:usuario] = {:clave => params[:usuario][:clave]} #only password is allowed to be modified
+    if @usuario.email == 'admin' or @usuario.email == 'guest' #with these users...
+      params[:usuario] = {:clave => params[:usuario][:clave]} #...the only field allowing modification is password
     end
 
     password = params[:usuario][:clave]
@@ -43,7 +43,11 @@ class Admin::UsuariosController < AdminController
     end
 
     if @usuario.update_attributes(params[:usuario])
-      redirect_to admin_usuarios_path, :notice => 'User created'
+      if password.blank? and (@usuario.email == 'admin' or @usuario.email == 'guest')
+        redirect_to admin_usuarios_path, :notice => 'User not modified'
+      else
+        redirect_to admin_usuarios_path, :notice => 'User updated'
+      end
     else
       @usuario.clave = ''
       render 'edit'
@@ -53,7 +57,7 @@ class Admin::UsuariosController < AdminController
   def destroy
     @usuario = Usuario.find(params[:id])
 
-    redirect_to admin_usuarios_path, :notice => 'User cannot be deleted' and return if @usuario.email == 'admin' or @usuario.email == 'guest'
+    redirect_to admin_usuarios_path, :alert => 'User cannot be deleted' and return if @usuario.email == 'admin' or @usuario.email == 'guest'
 
     @usuario.delete
     redirect_to admin_usuarios_path, :notice => 'User deleted'

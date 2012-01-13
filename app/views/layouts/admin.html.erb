@@ -3,28 +3,38 @@
   <head>
     <meta charset="UTF-8">
     <title>iCal - Administration</title>
-    <%= stylesheet_link_tag 'reset', 'admin' %>
+    <%= stylesheet_link_tag 'bootstrap', 'admin' %>
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <div id="centerer">
-      <p id="logged_as">
-        Welcome, <strong><%= @logged_as.email %></strong> |
-        <%= link_to 'Back to calendar', root_path %> |
-        <%= link_to 'Logout', logout_path %>
-      </p>
-
-      <ul class="tabrow">
-        <li class="<%= ((@tab.nil?) ? 'selected' : nil) %>"><%= link_to 'Information', admin_path %></li>
-        <% if @logged_as.email == 'admin' %>
-          <li class="<%= ((@tab == :users) ? 'selected' : nil) %>"><%= link_to 'Users', admin_usuarios_path %></li>
-        <% end %>
-        <li class="<%= ((@tab == :activities) ? 'selected' : nil) %>"><%= link_to 'Activities', admin_actividades_path %></li>
-      </ul>
-
-      <div id="content">
-        <%= yield %>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <h3><a href="#">iCal administration</a></h3>
+          <ul class="nav secondary-nav">
+            <li><a>Welcome, <strong><%= @logged_as.email %></strong></a></li>
+            <li><%= link_to 'Back to calendar', root_path %></li>
+            <li><%= link_to 'Logout', logout_path %></li>
+          </ul>
+        </div>
       </div>
     </div>
+
+    <div class="container">
+      <ul class="tabs">
+        <li class="<%= ((@tab.nil?) ? 'active' : nil) %>"><%= link_to 'Information', admin_path %></li>
+        <% if @logged_as.email == 'admin' %>
+          <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_usuarios_path %></li>
+        <% end %>
+        <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_actividades_path %></li>
+      </ul>
+
+      <div class="row">
+        <div class="span16">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'jquery.min', 'rails', 'admin' %>
   </body>
 </html>

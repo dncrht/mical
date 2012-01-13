@@ -1,32 +1,36 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
+<%= render '/admin/alert-message' %>
 
-<%= link_to 'new user', new_admin_usuario_path %>
+<div class="well">
+  <%= link_to 'New user', new_admin_usuario_path, :class => 'btn' %>
+</div>
 
-<table>
-  <tr>
-    <th>Email</th>
-    <th>Can I edit events?</th>
-    <th>Can I modify days?</th>
-    <th>Can I see the legend?</th>
-    <th>Can I see the description?</th>
-    <th>Can I export to CSV?</th>
-    <th></th>
-  </tr>
-  <% @usuarios.each do |i| %>
+<table class="bordered-table zebra-striped">
+  <thead>
     <tr>
-      <td><%= link_to i.email, edit_admin_usuario_path(i.id) %></td>
-      <td><%= i.can_edit_actividad %></td>
-      <td><%= i.can_edit_efemeride %></td>
-      <td><%= i.can_see_leyenda %></td>
-      <td><%= i.can_see_resumen %></td>
-      <td><%= i.can_download %></td>
-      <td>
-        <%= form_tag(admin_usuario_path(i.id), :method => :delete) do |f| %>
-          <%= submit_tag 'borrar', :confirm => "Clicking 'Yes' will delete user #{i.email}. Are you sure?" %>
-        <% end %>
-      </td>
+      <th>Email</th>
+      <th>Can I edit events?</th>
+      <th>Can I modify days?</th>
+      <th>Can I see the legend?</th>
+      <th>Can I see the description?</th>
+      <th>Can I export to CSV?</th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @usuarios.each do |i| %>
+      <tr>
+        <td><%= link_to i.email, edit_admin_usuario_path(i.id) %></td>
+        <td><%= i.can_edit_actividad %></td>
+        <td><%= i.can_edit_efemeride %></td>
+        <td><%= i.can_see_leyenda %></td>
+        <td><%= i.can_see_resumen %></td>
+        <td><%= i.can_download %></td>
+        <td>
+          <%= form_tag(admin_usuario_path(i.id), :method => :delete) do |f| %>
+            <%= submit_tag 'Delete', :class => 'btn danger', :confirm => "Clicking 'Yes' will delete user #{i.email}. Are you sure?" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

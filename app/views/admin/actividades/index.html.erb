@@ -1,24 +1,28 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
+<%= render '/admin/alert-message' %>
 
-<%= link_to 'new activity', new_admin_actividad_path %>
+<div class="well">
+  <%= link_to 'New activity', new_admin_actividad_path, :class => 'btn' %>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Color</th>
-    <th></th>
-  </tr>
-  <% @actividades.each do |i| %>
+<table class="bordered-table zebra-striped">
+  <thead>
     <tr>
-      <td><%= link_to i.nombre, edit_admin_actividad_path(i.id) %></td>
-      <td><%= i.color %></td>
-      <td>
-        <%= form_tag(admin_actividad_path(i.id), :method => :delete) do |f| %>
-          <%= submit_tag 'borrar', :confirm => "Clicking 'Yes' will delete activity #{i.nombre}. Are you sure?" %>
-        <% end %>
-      </td>
+      <th>Name</th>
+      <th>Color</th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @actividades.each do |i| %>
+      <tr>
+        <td><%= link_to i.nombre, edit_admin_actividad_path(i.id) %></td>
+        <td><%= i.color %></td>
+        <td>
+          <%= form_tag(admin_actividad_path(i.id), :method => :delete) do |f| %>
+            <%= submit_tag 'Delete', :class => 'btn danger', :confirm => "Clicking 'Yes' will delete activity #{i.nombre}. Are you sure?" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

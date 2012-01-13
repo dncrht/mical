@@ -1,19 +1,24 @@
 <%= form_for([:admin, @actividad]) do |f| %>
   <% if @actividad.errors.any? %>
-    <p id="noticeAlert">Activity has <%= pluralize(@actividad.errors.count, 'error') %></p>
+    <div class="alert-message block-message error">Activity has <%= pluralize(@actividad.errors.count, 'error') %></div>
   <% end %>
 
-  <p>
+  <div class="clearfix">
     <%= f.label :nombre %>
-    <%= f.text_field :nombre %>
-  </p>
+    <div class="input">
+      <%= f.text_field :nombre %>
+    </div>
+  </div>
 
-  <p>
+  <div class="clearfix">
     <%= f.label :color %>
-    <%= f.text_field :color %>
-  </p>
+    <div class="input">
+      <%= f.text_field :color %>
+    </div>
+  </div>
 
-  <p>
-    <%= submit_tag 'Save' %>
-  </p>
+  <div class="actions">
+    <%= submit_tag 'Save', :class => 'btn primary' %>
+    <%= link_to 'Cancel', admin_actividades_path, :class => 'btn' %>
+  </div>
 <% end %>

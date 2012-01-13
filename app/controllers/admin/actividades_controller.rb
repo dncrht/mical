@@ -23,7 +23,7 @@ class Admin::ActividadesController < AdminController
     @actividad = Actividad.find(params[:id])
 
     if @actividad.update_attributes(params[:actividad])
-      redirect_to admin_actividades_path, :notice => 'Activity created'
+      redirect_to admin_actividades_path, :notice => 'Activity updated'
     else
       render 'edit'
     end
