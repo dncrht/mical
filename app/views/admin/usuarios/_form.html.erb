@@ -3,9 +3,7 @@
     <div class="alert-message warning"><%= notice %></div>
   <% end %>
 
-  <% if @usuario.errors.any? %>
-    <div class="alert-message block-message error">User has <%= pluralize(@usuario.errors.count, 'error') %></div>
-  <% end %>
+  <%= errores @usuario %>
 
   <div class="clearfix">
     <%= f.label :email %>

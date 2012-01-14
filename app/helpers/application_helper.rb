@@ -87,4 +87,10 @@ module ApplicationHelper
     
     out.html_safe
   end
+
+  def errores(entidad)
+    if entidad.errors.any?
+      %(<div class="alert-message block-message error">#{entidad.errors.to_a.join('<br>')}</div>).html_safe
+    end
+  end
 end

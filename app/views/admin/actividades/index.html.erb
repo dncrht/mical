@@ -1,8 +1,8 @@
 <%= render '/admin/alert-message' %>
 
-<div class="well">
-  <%= link_to 'New activity', new_admin_actividad_path, :class => 'btn' %>
-</div>
+<p>
+  <%= link_to 'New activity', new_admin_actividad_path, :class => 'btn large' %>
+</p>
 
 <table class="bordered-table zebra-striped">
   <thead>
@@ -17,11 +17,7 @@
       <tr>
         <td><%= link_to i.nombre, edit_admin_actividad_path(i.id) %></td>
         <td><%= i.color %></td>
-        <td>
-          <%= form_tag(admin_actividad_path(i.id), :method => :delete) do |f| %>
-            <%= submit_tag 'Delete', :class => 'btn danger', :confirm => "Clicking 'Yes' will delete activity #{i.nombre}. Are you sure?" %>
-          <% end %>
-        </td>
+        <td><%= link_to 'Delete', admin_actividad_path(i), :class => 'btn danger', :confirm => "Clicking 'Yes' will delete activity #{i.nombre}. Are you sure?", :method => :delete, :remote => true %></td>
       </tr>
     <% end %>
   </tbody>

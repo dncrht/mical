@@ -5,5 +5,5 @@ $(document).ready(function(){
         $(this).parent().fadeOut();
     });
 
-    $('.help-inline').closest('.clearfix').addClass('error');
+    $('.help-inline.error').closest('.clearfix').addClass('error');
 });

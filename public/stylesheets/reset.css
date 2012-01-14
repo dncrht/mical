@@ -13,5 +13,5 @@ table {border-spacing: 0; border-collapse: 0;}
 legend, hr {display: none;}
 ul {list-style: none;}
 
-body {font: 14px Helvetica, Arial, Sans-serif; background: #111; color: #000;}
+body {font: 14px Helvetica, Arial, Sans-serif; background: #111; color: #333;}
     #centerer {position: relative; margin: 0 auto; width: 748px;}

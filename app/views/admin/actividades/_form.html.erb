@@ -1,7 +1,5 @@
 <%= form_for([:admin, @actividad]) do |f| %>
-  <% if @actividad.errors.any? %>
-    <div class="alert-message block-message error">Activity has <%= pluralize(@actividad.errors.count, 'error') %></div>
-  <% end %>
+  <%= errores @actividad %>
 
   <div class="clearfix">
     <%= f.label :nombre %>
