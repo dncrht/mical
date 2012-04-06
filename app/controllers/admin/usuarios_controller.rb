@@ -23,16 +23,19 @@ class Admin::UsuariosController < AdminController
 
   def edit
     @usuario = Usuario.find(params[:id])
-    @usuario.clave = ''
 
-    flash[:notice] = 'This is a special user. You can only modify the password.' if @usuario.email == 'admin' or @usuario.email == 'guest'
+    redirect_to admin_usuarios_path, :alert => 'User cannot be edited' and return if @usuario.email == 'guest'
+
+    @usuario.clave = ''
   end
 
   def update
     @usuario = Usuario.find(params[:id])
 
-    if @usuario.email == 'admin' or @usuario.email == 'guest' #with these users...
-      params[:usuario] = {:clave => params[:usuario][:clave]} #...the only field allowing modification is password
+    redirect_to admin_usuarios_path, :alert => 'User cannot be edited' and return if @usuario.email == 'guest'
+
+    if @usuario.email == 'admin'
+      params[:usuario] = {:clave => params[:usuario][:clave]} #the only field allowing modification is password
     end
 
     password = params[:usuario][:clave]
@@ -43,7 +46,7 @@ class Admin::UsuariosController < AdminController
     end
 
     if @usuario.update_attributes(params[:usuario])
-      if password.blank? and (@usuario.email == 'admin' or @usuario.email == 'guest')
+      if password.blank? and @usuario.email == 'admin'
         redirect_to admin_usuarios_path, :notice => 'User not modified'
       else
         redirect_to admin_usuarios_path, :notice => 'User updated'

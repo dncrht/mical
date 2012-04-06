@@ -29,11 +29,7 @@
         <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_actividades_path %></li>
       </ul>
 
-      <div class="row">
-        <div class="span16">
-          <%= yield %>
-        </div>
-      </div>
+      <%= yield %>
     </div>
     <%= javascript_include_tag 'jquery.min', 'rails', 'admin' %>
   </body>

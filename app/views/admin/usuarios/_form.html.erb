@@ -1,6 +1,6 @@
 <%= form_for([:admin, @usuario]) do |f| %>
-  <% if notice %>
-    <div class="alert-message warning"><%= notice %></div>
+  <% if @usuario.email == 'admin' %>
+    <div class="input clearfix"><span class="label warning">NOTICE</span> This is a special user. You can only modify the password.</div>
   <% end %>
 
   <%= errores @usuario %>
@@ -8,7 +8,11 @@
   <div class="clearfix">
     <%= f.label :email %>
     <div class="input">
-      <%= f.text_field :email %>
+      <% if @usuario.email == 'admin' %>
+        <span class="uneditable-input"><%= @usuario.email %></span>
+      <% else %>
+        <%= f.text_field :email %>
+      <% end %>
     </div>
   </div>
 
