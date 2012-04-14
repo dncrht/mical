@@ -1,58 +1,51 @@
-<div id="centerer">
-  <p id="logged_as">
-    Welcome, <strong><%= @logged_as.email %></strong> |
-    <% if @logged_as.email == 'guest' %>
-      <%= link_to 'Log in', admin_path %>
-    <% else %>
-      <%= link_to 'Administration', admin_path %> |
-      <%= link_to 'Logout', logout_path %>
-    <% end %>
-  </p>
-
-  <div id="cabecera">
-    <div id="today">
-      <h1><%= @today.day %></h1><h2><%= @nombres_mes[@today.month] %></h2>
-    </div>
-
-    <%= form_tag root_path, :method => :get do %>
-      <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
-    <% end %>
+<% content_for :cabecera do %>
+  <div id="today">
+    <h1><%= @today.day %></h1><h2><%= @nombres_mes[@today.month] %></h2>
   </div>
 
-  <div id="cuerpo" class="clearfix">
-    <%= compose_calendar %>
+  <%= form_tag root_path, :method => :get do %>
+    <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
+  <% end %>
 
-    <% if @logged_as.can_see_leyenda %>
-      <ul id="leyenda">
-        <% @actividades.each do |i| %>
-          <li><span class="activity<%= i.id %>"></span><%= i.nombre %></li>
-        <% end %>
-      </ul>
+  Welcome, <strong><%= @logged_as.email %></strong> |
+  <% if @logged_as.email == 'guest' %>
+    <%= link_to 'Log in', admin_path %>
+  <% else %>
+    <%= link_to 'Administration', admin_path %> |
+    <%= link_to 'Logout', logout_path %>
+  <% end %>
+<% end %>
+
+<%= compose_calendar %>
+
+<% if @logged_as.can_see_leyenda %>
+  <ul id="leyenda">
+    <% @actividades.each do |i| %>
+      <li><span class="activity<%= i.id %>"></span><%= i.nombre %></li>
     <% end %>
+  </ul>
+<% end %>
 
-    <% if @logged_as.can_edit_efemeride %>
-      <div id="replace">
-        <%= form_tag action_path, :method => :put do %>
-          <div id="input">
-            <p>
-              <%= label_tag :activity_id %>
-              <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
-            </p>
-            <p>
-              <%= label_tag :resumen %>
-              <%= text_area_tag :resumen %>
-            </p>
+<% if @logged_as.can_edit_efemeride %>
+  <div id="replace">
+    <%= form_tag action_path, :method => :put do %>
+      <div id="input">
+        <p>
+          <%= label_tag :activity_id %>
+          <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
+        </p>
+        <p>
+          <%= label_tag :resumen %>
+          <%= text_area_tag :resumen %>
+        </p>
 
-            <%= hidden_field_tag :day %>
-          </div>
-          <div id="buttons">
-              <button type="submit" id="save">Save</button>
-              <button type="button" id="cancel">Cancel</button>
-              <button type="button" id="delete">Delete</button>
-          </div>
-        <% end %>
+        <%= hidden_field_tag :day %>
+      </div>
+      <div id="buttons">
+        <button type="submit" id="save">Save</button>
+        <button type="button" id="cancel">Cancel</button>
+        <button type="button" id="delete">Delete</button>
       </div>
     <% end %>
-
   </div>
-</div>
+<% end %>

@@ -13,27 +13,7 @@ class ApplicationController < ActionController::Base
 
     #sigue con lo que estaba haciendo
     @actividades = Actividad.order('nombre')
-  end
-  
-  def logout
-    reset_session
 
-    redirect_to root_path
-  end
-
-  def login
-    begin
-      usuario = Usuario.find_by_email(params[:email])
-      raise if usuario.clave != Digest::MD5.hexdigest(params[:clave])
-
-      #ok, usuario logueado
-      session[:logged_as] = usuario
-    rescue
-      flash[:notice] = 'Login incorrecto'
-      render '/login', :layout => nil
-      return
-    end
-
-    redirect_to admin_path
+    @stylesheets = ['reset', 'home']
   end
 end

@@ -5,7 +5,7 @@
     h1 {color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center;}
         h2 {color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 20px; line-height: 20px;}
     #cabecera select {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; position: absolute; top: 28px; right: 50px; font-weight: bold; font-size: 30px; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45);}
-#cuerpo {position: relative; background: #fff; padding: 10px; border-radius: 0 0 6px 6px;}
+#cuerpo {position: relative; background: #fff; padding: 10px; border-radius: 0 0 6px 6px; min-height: 440px;}
 #cuerpo {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
 #cuerpo {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
     .month {margin: 0 auto; float: left; height: 160px; width: 162px; border-top: 1px solid #d5d5d5; border-left: 1px solid #d5d5d5; margin: 10px;}

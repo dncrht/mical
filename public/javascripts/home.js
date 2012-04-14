@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('.day').click(function(e){
-        if ($(this).attr('data-activity')) {
+        if ($(this).data('activity')) {
             $('#delete').show();
         } else {
             $('#delete').hide();
@@ -9,9 +9,9 @@ $(document).ready(function(){
         $('#replace').slideToggle();
         if (!$('#replace').is(':visible')) return;
 
-        $('#activity_id option[value=' + $(this).attr('data-activity') + ']').attr('selected', true);
+        $('#activity_id option[value=' + $(this).data('activity') + ']').attr('selected', true);
         $('#resumen').html($(this).attr('title'));
-        $('#day').val($(this).attr('data-day'));
+        $('#day').val($(this).data('day'));
     });
 
     $('#cancel').click(function(){

@@ -3,16 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <title>iCal</title>
-    <%= stylesheet_link_tag 'reset', 'home' %>
+    <%= stylesheet_link_tag @stylesheets %>
     <%= csrf_meta_tag %>
     <style>
-    <% @actividades.each do |i| %>
-      .activity<%= i.id %> {background: #<%= i.color %>;}
-    <% end %>
+<% @actividades.each do |i| %>
+        .activity<%= i.id %> {background: #<%= i.color %>;}
+<% end %>
     </style>
   </head>
   <body>
-    <%= yield %>
+    <div id="centerer">
+      <div id="cabecera">
+        <%= yield :cabecera %>
+      </div>
+
+      <div id="cuerpo" class="clearfix">
+        <%= content_for?(:cuerpo) ? yield(:cuerpo) : yield %>
+      </div>
+    </div>
 
     <%= javascript_include_tag 'jquery.min', 'rails', 'home' %>
   </body>

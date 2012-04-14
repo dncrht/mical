@@ -6,9 +6,8 @@ Ical::Application.routes.draw do
   end
 
   get 'admin' => 'admin#index'
-
-  post 'login' => 'application#login'
-  get 'logout' => 'application#logout'
+  post 'login' => 'admin#login'
+  get 'logout' => 'admin#logout'
 
   put 'action' => 'home#replace'
   delete 'action' => 'home#destroy'
