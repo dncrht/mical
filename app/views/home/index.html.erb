@@ -1,50 +1,54 @@
 <% content_for :cabecera do %>
-  <div id="today">
-    <h1><%= @today.day %></h1><h2><%= @nombres_mes[@today.month] %></h2>
+  <div id="today" class="span3">
+    <%= @today.day %>
+    <p><%= @nombres_mes[@today.month] %></p>
   </div>
 
-  <%= form_tag root_path, :method => :get do %>
-    <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
-  <% end %>
+  <p id="year"><%= @año %></p>
 
-  Welcome, <strong><%= @logged_as.email %></strong> |
-  <% if @logged_as.email == 'guest' %>
-    <%= link_to 'Log in', admin_path %>
-  <% else %>
-    <%= link_to 'Administration', admin_path %> |
-    <%= link_to 'Logout', logout_path %>
-  <% end %>
+  <div id="logged_as" class="span3">
+    <div>
+      Welcome, <strong><%= @logged_as.email %></strong><br>
+      <% if @logged_as.email == 'guest' %>
+        <%= link_to 'Log in', admin_path %>
+      <% else %>
+        <%= link_to 'Administration', admin_path %> |
+        <%= link_to 'Logout', logout_path %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
 <%= compose_calendar %>
 
 <% if @logged_as.can_see_leyenda %>
-  <ul id="leyenda">
+  <div id="leyenda">
     <% @actividades.each do |i| %>
-      <li><span class="activity<%= i.id %>"></span><%= i.nombre %></li>
+      <p><span class="badge activity<%= i.id %>"></span><%= i.nombre %></p>
     <% end %>
-  </ul>
+  </div>
+<% end %>
+
+<%= form_tag root_path, :method => :get do %>
+  <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
 <% end %>
 
 <% if @logged_as.can_edit_efemeride %>
   <div id="replace">
     <%= form_tag action_path, :method => :put do %>
       <div id="input">
-        <p>
-          <%= label_tag :activity_id %>
-          <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
-        </p>
-        <p>
-          <%= label_tag :resumen %>
-          <%= text_area_tag :resumen %>
-        </p>
+        <%= label_tag :activity_id %>
+        <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
+
+        <%= label_tag :resumen %>
+        <%= text_area_tag :resumen %>
 
         <%= hidden_field_tag :day %>
       </div>
       <div id="buttons">
-        <button type="submit" id="save">Save</button>
-        <button type="button" id="cancel">Cancel</button>
-        <button type="button" id="delete">Delete</button>
+        <button type="submit" id="save" class="btn btn-primary">Save</button>
+        <button type="button" id="cancel" class="btn">Cancel</button>
+        <button type="button" id="delete" class="btn btn-danger">Delete</button>
       </div>
     <% end %>
   </div>

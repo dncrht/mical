@@ -1,13 +1,17 @@
 <% content_for :cabecera do %>
-  <ul class="nav secondary-nav">
-    <li><a>Welcome, <strong><%= @logged_as.email %></strong></a></li>
-    <li><%= link_to 'Back to calendar', root_path %></li>
-    <li><%= link_to 'Logout', logout_path %></li>
-  </ul>
+  <p id="year">Admin</p>
+
+  <div id="logged_as" class="span3">
+    <div>
+      Welcome, <strong><%= @logged_as.email %></strong><br>
+      <%= link_to 'Back to calendar', root_path %>
+      <%= link_to 'Logout', logout_path %>
+    </div>
+  </div>
 <% end %>
 
 <% content_for :cuerpo do %>
-  <ul class="tabs">
+  <ul class="nav nav-tabs">
     <li class="<%= ((@tab.nil?) ? 'active' : nil) %>"><%= link_to 'Information', admin_path %></li>
     <% if @logged_as.email == 'admin' %>
       <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_usuarios_path %></li>

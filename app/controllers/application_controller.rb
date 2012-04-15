@@ -13,7 +13,5 @@ class ApplicationController < ActionController::Base
 
     #sigue con lo que estaba haciendo
     @actividades = Actividad.order('nombre')
-
-    @stylesheets = ['reset', 'home']
   end
 end

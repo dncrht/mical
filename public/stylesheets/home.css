@@ -1,14 +1,15 @@
-#logged_as {margin-right: 30px; color: #fff; text-align: right;}
-    #logged_as a {color: #fff;}
-#cabecera {margin-top: 20px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
-    #today {position: absolute; top: 16px; left: 55px;}
-    h1 {color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center;}
-        h2 {color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 20px; line-height: 20px;}
-    #cabecera select {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; position: absolute; top: 28px; right: 50px; font-weight: bold; font-size: 30px; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45);}
-#cuerpo {position: relative; background: #fff; padding: 10px; border-radius: 0 0 6px 6px; min-height: 440px;}
+#cabecera {margin: 20px auto 0; width: 788px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
+    #today {position: absolute; top: 16px; left: 0; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center; font-weight: bold;}
+        #today p {font-size: 20px; line-height: 20px; text-align: center;}
+    #year {margin-top: 20px; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-weight: bold; font-size: 60px; line-height: 60px; text-align: center;}
+    #logged_as {position: absolute; top: 28px; right: 20px;}
+        #logged_as div {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45); text-align: right;}
+        #logged_as a {color: #321700;}
+#cuerpo {position: relative; margin: 0 auto; width: 768px; background: #fff; padding: 20px 10px 0; border-radius: 0 0 6px 6px; min-height: 440px;}
 #cuerpo {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
 #cuerpo {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
-    .month {margin: 0 auto; float: left; height: 160px; width: 162px; border-top: 1px solid #d5d5d5; border-left: 1px solid #d5d5d5; margin: 10px;}
+    .row {margin-bottom: 20px;}
+    .month {/*margin: 0 auto; float: left;*/ height: 160px; /*width: 162px;*/ border-top: 1px solid #d5d5d5; border-left: 1px solid #d5d5d5; /*margin: 10px;*/}
         .caption th {padding: 4px; background: #dedede; text-align: left; font-weight: bold; font-size: 16px; color: #1c1c1c; border-right: 1px solid #d5d5d5;}
         .weekdays th {color: #b6b6b6; background: #dedede; font-weight: normal; font-size: 11px; border-bottom: 1px solid #d5d5d5;}
             .last {border-right: 1px solid #d5d5d5;}
@@ -16,23 +17,18 @@
         .current .caption th {background: -moz-linear-gradient(top, #4fabee, #5283df);}
         .current .caption th {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
         .current .weekdays th {background: #5283df; color: #fff;}
-        td {border: 1px solid #d5d5d5; border-top: 0; border-left: 0; color: #7b7b7b; text-align: center;}
-        td.current {font-weight: bold; color: #4f97e0;}
-        td.day:hover {background: #4fabee; color: #fff; cursor: pointer;}
-        td.day:hover {background: -moz-linear-gradient(top, #4fabee, #5283df);}
-        td.day:hover {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
-        #leyenda {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 20px; border-radius: 14px 0 0 14px;}
+        .month td {border: 1px solid #d5d5d5; border-top: 0; border-left: 0; color: #7b7b7b; text-align: center;}
+        .month td.current {font-weight: bold; color: #4f97e0;}
+        .month td.day:hover {background: #4fabee; color: #fff; cursor: pointer;}
+        .month td.day:hover {background: -moz-linear-gradient(top, #4fabee, #5283df);}
+        .month td.day:hover {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
+#leyenda {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 15px 20px; border-radius: 14px 0 0 14px;}
 #leyenda {background: -moz-linear-gradient(right, #363636 0px, #fff 10px);}
 #leyenda {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
-    #leyenda li {line-height: 1.5em;}
-    #leyenda span {float: left; width: 12px; height: 12px; margin-top: 6px; margin-right: 8px;}
+    #leyenda p {margin: 5px 0;}
+    #leyenda span {margin-right: 5px;}
 #replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #111; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
     #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
-        #replace p {margin-bottom: 10px;}
-        label {line-height: 2em; display: block;}
-        textarea, #replace select {width: 270px; display: block; padding: 6px; border: 1px solid #d5d5d5;}
+        textarea, #replace select {width: 270px;}
     #buttons {float: right; width: 100px; padding: 10px;}
-        button {width: 100px; height: 40px; margin-bottom: 15px; font-weight: bold; display: block; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); border-style: solid; border-width: 1px; border-radius: 6px; border-color: #c5372f #a23027 #7b301f; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); color: #fff;}
-button {background: -moz-linear-gradient(top,#d54e49 4%,#a23027);}
-button {background: -webkit-gradient(linear,left top, left bottom,from(#d54e49),to(#a23027));}
-button:hover {background: #c5372f;}
+        button {width: 100px; height: 40px; margin-bottom: 15px !important;}

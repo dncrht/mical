@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>iCal</title>
-    <%= stylesheet_link_tag @stylesheets %>
+    <%= stylesheet_link_tag 'xreset', 'bootstrap.min', 'home' %>
     <%= csrf_meta_tag %>
     <style>
 <% @actividades.each do |i| %>
@@ -12,12 +12,14 @@
     </style>
   </head>
   <body>
-    <div id="centerer">
-      <div id="cabecera">
+    <div id="cabecera">
+      <div class="container">
         <%= yield :cabecera %>
       </div>
+    </div>
 
-      <div id="cuerpo" class="clearfix">
+    <div id="cuerpo">
+      <div class="container">
         <%= content_for?(:cuerpo) ? yield(:cuerpo) : yield %>
       </div>
     </div>

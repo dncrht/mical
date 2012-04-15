@@ -31,7 +31,5 @@ class AdminController < ApplicationController
 
     #go on
     @actividades = Actividad.all
-
-    @stylesheets = ['reset', 'home', 'xbootstrap', 'admin']
   end
 end
