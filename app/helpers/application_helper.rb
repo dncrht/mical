@@ -17,15 +17,15 @@ module ApplicationHelper
 
     12.times do |month|
 
-      out << '<div class="clearfix">' if month % 4 == 0
+      out << '<div class="row">' if month % 4 == 0
 
-      out << %(<table class="month)
+      out << %(<table class="span3 month)
       out << ' current' if (month + 1) == @today.month
       out << %("><tr class="caption"><th colspan="7">#{@nombres_mes[month + 1]}</th></tr>)
       out << '<tr class="weekdays"><th>lu</th><th>ma</th><th>mi</th><th>ju</th><th>vi</th><th>sá</th><th class="last">do</th></tr><tr>'
 
       #we left as many blanks as last month's days are left
-      (week_day - 1).times { out << '<td></td>' }
+      (week_day - 1).times { out << '<td></td>' } if week_day < 8
 
       days_month[month + 1].times do |day|
         hoy = '%s-%02d-%02d' % [year, month +1, day + 1]
@@ -48,8 +48,12 @@ module ApplicationHelper
         out << ">#{day + 1}</td>"
 
         if week_day == 7
-          out << "</tr>\n<tr>"
-          week_day = 0
+          if (day + 1) < days_month[month + 1]
+            out << "</tr>\n"
+            week_day = 0
+          else
+            out << '<tr>'
+          end
         end
 
         week_day += 1
@@ -59,7 +63,12 @@ module ApplicationHelper
       #we fill with as many blanks as days are left
       (8 - week_day).times { out << '<td></td>' }
 
-      out << "</tr></table>\n"
+      if week_day < 8
+        out << '</tr>'
+      else
+        week_day = 1
+      end
+      out << "</table>\n"
 
       out << '</div>' if (month + 1) % 4 == 0
     end
