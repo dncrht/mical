@@ -6,8 +6,14 @@ $(document).ready(function(){
             $('#delete').hide();
         }
         
+        if (!$('#replace').is(':visible')) {
+            var month = $(this).closest('table').find('.caption th').html();
+            var day = $(this).data('day').split('-')[2];
+            $('#today').html(day + '<p>' + month + '</p>');
+        } else {
+            return;
+        }
         $('#replace').slideToggle();
-        if (!$('#replace').is(':visible')) return;
 
         if ($('#years').is(':visible')) $('#years').slideToggle();
 
@@ -18,6 +24,7 @@ $(document).ready(function(){
 
     $('#cancel').click(function(){
         $('#replace').slideToggle();
+        $('#today').html($('#today').data('day') + '<p>' + $('#today').data('month') + '</p>');
     });
 
     $('#year').click(function(){

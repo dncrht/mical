@@ -1,5 +1,5 @@
 <% content_for :cabecera do %>
-  <div id="today" class="span3">
+  <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= @nombres_mes[@today.month] %>">
     <%= @today.day %>
     <p><%= @nombres_mes[@today.month] %></p>
   </div>
