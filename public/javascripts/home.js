@@ -9,6 +9,8 @@ $(document).ready(function(){
         $('#replace').slideToggle();
         if (!$('#replace').is(':visible')) return;
 
+        if ($('#years').is(':visible')) $('#years').slideToggle();
+
         $('#activity_id option[value=' + $(this).data('activity') + ']').attr('selected', true);
         $('#resumen').html($(this).attr('title'));
         $('#day').val($(this).data('day'));
@@ -16,6 +18,11 @@ $(document).ready(function(){
 
     $('#cancel').click(function(){
         $('#replace').slideToggle();
+    });
+
+    $('#year').click(function(){
+        if ($('#replace').is(':visible')) $('#replace').slideToggle();
+        $('#years').slideToggle();
     });
 
     $('#delete').click(function(){

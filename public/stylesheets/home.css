@@ -1,7 +1,21 @@
+body {position: relative;}
 #cabecera {margin: 20px auto 0; width: 788px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
     #today {position: absolute; top: 16px; left: 0; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center; font-weight: bold;}
         #today p {font-size: 20px; line-height: 20px; text-align: center;}
-    #year {margin-top: 20px; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-weight: bold; font-size: 60px; line-height: 60px; text-align: center;}
+    #year {cursor: pointer; margin-top: 20px; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-weight: bold; font-size: 60px; line-height: 60px; text-align: center;}
+    #years {position: absolute; display: none; top: 84px; left: 308px; padding: 20px; list-style: none; z-index: 100; border: 1px solid #321700; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
+    #years:before {
+        content: '';
+        display: inline-block;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-bottom-color: #321700;
+        position: absolute;
+        top: -10px;
+        left: 5px;
+    }
+    #years a {/*line-height: 1.5em; font-size: 18px;*/}
     #logged_as {position: absolute; top: 28px; right: 20px;}
         #logged_as div {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45); text-align: right;}
         #logged_as a {color: #321700;}
@@ -27,7 +41,7 @@
 #leyenda {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
     #leyenda p {margin: 5px 0;}
     #leyenda span {margin-right: 5px;}
-#replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #111; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
+#replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #321700; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
     #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
         textarea, #replace select {width: 270px;}
     #buttons {float: right; width: 100px; padding: 10px;}

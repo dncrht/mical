@@ -5,7 +5,11 @@
   </div>
 
   <p id="year"><%= @año %></p>
-
+  <ul id="years" class="span1">
+    <% @años.reverse.each do |año| %>
+    <li><h3><%= link_to año, "/#{año}" %></h3></li>
+    <% end %>
+  </ul>
   <div id="logged_as" class="span3">
     <div>
       Welcome, <strong><%= @logged_as.email %></strong><br>
@@ -27,10 +31,6 @@
       <p><span class="badge activity<%= i.id %>"></span><%= i.nombre %></p>
     <% end %>
   </div>
-<% end %>
-
-<%= form_tag root_path, :method => :get do %>
-  <%= select_tag :anyo, options_for_select(@años, @año), :onchange => 'submit();' %>
 <% end %>
 
 <% if @logged_as.can_edit_efemeride %>
