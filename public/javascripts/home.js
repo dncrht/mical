@@ -39,4 +39,12 @@ $(document).ready(function(){
         $('input[name=_method]').val('delete');
         $('#replace form').submit();
     });
+
+    $('.alert').append('<a href="#" class="close">×</a>');
+
+    $('.close').live('click', function(){
+        $(this).parent().fadeOut();
+    });
+
+    $('.help-inline.error').closest('.control-group').addClass('error');
 });
