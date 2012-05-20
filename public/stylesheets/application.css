@@ -42,6 +42,8 @@ body {position: relative;}
     #leyenda p {margin: 5px 0;}
     #leyenda span {margin-right: 5px;}
 #replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #321700; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
+#replace {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
+#replace {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
     #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
         textarea, #replace select {width: 270px;}
     #buttons {float: right; width: 100px; padding: 10px;}
