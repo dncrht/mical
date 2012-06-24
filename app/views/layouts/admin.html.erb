@@ -1,4 +1,4 @@
-<% content_for :cabecera do %>
+<% content_for :header do %>
   <p id="year">Admin</p>
 
   <div id="logged_as" class="span3">
@@ -10,13 +10,13 @@
   </div>
 <% end %>
 
-<% content_for :cuerpo do %>
+<% content_for :body do %>
   <ul class="nav nav-tabs">
     <li class="<%= ((@tab.nil?) ? 'active' : nil) %>"><%= link_to 'Information', admin_path %></li>
     <% if @logged_as.email == 'admin' %>
-      <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_usuarios_path %></li>
+      <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_users_path %></li>
     <% end %>
-    <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_actividades_path %></li>
+    <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_activities_path %></li>
   </ul>
 
   <%= yield %>

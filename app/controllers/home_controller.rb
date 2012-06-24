@@ -1,34 +1,34 @@
 class HomeController < ApplicationController
 
-  # GET /:anyo
+  # GET /:year
   def index
-    hoy = Date.today
-    @today = hoy
-    @año = hoy.year
+    today = Date.today
+    @today = today
+    @year = today.year
 
-    if params[:anyo].to_i == @año #redirigir a / si el año es el actual
+    if params[:year].to_i == @year #redirect to / if @year is current year
       redirect_to root_path
       return
     end
 
     @nombres_mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    @años = (1996..@año).to_a
+    @years = (1996..@year).to_a
 
-    if params[:anyo].to_i >= 1996 #mejorar validación
-      @año = params[:anyo].to_i
+    if params[:year].to_i >= 1996 #mejorar validación
+      @year = params[:year].to_i
     end
 
-    efemerides = Efemeride.where('dia >= ? AND dia <= ?', "#@año-01-01", "#@año-12-31").order('dia')
-    @efemerides = Hash[*efemerides.collect { |e| [e.dia.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
+    events = Event.where('day >= ? AND day <= ?', "#@year-01-01", "#@year-12-31").order('day')
+    @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
   end
 
   # GET /
-  # GET /?anyo=
-  # Transforma las peticiones con parámetro para embellecer la URL
-  # Renderiza las peticiones / , así evitamos hacer redirección a index
+  # GET /?year=
+  # Transforms requests with parameter to make a friendlier URL
+  # Also, it renders / requests, so we avoid redirecting to index
   def index_query_string
-    if params[:anyo].to_i >= 1996
-      redirect_to root_path << params[:anyo]
+    if params[:year].to_i >= 1996
+      redirect_to root_path << params[:year]
     else
       index
       render 'index'
@@ -37,20 +37,20 @@ class HomeController < ApplicationController
 
   # PUT /action
   def replace
-    redirect_to root_path and return unless @logged_as.can_edit_efemeride
+    redirect_to root_path and return unless @logged_as.can_edit_event
 
     unless params[:day].blank?
-      e = Efemeride.find_by_dia(params[:day])
+      e = Event.find_by_day(params[:day])
       if e.nil?
-        e = Efemeride.new #TODO .create doesn't work?
-        e.dia = params[:day]
+        e = Event.new #TODO .create doesn't work?
+        e.day = params[:day]
       end
-      e.actividad_id = params[:activity_id] #there is only one activity per day
-      e.resumen = params[:resumen]
+      e.activity_id = params[:activity_id] #there is only one activity per day
+      e.description = params[:description]
       e.save
 
-      if params[:anyo].to_i >= 1996
-        redirect_to root_path << params[:anyo]
+      if params[:year].to_i >= 1996
+        redirect_to root_path << params[:year]
         return
       end
     end
@@ -60,15 +60,15 @@ class HomeController < ApplicationController
 
   # DELETE /action
   def destroy
-    redirect_to root_path and return unless @logged_as.can_edit_efemeride
+    redirect_to root_path and return unless @logged_as.can_edit_event
 
     unless params[:day].blank?
-      e = Efemeride.find_by_dia(params[:day])
+      e = Event.find_by_day(params[:day])
       e.delete
     end
 
-    if params[:anyo].to_i >= 1996
-      redirect_to root_path << params[:anyo]
+    if params[:year].to_i >= 1996
+      redirect_to root_path << params[:year]
       return
     end
 
@@ -78,8 +78,8 @@ class HomeController < ApplicationController
   def export
     out = ''
 
-    Efemeride.order('dia').each do |e|
-      out << "#{e.dia}\t#{e.actividad_id}\t#{e.resumen}\n"
+    Event.order('day').each do |e|
+      out << "#{e.day}\t#{e.activity_id}\t#{e.description}\n"
     end
 
     render :text => out #TODO csv attachment

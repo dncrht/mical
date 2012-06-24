@@ -1,8 +1,8 @@
 Ical::Application.routes.draw do
 
   namespace :admin do
-    resources :usuarios
-    resources :actividades
+    resources :users
+    resources :activities
   end
 
   get 'admin' => 'admin#index'

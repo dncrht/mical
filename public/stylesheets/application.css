@@ -1,5 +1,5 @@
 body {position: relative;}
-#cabecera {margin: 20px auto 0; width: 788px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
+#header {margin: 20px auto 0; width: 788px; height: 120px; background: url(/images/bg.png) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
     #today {position: absolute; top: 16px; left: 0; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center; font-weight: bold;}
         #today p {font-size: 20px; line-height: 20px; text-align: center;}
     #year {cursor: pointer; margin-top: 20px; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-weight: bold; font-size: 60px; line-height: 60px; text-align: center;}
@@ -19,9 +19,9 @@ body {position: relative;}
     #logged_as {position: absolute; top: 28px; right: 20px;}
         #logged_as div {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45); text-align: right;}
         #logged_as a {color: #321700;}
-#cuerpo {position: relative; margin: 0 auto; width: 768px; background: #fff; padding: 20px 10px 0; border-radius: 0 0 6px 6px; min-height: 440px;}
-#cuerpo {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
-#cuerpo {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
+#body {position: relative; margin: 0 auto; width: 768px; background: #fff; padding: 20px 10px 0; border-radius: 0 0 6px 6px; min-height: 440px;}
+#body {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
+#body {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
     .row {margin-bottom: 20px;}
     .month {/*margin: 0 auto; float: left;*/ height: 160px; /*width: 162px;*/ border-top: 1px solid #d5d5d5; border-left: 1px solid #d5d5d5; /*margin: 10px;*/}
         .caption th {padding: 4px; background: #dedede; text-align: left; font-weight: bold; font-size: 16px; color: #1c1c1c; border-right: 1px solid #d5d5d5;}
@@ -36,15 +36,15 @@ body {position: relative;}
         .month td.day:hover {background: #4fabee; color: #fff; cursor: pointer;}
         .month td.day:hover {background: -moz-linear-gradient(top, #4fabee, #5283df);}
         .month td.day:hover {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
-#leyenda {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 15px 20px; border-radius: 14px 0 0 14px;}
-#leyenda {background: -moz-linear-gradient(right, #363636 0px, #fff 10px);}
-#leyenda {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
-    #leyenda p {margin: 5px 0;}
-    #leyenda span {margin-right: 5px;}
+#legend {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 15px 20px; border-radius: 14px 0 0 14px;}
+#legend {background: -moz-linear-gradient(right, #363636 0px, #fff 10px);}
+#legend {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
+    #legend p {margin: 5px 0;}
+    #legend span {margin-right: 5px;}
 #replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #321700; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
 #replace {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
 #replace {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
     #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
         textarea, #replace select {width: 270px;}
     #buttons {float: right; width: 100px; padding: 10px;}
-        button {width: 100px; height: 40px; margin-bottom: 15px !important;}
+        #buttons button {width: 100px; height: 40px; margin-bottom: 15px !important;}

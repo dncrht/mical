@@ -1,4 +1,4 @@
-<% content_for :cabecera do %>
+<% content_for :header do %>
   <p id="year">Login</p>
 
   <div id="logged_as" class="span3">
@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<% content_for :cuerpo do %>
+<% content_for :body do %>
   <%= form_tag login_path, :method => :post do %>
 
     <% unless notice.blank? %>
@@ -19,8 +19,8 @@
     <%= label_tag :email %>
     <%= text_field_tag :email %>
 
-    <%= label_tag :clave %>
-    <%= password_field_tag :clave %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
 
     <div class="form-actions">
       <%= submit_tag 'Log me in!', :class => 'btn btn-primary' %>

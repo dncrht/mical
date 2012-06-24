@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   before_filter :guest_restricted
-  skip_before_filter :guest_restricted, :only => :login #same as return if @_action_name == 'login'
+  skip_before_filter :guest_restricted, :only => :login #same as "return if @_action_name == 'login'"
 
   def logout
     reset_session
@@ -10,26 +10,27 @@ class AdminController < ApplicationController
 
   def login
     begin
-      usuario = Usuario.find_by_email(params[:email])
-      raise if usuario.clave != Digest::MD5.hexdigest(params[:clave])
+      user = User.find_by_email(params[:email])
+      raise if user.password != Digest::MD5.hexdigest(params[:password])
 
       #ok, usuario logueado
-      session[:logged_as] = usuario
+      session[:logged_as] = user
     rescue
-      flash[:notice] = 'Login incorrecto'
+      flash[:notice] = 'Login failed'
     end
 
     redirect_to admin_path
   end
 
   private
+  
   def guest_restricted
     if @logged_as.email == 'guest'
       render '/admin/login', :layout => 'application', :status => 403
       return
     end
 
-    #go on
-    @actividades = Actividad.all
+    #continue normally
+    @activities = Activity.all
   end
 end

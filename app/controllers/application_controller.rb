@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :who_am_i
+  skip_before_filter :who_am_i, :only => :login #skip user identification when trying to log in
 
   def who_am_i
-    return if params[:action] == 'login' #al intertar loguearse no determina usuario
-
     begin
-      @logged_as = Usuario.find(session[:logged_as])
+      @logged_as = User.find(session[:logged_as])
     rescue
-      @logged_as = Usuario.find_by_email('guest') #si no estoy logueado, soy invitado
+      @logged_as = User.find_by_email('guest') #if i'm not logged in, i'm a guest
     end
 
-    #sigue con lo que estaba haciendo
-    @actividades = Actividad.order('nombre')
+    #continue normally
+    @activities = Activity.all
   end
 end

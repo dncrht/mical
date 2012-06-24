@@ -2,8 +2,8 @@ module ApplicationHelper
   def compose_calendar
     out = ''
 
-    day1 = Date.new(@año, 1, 1)
-    year = @año
+    day1 = Date.new(@year, 1, 1)
+    year = @year
 
     week_day = day1.wday
     week_day = 7 if week_day == 0
@@ -28,15 +28,15 @@ module ApplicationHelper
       (week_day - 1).times { out << '<td></td>' } if week_day < 8
 
       days_month[month + 1].times do |day|
-        hoy = '%s-%02d-%02d' % [year, month +1, day + 1]
+        today = '%s-%02d-%02d' % [year, month +1, day + 1]
 
-        out << %(<td data-day="#{hoy}")
+        out << %(<td data-day="#{today}")
 
         classes = ['day']
-        if @efemerides.kind_of? Hash and @efemerides.include? hoy
-          classes << "activity#{@efemerides[hoy].actividad_id}"
-          out << %( data-activity="#{@efemerides[hoy].actividad_id}")
-          out << %( title="#{@efemerides[hoy].resumen}") if @logged_as.can_see_resumen
+        if @events.kind_of? Hash and @events.include? today
+          classes << "activity#{@events[today].activity_id}"
+          out << %( data-activity="#{@events[today].activity_id}")
+          out << %( title="#{@events[today].description}") if @logged_as.can_see_description
         end
 
         classes << 'current' if (day + 1) == @today.day and (month + 1) == @today.month

@@ -6,21 +6,21 @@
     <%= stylesheet_link_tag :all %>
     <%= csrf_meta_tag %>
     <style>
-<% @actividades.each do |i| %>
+<% @activities.each do |i| %>
         .activity<%= i.id %> {background: #<%= i.color %>;}
 <% end %>
     </style>
   </head>
   <body>
-    <div id="cabecera">
+    <div id="header">
       <div class="container">
-        <%= yield :cabecera %>
+        <%= yield :header %>
       </div>
     </div>
 
-    <div id="cuerpo">
+    <div id="body">
       <div class="container">
-        <%= content_for?(:cuerpo) ? yield(:cuerpo) : yield %>
+        <%= content_for?(:body) ? yield(:body) : yield %>
       </div>
     </div>
 

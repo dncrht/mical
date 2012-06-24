@@ -1,13 +1,13 @@
-<% content_for :cabecera do %>
+<% content_for :header do %>
   <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= @nombres_mes[@today.month] %>">
     <%= @today.day %>
     <p><%= @nombres_mes[@today.month] %></p>
   </div>
 
-  <p id="year"><%= @año %></p>
+  <p id="year"><%= @year %></p>
   <ul id="years" class="span1">
-    <% @años.reverse.each do |año| %>
-    <li><h3><%= link_to año, "/#{año}" %></h3></li>
+    <% @years.reverse.each do |year| %>
+    <li><h3><%= link_to year, "/#{year}" %></h3></li>
     <% end %>
   </ul>
   <div id="logged_as" class="span3">
@@ -25,23 +25,23 @@
 
 <%= compose_calendar %>
 
-<% if @logged_as.can_see_leyenda %>
-  <div id="leyenda">
-    <% @actividades.each do |i| %>
-      <p><span class="badge activity<%= i.id %>"></span><%= i.nombre %></p>
+<% if @logged_as.can_see_legend %>
+  <div id="legend">
+    <% @activities.each do |i| %>
+      <p><span class="badge activity<%= i.id %>"></span><%= i.name %></p>
     <% end %>
   </div>
 <% end %>
 
-<% if @logged_as.can_edit_efemeride %>
+<% if @logged_as.can_edit_event %>
   <div id="replace">
     <%= form_tag action_path, :method => :put do %>
       <div id="input">
         <%= label_tag :activity_id %>
-        <%= select_tag :activity_id, options_from_collection_for_select(@actividades, :id, :nombre) %>
+        <%= select_tag :activity_id, options_from_collection_for_select(@activities, :id, :name) %>
 
-        <%= label_tag :resumen %>
-        <%= text_area_tag :resumen %>
+        <%= label_tag :description %>
+        <%= text_area_tag :description %>
 
         <%= hidden_field_tag :day %>
       </div>
