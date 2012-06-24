@@ -1,0 +1,56 @@
+<%= form_for([:admin, @user], :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @user.email == 'admin' %>
+    <div class="controls control-group"><span class="label label-warning">NOTICE</span> This is a special user. You can only modify the password.</div>
+  <% end %>
+
+  <%= errores @user %>
+
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <% if @user.email == 'admin' %>
+        <span class="uneditable-input"><%= @user.email %></span>
+      <% else %>
+        <%= f.text_field :email %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Permissions</label>
+    <div class="controls">
+          <label class="checkbox">
+            <%= f.check_box :can_edit_activity %>
+            <span>Can edit activity</span>
+          </label>
+          <label class="checkbox">
+            <%= f.check_box :can_edit_event %>
+            <span>Can edit event</span>
+          </label>
+          <label class="checkbox">
+            <%= f.check_box :can_see_legend %>
+            <span>Can see legend</span>
+          </label>
+          <label class="checkbox">
+            <%= f.check_box :can_see_description %>
+            <span>Can see description</span>
+          </label>
+          <label class="checkbox">
+            <%= f.check_box :can_download %>
+            <span>Can download</span>
+          </label>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag 'Save', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', admin_users_path, :class => 'btn' %>
+  </div>
+<% end %>
