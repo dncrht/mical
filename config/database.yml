@@ -7,3 +7,5 @@ development:
   username: pruebas
   password: pruebas
 
+production:
+  adapter: postgresql
