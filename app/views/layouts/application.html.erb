@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>iCal</title>
-    <%= stylesheet_link_tag :all %>
-    <%= csrf_meta_tag %>
+      <%= stylesheet_link_tag 'application', :media => 'all' %>
+      <%= csrf_meta_tags %>
     <style>
 <% @activities.each do |i| %>
         .activity<%= i.id %> {background: #<%= i.color %>;}
@@ -24,6 +24,6 @@
       </div>
     </div>
 
-    <%= javascript_include_tag 'jquery.min', 'rails', 'application' %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

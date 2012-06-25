@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ical::Application.config.secret_token = '9c053a8a849761c7208cbd67d915728867a5c2019dbe76170e2648ab80952bfac94ec39c538c1de6ee47ae1c324aad8ca597ea07a51197713c082f23027cd257'
+Ical::Application.config.secret_token = 'bcbd76344fce6f355f46b36f0f0bdf72fc325b3fe6f43cd0bc396001826118dbce90522631367d81b7f96692ade6b8f39810819744dacaafc834df10ce040e9f'
