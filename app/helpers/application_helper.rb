@@ -22,7 +22,7 @@ module ApplicationHelper
       out << %(<table class="span3 month)
       out << ' current' if (month + 1) == @today.month
       out << %("><tr class="caption"><th colspan="7">#{@nombres_mes[month + 1]}</th></tr>)
-      out << '<tr class="weekdays"><th>lu</th><th>ma</th><th>mi</th><th>ju</th><th>vi</th><th>sá</th><th class="last">do</th></tr><tr>'
+      out << '<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th class="last">sun</th></tr><tr>'
 
       #we left as many blanks as last month's days are left
       (week_day - 1).times { out << '<td></td>' } if week_day < 8

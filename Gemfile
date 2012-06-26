@@ -22,4 +22,6 @@ gem 'anjlab-bootstrap-rails', '>= 2.0', :require => 'bootstrap-rails'
 
 gem 'jquery-rails'
 
-gem 'composite_primary_keys'
+#gem 'composite_primary_keys'
+
+gem 'thin'

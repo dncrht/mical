@@ -6,6 +6,3 @@ development:
   pool: 5
   username: pruebas
   password: pruebas
-
-production:
-  adapter: postgresql
