@@ -11,7 +11,7 @@ Ical::Application.routes.draw do
 
   put 'action' => 'home#replace'
   delete 'action' => 'home#destroy'
-  match ':anyo' => "home#index"#, :id => /\d{4}/
+  match ':year' => "home#index"#, :id => /\d{4}/
   root :to => "home#index_query_string"
 
 end
