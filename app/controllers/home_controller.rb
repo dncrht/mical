@@ -48,14 +48,9 @@ class HomeController < ApplicationController
       e.activity_id = params[:activity_id] #there is only one activity per day
       e.description = params[:description]
       e.save
-
-      if params[:year].to_i >= 1996
-        redirect_to root_path << params[:year]
-        return
-      end
     end
 
-    redirect_to root_path
+    redirect_to root_path << e.day.year.to_s
   end
 
   # DELETE /action
@@ -64,15 +59,10 @@ class HomeController < ApplicationController
 
     unless params[:day].blank?
       e = Event.find_by_day(params[:day])
-      e.delete
+      e.destroy
     end
 
-    if params[:year].to_i >= 1996
-      redirect_to root_path << params[:year]
-      return
-    end
-
-    redirect_to root_path
+    redirect_to root_path << e.day.year.to_s
   end
 
   def export
