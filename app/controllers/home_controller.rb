@@ -39,16 +39,7 @@ class HomeController < ApplicationController
   def replace
     redirect_to root_path and return unless @logged_as.can_edit_event
 
-    unless params[:day].blank?
-      e = Event.find_by_day(params[:day])
-      if e.nil?
-        e = Event.new #TODO .create doesn't work?
-        e.day = params[:day]
-      end
-      e.activity_id = params[:activity_id] #there is only one activity per day
-      e.description = params[:description]
-      e.save
-    end
+    e = Event.replace(params[:day], params[:activity_id], params[:description])
 
     redirect_to root_path << e.day.year.to_s
   end

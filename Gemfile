@@ -25,3 +25,7 @@ gem 'jquery-rails'
 #gem 'composite_primary_keys'
 
 gem 'thin'
+
+group :development, :test do
+  gem 'rspec-rails'#, '>= 2.5.0'
+end

@@ -6,3 +6,12 @@ development:
   pool: 5
   username: pruebas
   password: pruebas
+  
+test:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: ical
+  pool: 5
+  username: pruebas
+  password: pruebas
