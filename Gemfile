@@ -27,5 +27,6 @@ gem 'jquery-rails'
 gem 'thin'
 
 group :development, :test do
-  gem 'rspec-rails'#, '>= 2.5.0'
+  gem 'rspec-rails', '>= 2.5.0'
+  gem 'sqlite3'
 end
