@@ -36,7 +36,7 @@ module ApplicationHelper
         if @events.kind_of? Hash and @events.include? today
           classes << "activity#{@events[today].activity_id}"
           out << %( data-activity="#{@events[today].activity_id}")
-          out << %( title="#{@events[today].description}") if @logged_as.can_see_description
+          out << %( title="#{@events[today].description}") if signed_in? and current_user.can_see_description
         end
 
         classes << 'current' if (day + 1) == @today.day and (month + 1) == @today.month

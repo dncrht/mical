@@ -3,9 +3,9 @@
 
   <div id="logged_as" class="span3">
     <div>
-      Welcome, <strong><%= @logged_as.email %></strong><br>
+      Welcome, <strong><%= current_user.email %></strong><br>
       <%= link_to 'Back to calendar', root_path %>
-      <%= link_to 'Logout', logout_path %>
+      <%= link_to 'Logout', sign_out_path, :method => :delete %>
     </div>
   </div>
 <% end %>
@@ -13,7 +13,7 @@
 <% content_for :body do %>
   <ul class="nav nav-tabs">
     <li class="<%= ((@tab.nil?) ? 'active' : nil) %>"><%= link_to 'Information', admin_path %></li>
-    <% if @logged_as.email == 'admin' %>
+    <% if current_user.id == 1 %>
       <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_users_path %></li>
     <% end %>
     <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_activities_path %></li>

@@ -1,0 +1,17 @@
+<%= form_for :session, :url => session_path do |f| %>
+
+  <% unless notice.blank? %>
+    <div class="alert alert-error"><%= notice %></div>
+  <% end %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <div class="form-actions">
+    <%= f.submit 'Log me in!', :class => 'btn btn-primary' %>
+  </div>
+
+<% end %>

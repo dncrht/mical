@@ -2,6 +2,8 @@ class HomeController < ApplicationController
 
   # GET /:year
   def index
+    @activities = Activity.order('name')
+    
     today = Date.today
     @today = today
     @year = today.year
@@ -37,7 +39,7 @@ class HomeController < ApplicationController
 
   # PUT /action
   def replace
-    redirect_to root_path and return unless @logged_as.can_edit_event
+    redirect_to root_path and return if !signed_in? or !current_user.can_edit_event
 
     e = Event.replace(params[:day], params[:activity_id], params[:description])
 
@@ -46,7 +48,7 @@ class HomeController < ApplicationController
 
   # DELETE /action
   def destroy
-    redirect_to root_path and return unless @logged_as.can_edit_event
+    redirect_to root_path and return if !signed_in? or !current_user.can_edit_event
 
     unless params[:day].blank?
       e = Event.find_by_day(params[:day])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212203657) do
+ActiveRecord::Schema.define(:version => 20121213211318) do
 
   create_table "activities", :force => true do |t|
     t.text "name"
@@ -26,12 +26,17 @@ ActiveRecord::Schema.define(:version => 20121212203657) do
 
   create_table "users", :force => true do |t|
     t.text    "email"
-    t.text    "password"
     t.boolean "can_download"
     t.boolean "can_edit_activity"
     t.boolean "can_edit_event"
     t.boolean "can_see_legend"
     t.boolean "can_see_description"
+    t.string  "encrypted_password",  :limit => 128
+    t.string  "confirmation_token",  :limit => 128
+    t.string  "remember_token",      :limit => 128
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

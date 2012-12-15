@@ -1,6 +1,5 @@
 admin:
-    email: admin
-    password: 21232f297a57a5a743894a0e4a801fc3
+    email: admin@domain.tld
     can_download: true
     can_edit_activity: true
     can_edit_event: true

@@ -32,8 +32,15 @@ GEM
       railties (>= 3.0)
       sass (>= 3.2)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    clearance (1.0.0.rc2)
+      bcrypt-ruby
+      diesel (= 0.1.5)
+      rails (>= 3.0)
     daemons (1.1.8)
+    diesel (0.1.5)
+      railties
     diff-lcs (1.1.3)
     erubis (2.7.0)
     eventmachine (0.12.10)
@@ -124,6 +131,7 @@ PLATFORMS
 
 DEPENDENCIES
   anjlab-bootstrap-rails (>= 2.0)
+  clearance (= 1.0.0.rc2)
   jquery-rails
   json
   pg

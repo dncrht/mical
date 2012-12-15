@@ -6,12 +6,10 @@ Ical::Application.routes.draw do
   end
 
   get 'admin' => 'admin#index'
-  post 'login' => 'admin#login'
-  get 'logout' => 'admin#logout'
 
   put 'action' => 'home#replace'
   delete 'action' => 'home#destroy'
-  match ':year' => "home#index"#, :id => /\d{4}/
-  root :to => "home#index_query_string"
+  match ':year' => 'home#index', :year => /\d{4}/
+  root :to => 'home#index'
 
 end

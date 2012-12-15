@@ -8,7 +8,7 @@
     <style>
 <% @activities.each do |i| %>
         .activity<%= i.id %> {background: #<%= i.color %>;}
-<% end %>
+<% end if defined? @activities %>
     </style>
   </head>
   <body>

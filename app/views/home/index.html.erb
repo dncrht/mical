@@ -12,12 +12,12 @@
   </ul>
   <div id="logged_as" class="span3">
     <div>
-      Welcome, <strong><%= @logged_as.email %></strong><br>
-      <% if @logged_as.email == 'guest' %>
+      Welcome, <strong><%= current_user.email rescue 'guest' %></strong><br>
+      <% unless signed_in? %>
         <%= link_to 'Log in', admin_path %>
       <% else %>
         <%= link_to 'Administration', admin_path %> |
-        <%= link_to 'Logout', logout_path %>
+        <%= link_to 'Logout', sign_out_path, :method => :delete %>
       <% end %>
     </div>
   </div>
@@ -25,7 +25,7 @@
 
 <%= compose_calendar %>
 
-<% if @logged_as.can_see_legend %>
+<% if signed_in? and current_user.can_see_legend %>
   <div id="legend">
     <% @activities.each do |i| %>
       <p><span class="badge activity<%= i.id %>"></span><%= i.name %></p>
@@ -33,7 +33,7 @@
   </div>
 <% end %>
 
-<% if @logged_as.can_edit_event %>
+<% if signed_in? and current_user.can_edit_event %>
   <div id="replace">
     <%= form_tag action_path, :method => :put do %>
       <div id="input">
