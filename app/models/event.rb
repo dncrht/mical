@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
-  #set_primary_keys :day
   validates :day, :activity_id, :description, :presence => true
+  validates :day, :uniqueness => true
   
   attr_accessible :day, :activity_id, :description
   
