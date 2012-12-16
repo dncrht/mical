@@ -102,4 +102,8 @@ module ApplicationHelper
       %(<div class="alert alert-error error">#{entidad.errors.to_a.join('<br>')}</div>).html_safe
     end
   end
+  
+  def current_user_account
+    current_user.email.split('@')[0] rescue 'guest'
+  end
 end

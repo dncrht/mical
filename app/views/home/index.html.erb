@@ -12,7 +12,7 @@
   </ul>
   <div id="logged_as" class="span3">
     <div>
-      Welcome, <strong><%= current_user.email rescue 'guest' %></strong><br>
+      Welcome, <strong><%= current_user_account %></strong><br>
       <% unless signed_in? %>
         <%= link_to 'Log in', admin_path %>
       <% else %>
