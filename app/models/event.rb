@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
 
     e = Event.find_by_day(day)
     if e.nil?
-      e = Event.new #TODO .create doesn't work?
+      e = Event.new
       e.day = day
     end
     e.activity_id = activity_id #there is only one activity per day
