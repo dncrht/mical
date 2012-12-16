@@ -1,89 +1,67 @@
 module ApplicationHelper
   
-  def compose_calendar
+  def print_month(year, month)
     out = ''
 
-    day1 = Date.new(@year, 1, 1)
-    year = @year
+    day = Date.new(year, month, 1)
 
-    week_day = day1.wday
+    week_day = day.wday
     week_day = 7 if week_day == 0
 
-    #number of days of each month
-    days_month = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    # Print month name
+    out << %(<table class="span3 month)
+    out << ' current' if month == @today.month
+    out << %(">\n<tr class="caption"><th colspan="7">#{l(day, :format => :month)}</th></tr>)
+    
+    # Print day of the week names
+    out << %(<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th class="last">sun</th></tr>\n<tr>)
 
-    if is_leap? year
-      days_month[2] = 29 #los años múltiplos de 4, son bisiestos
-    end
+    # Leave as many blanks as last month's days are left
+    (week_day - 1).times { out << '<td></td>' }
 
-    12.times do |month|
+    # Iterate days
+    day.end_of_month.day.times do
+      today = day.to_s
 
-      out << '<div class="row">' if month % 4 == 0
+      out << %(<td data-day="#{today}")
 
-      out << %(<table class="span3 month)
-      out << ' current' if (month + 1) == @today.month
-      out << %("><tr class="caption"><th colspan="7">#{@nombres_mes[month + 1]}</th></tr>)
-      out << '<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th class="last">sun</th></tr><tr>'
-
-      #we left as many blanks as last month's days are left
-      (week_day - 1).times { out << '<td></td>' } if week_day < 8
-
-      days_month[month + 1].times do |day|
-        today = '%s-%02d-%02d' % [year, month +1, day + 1]
-
-        out << %(<td data-day="#{today}")
-
-        classes = ['day']
-        if @events.kind_of? Hash and @events.include? today
-          classes << "activity#{@events[today].activity_id}"
-          out << %( data-activity="#{@events[today].activity_id}")
-          out << %( title="#{@events[today].description}") if signed_in? and current_user.can_see_description
-        end
-
-        classes << 'current' if (day + 1) == @today.day and (month + 1) == @today.month
-
-        unless classes.empty?
-          out << %( class="#{classes.join(' ')}")
-        end
-
-        out << ">#{day + 1}</td>"
-
-        if week_day == 7
-          if (day + 1) < days_month[month + 1]
-            out << "</tr>\n"
-            week_day = 0
-          else
-            out << '<tr>'
-          end
-        end
-
-        week_day += 1
-
+      html_classes = ['day']
+      if @events.kind_of? Hash and @events.include? today
+        html_classes << "activity#{@events[today].activity_id}"
+        out << %( data-activity="#{@events[today].activity_id}")
+        out << %( title="#{@events[today].description}") if signed_in? and current_user.can_see_description
       end
 
-      #we fill with as many blanks as days are left
-      (8 - week_day).times { out << '<td></td>' }
+      html_classes << 'current' if day == @today
 
-      if week_day < 8
-        out << '</tr>'
-      else
-        week_day = 1
+      unless html_classes.empty?
+        out << %( class="#{html_classes.join(' ')}")
       end
-      out << "</table>\n"
 
-      out << '</div>' if (month + 1) % 4 == 0
+      out << ">#{day.day}</td>"
+
+      if day.wday == 0
+        if day < day.end_of_month
+          out << "</tr>\n<tr>"
+        end
+      end
+
+      day += 1
     end
-    out << '</div>'
+
+    week_day = day.wday
+    week_day = 7 if week_day == 0
+
+    # Fill with blank days unless the month ends in last day of the week
+    (8 - week_day).times { out << '<td></td>' } if week_day > 1
+
+    out << "</tr>\n"
+    
+    out << "</table>\n"
 
     out.html_safe
   end
   
-  # Determine if this is a leap year
-  # http://www.ruby-forum.com/topic/87413
-  def is_leap?(y)
-    (y % 4).zero? && !(y % 100).zero? || (y % 400).zero?
-  end
-
   # Wrap a HTML block within a DIV, every X iterations
   # We can't redefine this as an Array method because Array can't access with_output_buffer
   # http://blog.agile-pandas.com/2011/01/13/rails-capture-vs-with-output-buffer
@@ -95,7 +73,7 @@ module ApplicationHelper
     i = 0
     object.each do |o|
       out << %(<div class="#{clazz}">) if i % per_row == 0
-      out << with_output_buffer { yield o } #with_output_buffer(&block) : requieres a block but our code needs i so we use block.call(i) , aka yield
+      out << with_output_buffer { yield o } #with_output_buffer(&block) : requires a block but our code needs i so we use block.call(i) , aka yield
       i += 1
       out << '</div>' if i % per_row == 0
     end

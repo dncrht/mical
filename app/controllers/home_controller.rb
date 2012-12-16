@@ -13,7 +13,6 @@ class HomeController < ApplicationController
       return
     end
 
-    @nombres_mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     @years = (1996..@year).to_a
 
     if params[:year].to_i >= 1996 #mejorar validación

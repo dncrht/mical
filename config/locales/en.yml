@@ -6,3 +6,8 @@ en:
     controllers:
       sessions:
         bad_email_or_password: 'Login failed'
+
+  # Active Support
+  date:
+    formats:
+      month: '%B'

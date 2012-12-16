@@ -1,13 +1,13 @@
 <% content_for :header do %>
-  <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= @nombres_mes[@today.month] %>">
+  <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
     <%= @today.day %>
-    <p><%= @nombres_mes[@today.month] %></p>
+    <p><%= l(@today, :format => :month) %></p>
   </div>
 
   <p id="year"><%= @year %></p>
   <ul id="years" class="span1">
     <% @years.reverse.each do |year| %>
-    <li><h3><%= link_to year, "/#{year}" %></h3></li>
+      <li><h3><%= link_to year, "/#{year}" %></h3></li>
     <% end %>
   </ul>
   <div id="logged_as" class="span3">
@@ -23,7 +23,9 @@
   </div>
 <% end %>
 
-<%= compose_calendar %>
+<%= each_with_wrapper(1..12, 4, 'row') do |month| %>
+  <%= print_month @year, month %>
+<% end %>
 
 <% if signed_in? and current_user.can_see_legend %>
   <div id="legend">
