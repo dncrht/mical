@@ -5,5 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :activity_id
       t.text :description
     end
+    
+    add_index :events, :day
   end
 end
