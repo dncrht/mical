@@ -25,7 +25,7 @@
         <td><%= i.can_see_legend ? '✓' : '✗' %></td>
         <td><%= i.can_see_description ? '✓' : '✗' %></td>
         <td><%= i.can_download ? '✓' : '✗' %></td>
-        <td><%= link_to 'Delete', admin_user_path(i), :class => 'btn btn-danger', :data => {:confirm => "Clicking 'Yes' will delete user #{i.email}. Are you sure?"}, :method => :delete, :remote => true %></td>
+        <td><%= link_to 'Delete', admin_user_path(i), :class => 'btn btn-danger', :data => {:confirm => "Clicking 'Yes' will delete user #{i.email}. Are you sure?"}, :method => :delete %></td>
       </tr>
     <% end %>
   </tbody>
