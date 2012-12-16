@@ -60,16 +60,18 @@ class Admin::UsersController < AdminController
   def destroy
     @user = User.find(params[:id])
 
-    redirect_to admin_users_path, :alert => 'User cannot be deleted' and return if @user.id == 1
-
-    @user.delete
-    redirect_to admin_users_path, :notice => 'User deleted'
+    begin
+      @user.destroy
+      redirect_to admin_users_path, :notice => 'User deleted'
+    rescue => e
+      redirect_to admin_users_path, :alert => e.message
+    end
   end
 
   private
   
   def restricted
-    render :status => 403 if current_user.id != 1
+    render :status => 403 unless current_user.is_admin
 
     @tab = :users
   end

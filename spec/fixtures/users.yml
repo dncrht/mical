@@ -5,6 +5,7 @@ admin:
     can_edit_event: true
     can_see_legend: true
     can_see_description: true
+    is_admin: true
 
 guest:
     email: guest
@@ -13,3 +14,4 @@ guest:
     can_edit_event: false
     can_see_legend: false
     can_see_description: false
+    is_admin: false
