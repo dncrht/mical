@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
   def compose_calendar
     out = ''
 
@@ -11,7 +12,7 @@ module ApplicationHelper
     #number of days of each month
     days_month = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    if year % 4 == 0
+    if is_leap? year
       days_month[2] = 29 #los años múltiplos de 4, son bisiestos
     end
 
@@ -76,6 +77,12 @@ module ApplicationHelper
 
     out.html_safe
   end
+  
+  # Determine if this is a leap year
+  # http://www.ruby-forum.com/topic/87413
+  def is_leap?(y)
+    (y % 4).zero? && !(y % 100).zero? || (y % 400).zero?
+  end
 
   # Wrap a HTML block within a DIV, every X iterations
   # We can't redefine this as an Array method because Array can't access with_output_buffer
@@ -106,4 +113,5 @@ module ApplicationHelper
   def current_user_account
     current_user.email.split('@')[0] rescue 'guest'
   end
+  
 end
