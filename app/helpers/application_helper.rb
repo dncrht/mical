@@ -77,18 +77,18 @@ module ApplicationHelper
     out.html_safe
   end
 
-  # Cose un bloque en DIVs, cada X iteraciones
-  # No podemos redefinirlo como un método de Array ya que no tiene disponible with_output_buffer
+  # Wrap a HTML block within a DIV, every X iterations
+  # We can't redefine this as an Array method because Array can't access with_output_buffer
   # http://blog.agile-pandas.com/2011/01/13/rails-capture-vs-with-output-buffer
   # http://asciicasts.com/episodes/208-erb-blocks-in-rails-3
-  def each_with_wrapper(object, per_row=4, clazz='') #el último parámetro &block) es opcional
+  def each_with_wrapper(object, per_row = 4, clazz = '') #the last &block) parameter is optional
     return if object.nil?
 
     out = ''
     i = 0
     object.each do |o|
       out << %(<div class="#{clazz}">) if i % per_row == 0
-      out << with_output_buffer { yield o } #with_output_buffer(&block) : requiere un bloque pero nuestro código necesita i así que usamos block.call(i) oséase, yield
+      out << with_output_buffer { yield o } #with_output_buffer(&block) : requieres a block but our code needs i so we use block.call(i) , aka yield
       i += 1
       out << '</div>' if i % per_row == 0
     end
