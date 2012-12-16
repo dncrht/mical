@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  before_filter :restricted
+  before_filter :restricted, :set_tab
 
   def index
     @users = User.order('email')
@@ -48,7 +48,10 @@ class Admin::UsersController < AdminController
   
   def restricted
     render :status => 403 unless current_user.is_admin
-
+  end
+  
+  def set_tab
     @tab = :users
   end
+
 end

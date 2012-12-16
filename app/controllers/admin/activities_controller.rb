@@ -1,5 +1,5 @@
 class Admin::ActivitiesController < AdminController
-  before_filter :restricted
+  before_filter :restricted, :set_tab
 
   def index
     @activities = Activity.order('name')
@@ -44,7 +44,9 @@ class Admin::ActivitiesController < AdminController
   
   def restricted
     render :status => 403 unless current_user.can_edit_activity
-
+  end
+  
+  def set_tab
     @tab = :activities
   end
 end
