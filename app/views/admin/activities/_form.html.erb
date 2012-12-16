@@ -1,5 +1,5 @@
 <%= form_for([:admin, @activity], :html => {:class => 'form-horizontal'}) do |f| %>
-  <%= errores @activity %>
+  <%= show_errors @activity %>
 
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>

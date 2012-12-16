@@ -3,7 +3,7 @@
     <div class="controls control-group"><span class="label label-warning">NOTICE</span> This is a special user. You can only modify the password.</div>
   <% end %>
 
-  <%= errores @user %>
+  <%= show_errors @user %>
 
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
