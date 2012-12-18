@@ -7,11 +7,21 @@ describe Event do
   end
   
   it 'should replace when giving a date and the record exists' do
-    Event.replace('1995-01-28', nil, nil).should be_an_instance_of Event
+    @event = FactoryGirl.create(:event)
+    
+    replacement = Event.replace(@event.day, nil, nil)
+    
+    replacement.should be_an_instance_of Event
+    replacement.description.should be_nil
   end
   
   it 'should replace when giving a date and the record is new' do
-    Event.replace('1992-01-28', nil, nil).should be_an_instance_of Event
+    @event = FactoryGirl.build(:event)
+    
+    replacement = Event.replace(@event.day, nil, nil)
+    
+    replacement.should be_an_instance_of Event
+    replacement.description.should be_nil
   end
   
 end

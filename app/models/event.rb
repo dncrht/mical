@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   validates :day, :activity_id, :description, :presence => true
   validates :day, :uniqueness => true
   
+  belongs_to :activity
+  
   attr_accessible :day, :activity_id, :description
   
   def self.replace(day, activity_id, description)
