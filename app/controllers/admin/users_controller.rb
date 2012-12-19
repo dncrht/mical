@@ -4,6 +4,10 @@ class Admin::UsersController < AdminController
   def index
     @users = User.order('email')
   end
+  
+  def show
+    redirect_to edit_admin_user_path(params[:id])
+  end
 
   def new
     @user = User.new
