@@ -5,7 +5,7 @@ describe Admin::UsersController do
   let(:user) { mock_model(User) }
 
   before do
-    sign_in_as FactoryGirl.build(:user)
+    sign_in
 
     User.stub(:find).and_return(user)
     User.stub(:new).and_return(user)

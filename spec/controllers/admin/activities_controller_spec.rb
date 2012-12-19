@@ -5,7 +5,7 @@ describe Admin::ActivitiesController do
   let(:activity) { mock_model(Activity) }
 
   before do
-    sign_in_as FactoryGirl.build(:user)
+    sign_in
 
     Activity.stub(:find).and_return(activity)
     Activity.stub(:new).and_return(activity)
