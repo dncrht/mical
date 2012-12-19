@@ -40,7 +40,7 @@ class Admin::ActivitiesController < AdminController
   def destroy
     @activity = Activity.find(params[:id])
 
-    @activity.delete
+    @activity.destroy
     redirect_to admin_activities_path, :notice => 'Activity deleted'
   end
 
