@@ -5,6 +5,10 @@ class Admin::ActivitiesController < AdminController
     @activities = Activity.order('name')
   end
   
+  def show
+    redirect_to edit_admin_activity_path(params[:id])
+  end
+  
   def new
     @activity = Activity.new
   end
