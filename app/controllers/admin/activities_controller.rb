@@ -10,7 +10,7 @@ class Admin::ActivitiesController < AdminController
   end
   
   def new
-    @activity = Activity.new
+    @activity = Activity.new(color: '#dddddd')
   end
 
   def create
