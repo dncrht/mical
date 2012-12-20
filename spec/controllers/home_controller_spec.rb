@@ -44,7 +44,7 @@ describe HomeController do
     end
   
     it 'should not replace an event if not logged' do
-      get :replace
+      put :replace
       response.should redirect_to(root_path)
     end
   
@@ -52,7 +52,7 @@ describe HomeController do
       @user = FactoryGirl.build(:user, can_edit_event: false)
       sign_in_as(@user)
     
-      get :replace
+      put :replace
       response.should redirect_to(root_path)
     end
   
@@ -60,8 +60,48 @@ describe HomeController do
       @user = FactoryGirl.build(:user)
       sign_in_as(@user)
     
-      get :replace
+      put :replace
       response.should redirect_to("#{root_path}#{Date.today.year}")
+    end
+    
+  end
+  
+  context 'delete event' do
+  
+    before do
+      Event.stub(:find_by_day).and_return(FactoryGirl.build(:event))
+      Event.stub(:destroy).and_return(true)
+    end
+  
+    it 'should not delete an event if not logged' do
+      delete :destroy
+      response.should redirect_to(root_path)
+    end
+  
+    it "should not delete an event if logged and can't edit event" do
+      @user = FactoryGirl.build(:user, can_edit_event: false)
+      sign_in_as(@user)
+    
+      delete :destroy
+      response.should redirect_to(root_path)
+    end
+  
+    it 'should redirect to / harmlessly if you try to delete but you not provide a year' do
+      @user = FactoryGirl.build(:user)
+      sign_in_as(@user)
+    
+      delete :destroy
+      response.should redirect_to root_path
+    end
+  
+    it 'should delete the given event if logged and can edit event' do
+      @user = FactoryGirl.build(:user)
+      sign_in_as(@user)
+    
+      today = Date.today
+      
+      delete :destroy, :day => today
+      response.should redirect_to("#{root_path}#{today.year}")
     end
   
   end
