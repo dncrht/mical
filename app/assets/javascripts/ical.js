@@ -46,3 +46,6 @@ $('.close').live('click', function(){
 });
 
 $('.help-inline.error').closest('.control-group').addClass('error');
+
+$('#activity_color').after('<div id="colorpicker"></div>');
+$('#colorpicker').farbtastic('#activity_color');
