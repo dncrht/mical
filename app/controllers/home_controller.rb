@@ -23,19 +23,6 @@ class HomeController < ApplicationController
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
   end
 
-  # GET /
-  # GET /?year=
-  # Transforms requests with parameter to make a friendlier URL
-  # Also, it renders / requests, so we avoid redirecting to index
-  def index_query_string
-    if params[:year].to_i >= 1996
-      redirect_to root_path << params[:year]
-    else
-      index
-      render 'index'
-    end
-  end
-
   # PUT /action
   def replace
     redirect_to root_path and return if !signed_in? or !current_user.can_edit_event
