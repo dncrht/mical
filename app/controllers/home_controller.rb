@@ -36,12 +36,15 @@ class HomeController < ApplicationController
   def destroy
     redirect_to root_path and return if !signed_in? or !current_user.can_edit_event
 
-    unless params[:day].blank?
+    redirection = root_path
+
+    if params[:day].present?
       e = Event.find_by_day(params[:day])
       e.destroy
+      redirection << e.day.year.to_s
     end
 
-    redirect_to root_path << e.day.year.to_s
+    redirect_to redirection
   end
 
   def export
