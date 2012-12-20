@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
     <style>
 <% @activities.each do |i| %>
-        .activity<%= i.id %> {background: #<%= i.color %>;}
+        .activity<%= i.id %> {background: <%= i.color %>;}
 <% end if defined? @activities %>
     </style>
   </head>

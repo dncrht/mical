@@ -13,7 +13,7 @@ FactoryGirl.define do
 
   factory :activity do
     name 'Programming'
-    color '0FF1CE' # A cyan tint in http://en.wikipedia.org/wiki/Hexspeak
+    color '#0FF1CE' # A cyan tint in http://en.wikipedia.org/wiki/Hexspeak
   end
 
   factory :event do
