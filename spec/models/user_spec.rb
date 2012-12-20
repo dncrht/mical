@@ -25,7 +25,10 @@ describe User do
   
   it 'is invalid if the email exists' do
     FactoryGirl.create(:user)
-    FactoryGirl.build(:user).should_not be_valid
+    
+    user = FactoryGirl.build(:user)
+    user.should_not be_valid
+    user.should have(1).error_on(:email)
   end
   
   it "can't delete the last admin" do
