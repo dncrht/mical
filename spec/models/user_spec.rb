@@ -18,9 +18,9 @@ describe User do
   
   it 'accept a blank password if the user exists' do
     user = FactoryGirl.create(:user)
-    user.save
     user.password = ''
     user.should be_valid
+    user.save.should be_true
   end
   
   it 'is invalid if the email exists' do
