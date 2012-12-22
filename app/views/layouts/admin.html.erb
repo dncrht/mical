@@ -12,11 +12,13 @@
 
 <% content_for :body do %>
   <ul class="nav nav-tabs">
-    <li class="<%= ((@tab.nil?) ? 'active' : nil) %>"><%= link_to 'Information', admin_path %></li>
+    <li class="<%= current_tab %>"><%= link_to 'Information', admin_path %></li>
+    
     <% if current_user.is_admin %>
-      <li class="<%= ((@tab == :users) ? 'active' : nil) %>"><%= link_to 'Users', admin_users_path %></li>
+      <li class="<%= current_tab :users %>"><%= link_to 'Users', admin_users_path %></li>
     <% end %>
-    <li class="<%= ((@tab == :activities) ? 'active' : nil) %>"><%= link_to 'Activities', admin_activities_path %></li>
+      
+    <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
   </ul>
 
   <%= yield %>

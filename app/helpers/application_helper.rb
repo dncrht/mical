@@ -92,4 +92,8 @@ module ApplicationHelper
     current_user.email.split('@')[0] rescue 'guest'
   end
   
+  def current_tab(this_tab = nil)
+    (@tab == this_tab) ? 'active' : nil
+  end
+  
 end
