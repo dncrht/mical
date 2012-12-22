@@ -14,7 +14,7 @@ module ApplicationHelper
     out << %(">\n<tr class="caption"><th colspan="7">#{l(day, :format => :month)}</th></tr>)
     
     # Print day of the week names
-    out << %(<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th class="last">sun</th></tr>\n<tr>)
+    out << %(<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>\n<tr>)
 
     # Leave as many blanks as last month's days are left
     (week_day - 1).times { out << '<td></td>' }

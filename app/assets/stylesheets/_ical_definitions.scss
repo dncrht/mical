@@ -1,0 +1,31 @@
+/*******************************************************************************
+** BASE COLORS
+*******************************************************************************/
+
+$white: white;
+$gray: #363636;
+$headerText: #321700;
+
+/*******************************************************************************
+** DERIVED COLORS
+*******************************************************************************/
+
+$day: lighten($gray, 27%);
+$tableBorder: lighten($gray, 62%);
+$weekDay: lighten($gray, 50%);
+$shadow: darken($gray, 10%);
+$headerTextLight: lighten($headerText, 80%);
+$monthCaptionBackground: lighten($gray, 66%);
+$monthCaptionBackgroundSelected: #4fabee;
+$monthCaptionBackgroundSelectedTo: #5283df;
+$daySelected: darken($monthCaptionBackgroundSelected, 10%);
+
+/*******************************************************************************
+** MIXINS
+*******************************************************************************/
+
+@mixin gradient($direction, $to, $from) {
+  background: $from;
+  background: -moz-linear-gradient($direction, $to, $from);
+  background: -webkit-linear-gradient($direction, $to, $from);
+}

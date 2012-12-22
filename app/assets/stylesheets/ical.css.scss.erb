@@ -1,53 +1,224 @@
-body {position: relative;}
-#header {margin: 20px auto 0; width: 788px; height: 120px; background: url(<%= asset_path 'bg.png' %>) repeat-x; position: relative; border-radius: 30px 30px 0 0; border-top: 1px solid #cfc4c0;}
-    #today {position: absolute; top: 16px; left: 0; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-size: 50px; line-height: 50px; text-align: center; font-weight: bold;}
-        #today p {font-size: 20px; line-height: 20px; text-align: center;}
-    #year {cursor: pointer; margin-top: 20px; color: #321700; text-shadow: 1px 1px 1px #ead7b7; font-weight: bold; font-size: 60px; line-height: 60px; text-align: center;}
-    #years {position: absolute; display: none; top: 84px; left: 308px; padding: 20px; list-style: none; z-index: 100; border: 1px solid #321700; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
-    #years:before {
-        content: '';
-        display: inline-block;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-bottom: 10px solid transparent;
-        border-bottom-color: #321700;
-        position: absolute;
-        top: -10px;
-        left: 5px;
-    }
-    #years a {font-size: 20px;}
-    #logged_as {position: absolute; top: 28px; right: 20px;}
-        #logged_as div {border: 1px solid rgba(0,0,0,0.4); border-radius: 5px; padding: 5px; background: rgba(0,0,0,0.2); color: #321700; box-shadow: inset 0 6px 10px rgba(0,0,0,0.45); text-align: right;}
-        #logged_as a {color: #321700;}
-#body {position: relative; margin: 0 auto; width: 768px; background: #fff; padding: 20px 10px 0; border-radius: 0 0 6px 6px; min-height: 440px;}
-#body {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
-#body {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
-    .row {margin-bottom: 20px;}
-    .month {border-top: 1px solid #d5d5d5; border-left: 1px solid #d5d5d5;}
-        .caption th {padding: 4px; background: #dedede; text-align: left; font-weight: bold; font-size: 16px; color: #1c1c1c; border-right: 1px solid #d5d5d5;}
-        .weekdays th {color: #b6b6b6; background: #dedede; font-weight: normal; font-size: 11px; border-bottom: 1px solid #d5d5d5;}
-            .last {border-right: 1px solid #d5d5d5;}
-        .current .caption th {background: #4fabee; color: #fff;}
-        .current .caption th {background: -moz-linear-gradient(top, #4fabee, #5283df);}
-        .current .caption th {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
-        .current .weekdays th {background: #5283df; color: #fff;}
-        .month td {border: 1px solid #d5d5d5; border-top: 0; border-left: 0; color: #7b7b7b; text-align: center;}
-        .month td.current {font-weight: bold; color: #4f97e0;}
-        .month td.day:hover {background: #4fabee; color: #fff; cursor: pointer;}
-        .month td.day:hover {background: -moz-linear-gradient(top, #4fabee, #5283df);}
-        .month td.day:hover {background: -webkit-linear-gradient(top, #4fabee, #5283df);}
-#legend {position: absolute; background: -moz-linear-gradient(right, #363636 0px, #fff 10px); top: 100px; left: -190px; width: 150px; padding: 15px 20px; border-radius: 14px 0 0 14px;}
-#legend {background: -moz-linear-gradient(right, #363636 0px, #fff 10px);}
-#legend {background: -webkit-linear-gradient(right, #363636 0px, #fff 10px);}
-    #legend p {margin: 5px 0;}
-    #legend span {margin-right: 5px;}
-#replace {position: absolute; display: none; padding: 10px; width: 440px; overflow: hidden; top: 0; left: 163px; border: 1px solid #321700; border-top: 0; background: #fff; box-shadow: 0 7px 10px #1c1c1c;}
-#replace {background: -moz-linear-gradient(top, #363636 0px, #fff 7px);}
-#replace {background: -webkit-linear-gradient(top, #363636 0px, #fff 7px);}
-    #input {float: left; width: 290px; padding: 10px; border-right: 1px solid #d5d5d5;}
-        textarea, #replace select {width: 270px;}
-    #buttons {float: right; width: 100px; padding: 10px;}
-        #buttons button {width: 100px; height: 40px; margin-bottom: 15px !important;}
+@import 'ical_definitions';
 
+/*******************************************************************************
+** BODY
+*******************************************************************************/
+
+body {position: relative;}
+
+/*******************************************************************************
+** CALENDAR HEADER
+*******************************************************************************/
+
+#header {
+  position: relative;
+  margin: 20px auto 0;
+  width: 788px;
+  height: 120px;
+  background: url(<%= asset_path 'bg.png' %>) repeat-x;
+  border-radius: 30px 30px 0 0;
+  border-top: 1px solid $headerTextLight;
+}
+
+#today {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  color: $headerText;
+  text-shadow: 1px 1px 1px $headerTextLight;
+  font-size: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: bold;
+
+  p {
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
+}
+
+#year {
+  cursor: pointer;
+  margin-top: 20px;
+  color: $headerText;
+  text-shadow: 1px 1px 1px $headerTextLight;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+#years {
+  position: absolute;
+  display: none;
+  top: 84px;
+  left: 308px;
+  padding: 20px;
+  list-style: none;
+  z-index: 100;
+  border: 1px solid $headerText;
+  background: $white;
+  box-shadow: 0 7px 10px $shadow;
+
+  &:before {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    content: '';
+    display: inline-block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-bottom-color: $headerText;
+  }
+  a {font-size: 20px;}
+}
+
+#logged_as {
+  position: absolute;
+  top: 28px;
+  right: 20px;
+
+  div {
+    border: 1px solid rgba(black, 0.4);
+    border-radius: 5px;
+    padding: 5px;
+    background: rgba(black, 0.2);
+    color: $headerText;
+    box-shadow: inset 0 6px 10px rgba(black, 0.45);
+    text-align: right;
+  }
+  a {color: $headerText;}
+}
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {background-color: white !important;}
-.badge {padding: 9px; vertical-align: middle;}
+        
+/*******************************************************************************
+** CALENDAR BODY
+*******************************************************************************/
+
+#body {
+  position: relative;
+  @include gradient(top, $gray 0px, $white 7px);
+  margin: 0 auto;
+  width: 768px;
+  padding: 20px 10px 0;
+  border-radius: 0 0 6px 6px;
+  min-height: 440px;
+}
+
+.row {margin-bottom: 20px;}
+
+.caption th {
+  padding: 4px;
+  background: $monthCaptionBackground;
+  text-align: left;
+  font-weight: bold;
+  font-size: 16px;
+  color: $shadow;
+  border-right: 1px solid $tableBorder;
+}
+
+.month {
+  border-top: 1px solid $tableBorder;
+  border-left: 1px solid $tableBorder;
+
+  td {
+    border: 1px solid $tableBorder;
+    border-top: 0;
+    border-left: 0;
+    color: $day;
+    text-align: center;
+  }
+  td.current {
+    font-weight: bold;
+    color: $daySelected;
+  }
+  td.day:hover {
+    @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+.weekdays {
+  border-right: 1px solid $tableBorder;
+
+  th {
+    color: $weekDay;
+    background: $monthCaptionBackground;
+    font-weight: normal;
+    font-size: 11px;
+    border-bottom: 1px solid $tableBorder;
+  }
+}
+
+.current {
+  .caption th {
+    @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
+    color: $white;
+  }
+  .weekdays th {
+    background: $monthCaptionBackgroundSelectedTo;
+    color: $white;
+  }
+}
+        
+/*******************************************************************************
+** CALENDAR LEGEND
+*******************************************************************************/
+
+#legend {
+  position: absolute;
+  @include gradient(right, $gray 0px, $white 10px);
+  top: 100px;
+  left: -190px;
+  width: 150px;
+  padding: 15px 20px;
+  border-radius: 14px 0 0 14px;
+
+  p {margin: 5px 0;}
+  span {margin-right: 5px;}
+}
+.badge {
+  padding: 9px;
+  vertical-align: middle;
+}
+
+/*******************************************************************************
+** COLLAPSABLE FORM TO MANAGE EVENTS
+*******************************************************************************/
+
+#replace {
+  position: absolute;
+  display: none;
+  padding: 10px;
+  width: 440px;
+  overflow: hidden;
+  top: 0;
+  left: 163px;
+  border: 1px solid $headerText;
+  border-top: 0;
+  @include gradient(top, $gray 0px, $white 7px);
+  box-shadow: 0 7px 10px $shadow;
+}
+
+#input {
+  float: left;
+  width: 290px;
+  padding: 10px;
+  border-right: 1px solid $tableBorder;
+}
+textarea, #replace select {width: 270px;}
+
+#buttons {
+  float: right;
+  width: 100px;
+  padding: 10px;
+
+  button {
+    width: 100px;
+    height: 40px;
+    margin-bottom: 15px !important;
+  }
+}
