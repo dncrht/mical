@@ -1,26 +1,17 @@
-<% content_for :header do %>
+<% content_for :header_day do %>
   <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
     <%= @today.day %>
     <p><%= l(@today, :format => :month) %></p>
   </div>
+<% end %>
 
+<% content_for :header_year do %>
   <p id="year"><%= @year %></p>
   <ul id="years" class="span1">
     <% @years.reverse.each do |year| %>
       <li><h3><%= link_to year, "/#{year}" %></h3></li>
     <% end %>
   </ul>
-  <div id="logged_as" class="span3">
-    <div>
-      Welcome, <strong><%= current_user_account %></strong><br>
-      <% unless signed_in? %>
-        <%= link_to 'Log in', admin_path %>
-      <% else %>
-        <%= link_to 'Administration', admin_path %> |
-        <%= link_to 'Logout', sign_out_path, :method => :delete %>
-      <% end %>
-    </div>
-  </div>
 <% end %>
 
 <%= each_with_wrapper(1..12, 4, 'row') do |month| %>

@@ -1,17 +1,7 @@
-<% content_for :header do %>
+<% content_for :header_year do %>
   <p id="year">Login</p>
-
-  <div id="logged_as" class="span3">
-    <div>
-      Welcome, <strong><%= current_user_account %></strong><br>
-      <%= link_to 'Back to calendar', root_path %>
-    </div>
-  </div>
 <% end %>
 
 <% content_for :body do %>
   <%= render :partial => '/sessions/form' %>
 <% end %>
-
-<%#= link_to 'Sign up', sign_up_path %>
-<%#= link_to 'Forgot password?', new_password_path %>

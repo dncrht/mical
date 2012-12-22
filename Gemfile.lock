@@ -135,7 +135,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  anjlab-bootstrap-rails (>= 2.0)
+  anjlab-bootstrap-rails (~> 2.2.1)
   clearance (= 1.0.0.rc2)
   factory_girl_rails
   jquery-rails

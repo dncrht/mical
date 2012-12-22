@@ -1,13 +1,5 @@
-<% content_for :header do %>
+<% content_for :header_year do %>
   <p id="year">Admin</p>
-
-  <div id="logged_as" class="span3">
-    <div>
-      Welcome, <strong><%= current_user_account %></strong><br>
-      <%= link_to 'Back to calendar', root_path %>
-      <%= link_to 'Logout', sign_out_path, :method => :delete %>
-    </div>
-  </div>
 <% end %>
 
 <% content_for :body do %>

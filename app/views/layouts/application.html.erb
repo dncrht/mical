@@ -14,7 +14,15 @@
   <body>
     <div id="header">
       <div class="container">
-        <%= yield :header %>
+        <%= yield :header_day %>
+        <%= yield :header_year %>
+
+        <div id="user_box" class="span3">
+          <div>
+            Welcome, <strong><%= current_user_account %></strong><br>
+            <%= render 'layouts/user_box_links' %>
+          </div>
+        </div>
       </div>
     </div>
 
