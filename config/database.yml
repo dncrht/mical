@@ -2,10 +2,10 @@ development:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: ical
+  database: mical
   pool: 5
-  username: pruebas
-  password: pruebas
+  username: dummy
+  password: dummy
   
 test:
   adapter: sqlite3

@@ -9,6 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require app_bootstrap
- *= require ical
+ *= require mical
  *= require farbtastic
  */
