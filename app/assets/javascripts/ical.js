@@ -1,3 +1,5 @@
+$('.day').tooltip();
+
 $('.day').click(function(e){
     if ($(this).data('activity')) {
         $('#delete').show();
