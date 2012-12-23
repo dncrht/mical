@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Ical::Application.load_tasks
+Mical::Application.load_tasks

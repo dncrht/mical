@@ -1,4 +1,4 @@
-Ical::Application.routes.draw do
+Mical::Application.routes.draw do
 
   namespace :admin do
     resources :users
