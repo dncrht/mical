@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module ApplicationHelper
   
   def print_month(year, month)
@@ -94,6 +96,10 @@ module ApplicationHelper
   
   def current_tab(this_tab = nil)
     (@tab == this_tab) ? 'active' : nil
+  end
+  
+  def tick_or_x(bool)
+    bool ? '✓' : '✗'
   end
   
 end
