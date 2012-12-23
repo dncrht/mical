@@ -29,3 +29,10 @@ $daySelected: darken($monthCaptionBackgroundSelected, 10%);
   background: -moz-linear-gradient($direction, $to, $from);
   background: -webkit-linear-gradient($direction, $to, $from);
 }
+
+/*******************************************************************************
+** DIMENSIONS
+*******************************************************************************/
+
+$topRadius: 30px 30px;
+$bottomRadius: 6px 6px;

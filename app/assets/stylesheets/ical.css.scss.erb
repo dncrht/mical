@@ -5,6 +5,12 @@
 *******************************************************************************/
 
 body {position: relative;}
+#wrapper {
+  margin: 20px auto 0;
+  box-shadow: 0 10px 40px $gray;
+  width: 788px;
+  border-radius: $topRadius $bottomRadius;
+}
 
 /*******************************************************************************
 ** CALENDAR HEADER
@@ -12,11 +18,9 @@ body {position: relative;}
 
 #header {
   position: relative;
-  margin: 20px auto 0;
-  width: 788px;
   height: 120px;
   background: url(<%= asset_path 'bg.png' %>) repeat-x;
-  border-radius: 30px 30px 0 0;
+  border-radius: $topRadius 0 0;
   border-top: 1px solid $headerTextLight;
 }
 
@@ -100,10 +104,9 @@ body {position: relative;}
 #body {
   position: relative;
   @include gradient(top, $gray 0px, $white 7px);
-  margin: 0 auto;
   width: 768px;
+  border-radius: 0 0 $bottomRadius;
   padding: 20px 10px 0;
-  border-radius: 0 0 6px 6px;
   min-height: 440px;
 }
 
@@ -170,12 +173,14 @@ body {position: relative;}
 
 #legend {
   position: absolute;
-  @include gradient(right, $gray 0px, $white 10px);
   top: 100px;
   left: -190px;
   width: 150px;
   padding: 15px 20px;
   border-radius: 14px 0 0 14px;
+  background: $white;
+  z-index: -1;
+  box-shadow: 0 10px 40px $gray;
 
   p {margin: 5px 0;}
   span {margin-right: 5px;}
