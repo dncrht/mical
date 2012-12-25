@@ -4,16 +4,16 @@
 
     <% if current_user.is_admin or current_user.can_edit_activity %>
 
-      <%= link_to 'Admin area', admin_path %>
+      <%= link_to 'Admin area', admin_path %> |
 
     <% end %>
 
   <% else %>
 
-    <%= link_to '↩ Calendar', root_path %>
+    <%= link_to '↩ Calendar', root_path %> |
 
   <% end %>
-  |
+
   <%= link_to '✖ Logout', sign_out_path, :method => :delete %>
 
 <% else %>
