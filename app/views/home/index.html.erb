@@ -46,3 +46,13 @@
     <% end %>
   </div>
 <% end %>
+
+<% content_for :footer do %>
+  <% if signed_in? and current_user.can_download %>
+    <div class="row">
+      <div class="span4">
+        <%= link_to '↯ Download as .csv', "#@year.csv" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

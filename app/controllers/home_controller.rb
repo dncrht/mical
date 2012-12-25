@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @today = today
     @year = today.year
 
-    if params[:year].to_i == @year #redirect to / if @year is current year
+    if params[:year].to_i == @year and request.format == :html # Redirect to / if @year is current year
       redirect_to root_path
       return
     end
@@ -21,6 +21,16 @@ class HomeController < ApplicationController
 
     events = Event.where('day >= ? AND day <= ?', "#@year-01-01", "#@year-12-31").order('day')
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
+    
+    respond_to do |format|
+      if signed_in? and current_user.can_download
+      format.csv {
+        headers['Content-Type'] = 'text/csv'
+        headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")        
+      }
+      end
+      format.html
+    end
   end
 
   # PUT /action
@@ -47,13 +57,4 @@ class HomeController < ApplicationController
     redirect_to redirection
   end
 
-  def export
-    out = ''
-
-    Event.order('day').each do |e|
-      out << "#{e.day}\t#{e.activity_id}\t#{e.description}\n"
-    end
-
-    render :text => out #TODO csv attachment
-  end
 end

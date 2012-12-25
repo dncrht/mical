@@ -20,4 +20,8 @@ class Event < ActiveRecord::Base
     
     e
   end
+  
+  def to_s
+    %(#{day},"#{activity.name}","#{description.strip}")
+  end
 end
