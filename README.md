@@ -38,12 +38,13 @@ If you want to add events, or read descriptions, you have to be a registered use
 
 Registered users have different permissions, split into two categories:
 - Calendar permissions
-    - Can edit event: the user can add, modify and delete events
-    - Can see legend: the user can see a legend comprising all the activities and its color codes
-    - Can see description: the user can see the events' description
+    - Can add/edit/delete events: the user can add, modify and delete events
+    - Can see a legend besides the calendar: the user can see a legend comprising all the activities and its color codes
+    - Can see description hovering over a day: the user can see the events' description
+    - Can download events as CSV: the user can download the current year events as a CSV file clicking on the link
 
 - Administration permissions
-    - Can edit activity: the user can manage the activities list
-    - It's an admin: the user can create more users
+    - Can manage activities on admin: the user can manage the activities list
+    - Can manage users on admin: the user can create more users
 
 Keep in mind that it must be at least one admin, but admin users can downgrade themselves.
