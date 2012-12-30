@@ -13,7 +13,8 @@ class HomeController < ApplicationController
       return
     end
 
-    @years = (Event.first.day.year..@today.year).to_a
+    first_year = Event.first.nil? ? @today.year : Event.first.day.year
+    @years = (first_year..@today.year).to_a
 
     events = Event.where('day >= ? AND day <= ?', "#@year-01-01", "#@year-12-31").order('day')
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
