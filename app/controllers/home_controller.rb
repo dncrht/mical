@@ -4,20 +4,16 @@ class HomeController < ApplicationController
   def index
     @activities = Activity.order('name')
     
-    today = Date.today
-    @today = today
-    @year = today.year
+    @today = Date.today
+    @year = params[:year].to_i
+    @year = @year.zero? ? @today.year : @year
 
-    if params[:year].to_i == @year and request.format == :html # Redirect to / if @year is current year
+    if request.path == "/#{@today.year}" and request.format == :html # Redirect to / when requesting /current_year, to clean the URL
       redirect_to root_path
       return
     end
 
-    @years = (1996..@year).to_a
-
-    if params[:year].to_i >= 1996 #mejorar validación
-      @year = params[:year].to_i
-    end
+    @years = (Event.first.day.year..@today.year).to_a
 
     events = Event.where('day >= ? AND day <= ?', "#@year-01-01", "#@year-12-31").order('day')
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302

@@ -4,6 +4,10 @@ describe HomeController do
   
   context 'calendar' do
     
+    before do
+      Event.stub(:first).and_return(FactoryGirl.build(:event))
+    end
+    
     it 'renders the current year' do
       today = Date.today
       
