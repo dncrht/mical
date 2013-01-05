@@ -21,6 +21,10 @@ class Event < ActiveRecord::Base
     e
   end
   
+  def self.first_year
+    Event.first.nil? ? Date.today.year : Event.first.day.year
+  end
+  
   def to_s
     %(#{day},"#{activity.name}","#{description.strip}")
   end

@@ -11,8 +11,7 @@ class HomeController < ApplicationController
     end
 
     # Prepares the years list
-    first_year = Event.first.nil? ? @today.year : Event.first.day.year
-    @years = (first_year..@today.year).to_a
+    @years = (Event.first_year..@today.year).to_a
 
     # Determines the requested year
     @year = params[:year].blank? ? @today.year : params[:year].to_i

@@ -48,4 +48,15 @@ describe Event do
     replacement.description.should be_nil
   end
   
+  it 'first_year should return current year if there are no events' do
+    Event.first_year.should eq Date.today.year
+  end
+  
+  it 'first_year should return the year of the first event if there are several events' do
+    @event = FactoryGirl.create(:event, day: '1979-03-12')
+    FactoryGirl.create(:event)
+    
+    Event.first_year.should eq @event.day.year
+  end
+  
 end
