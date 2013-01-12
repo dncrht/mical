@@ -10,7 +10,12 @@ You can see my own mical at http://mical.herokuapp.com/ as a demonstration.
 
 ## Installation
 
-Check out the code and deploy in your server. Run bundler, it needs Rails 3.2.6
+Check out the code and deploy in your server. Run bundler, it needs Rails 3.2.11
+```bash
+    git clone git://github.com/dncrht/mical.git
+    cd mical
+    bundle
+```
 
 Don't forget to customize your database credentials in *config/database.yml*
 
