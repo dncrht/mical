@@ -2,7 +2,7 @@ class Admin::ActivitiesController < AdminController
   before_filter :set_tab, :restricted
 
   def index
-    @activities = Activity.order('name')
+    @activities = Activity.order('position')
   end
   
   def show

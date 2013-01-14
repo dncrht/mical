@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
     
     # Prepares the activities list
-    @activities = Activity.order('name')
+    @activities = Activity.order('position')
     
     respond_to do |format|
       if signed_in? and current_user.can_download
