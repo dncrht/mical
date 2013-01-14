@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Mical::Application.config.secret_token = 'bcbd76344fce6f355f46b36f0f0bdf72fc325b3fe6f43cd0bc396001826118dbce90522631367d81b7f96692ade6b8f39810819744dacaafc834df10ce040e9f'
+Mical::Application.config.secret_token = ENV['SECRET_TOKEN'] || 'bcbd76344fce6f355f46b36f0f0bdf72fc325b3fe6f43cd0bc396001826118dbce90522631367d81b7f96692ade6b8f39810819744dacaafc834df10ce040e9f'

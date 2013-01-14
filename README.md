@@ -19,6 +19,11 @@ Check out the code and deploy in your server. Run bundler, it needs Rails 3.2.11
 
 Don't forget to customize your database credentials in *config/database.yml*
 
+To prevent nobody could tamper the session cookie, generate a new token with *rake secret* and:
+- change the token in *config/initializers/secret_token.rb* and deploy
+or
+- set a secret_token in your environment as ENV['SECRET_TOKEN']. If you deploy in Heroku, the command is *heroku config:add SECRET_TOKEN=_output_of_rake_secret_*
+
 Run migrations to create the database structure:
 ```bash
     rake db:migrate
