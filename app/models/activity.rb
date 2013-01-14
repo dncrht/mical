@@ -5,5 +5,5 @@ class Activity < ActiveRecord::Base
   
   has_many :events, :dependent => :destroy
   
-  attr_accessible :name, :color
+  attr_accessible :name, :color, :position
 end

@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>Color</th>
+      <th>Position</th>
       <th></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= link_to i.name, edit_admin_activity_path(i.id) %></td>
         <td><span class="uneditable-input" style="background:<%= i.color %>"><%= i.color %></span></td>
+        <td><%= i.position %></td>
         <td><%= link_to 'Delete', admin_activity_path(i), :class => 'btn btn-danger', :data => {:confirm => "Clicking 'Yes' will delete activity #{i.name}. Are you sure?"}, :method => :delete %></td>
       </tr>
     <% end %>
