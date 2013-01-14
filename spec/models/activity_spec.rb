@@ -10,6 +10,15 @@ describe Activity do
     FactoryGirl.build(:activity, name: nil).should_not be_valid
   end
 
+  it 'is invalid without position' do
+    FactoryGirl.build(:activity, position: nil).should_not be_valid
+  end
+
+  it 'is invalid without unique position' do
+    FactoryGirl.create(:activity)
+    FactoryGirl.build(:activity).should_not be_valid
+  end
+
   it 'is invalid without color, or improper color format' do
     FactoryGirl.build(:activity, color: nil).should_not be_valid
 

@@ -13,6 +13,7 @@ FactoryGirl.define do
 
   factory :activity do
     name 'Programming'
+    position 10
     color '#0FF1CE' # A cyan tint in http://en.wikipedia.org/wiki/Hexspeak
   end
 
