@@ -26,4 +26,6 @@ group :development, :test do
   gem 'rspec-rails', '>= 2.5.0'
   gem 'sqlite3'
   gem 'factory_girl_rails'
+  gem 'pry'
+  gem 'pry-debugger'
 end
