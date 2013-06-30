@@ -7,18 +7,16 @@ describe Admin::UsersController do
     get :index
     response.should_not be_success
   end
-  
-  context 'properly authenticated' do
-    
-    let(:user) { mock_model(User) }
-  
-    before do
-      sign_in
 
-      User.stub(:find).and_return(user)
-      User.stub(:new).and_return(user)
+  context 'properly authenticated' do
+
+    let(:user) { FactoryGirl.create(:user) }
+    let(:other_user) { FactoryGirl.create(:user) }
+
+    before do
+      sign_in_as user
     end
-  
+
     it 'GET index' do
       get :index
       response.should be_success
@@ -39,24 +37,20 @@ describe Admin::UsersController do
     end
 
     it 'POST create valid' do
-      user.stub :save => true
-
-      post :create, :user => {}
+      User.any_instance.stub :save => true
+      post :create
       response.should redirect_to admin_users_path
     end
 
     it 'POST create invalid' do
-      user.stub :save => false
-
-      post :create, :user => {}
+      User.any_instance.stub :save => false
+      post :create
       response.should be_success
       assigns(:user).should be_an_instance_of User
       response.should render_template('new')
     end
-  
+
     it 'GET edit' do
-      user.stub :save => true
-    
       get :edit, :id => user.id
       response.should be_success
       assigns(:user).should be_an_instance_of User
@@ -65,26 +59,23 @@ describe Admin::UsersController do
     end
 
     it 'PUT update valid' do
-      user.stub :update_attributes => true
-
-      put :update, {:id => user.id, :user => {}} # Don't care about the attributes because we are not testing the model
+      User.any_instance.stub :update_attributes => true
+      put :update, :id => user.id
       response.should redirect_to admin_users_path
     end
-  
-    it 'PUT update invalid' do
-      user.stub :update_attributes => false
 
-      put :update, {:id => user.id, :user => {}}
+    it 'PUT update invalid' do
+      User.any_instance.stub :update_attributes => false
+      put :update, :id => user.id
       response.should be_success
       assigns(:user).should be_an_instance_of User
       assigns(:user).id.should eq user.id
       response.should render_template('edit')
     end
-  
-    it 'DELETE destroy' do
-      user.stub :destroy => true
 
-      delete :destroy, :id => user.id
+    it 'DELETE destroy' do
+      delete :destroy, :id => other_user.id # Try to delete other user because he's the last admin
+      User.exists?(other_user.id).should be_false
       response.should redirect_to admin_users_path
     end
 

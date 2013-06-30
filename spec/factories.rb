@@ -1,7 +1,15 @@
 FactoryGirl.define do
-  
+
+  sequence :email do |n|
+    "admin#{n}@domain.tld"
+  end
+
+  sequence :position do |n|
+    n * 10
+  end
+
   factory :user do
-    email 'admin@domain.tld'
+    email
     password 'admin'
     can_download true
     can_edit_activity true
@@ -13,7 +21,7 @@ FactoryGirl.define do
 
   factory :activity do
     name 'Programming'
-    position 10
+    position
     color '#0FF1CE' # A cyan tint in http://en.wikipedia.org/wiki/Hexspeak
   end
 

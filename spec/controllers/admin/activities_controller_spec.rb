@@ -2,13 +2,10 @@ require 'spec_helper'
 
 describe Admin::ActivitiesController do
 
-  let(:activity) { mock_model(Activity) }
+  let(:activity) { FactoryGirl.create(:activity) }
 
   before do
     sign_in
-
-    Activity.stub(:find).and_return(activity)
-    Activity.stub(:new).and_return(activity)
   end
 
   it 'GET index' do
@@ -31,24 +28,20 @@ describe Admin::ActivitiesController do
   end
 
   it 'POST create valid' do
-    activity.stub :save => true
-
-    post :create, :activity => {}
+    Activity.any_instance.stub :save => true
+    post :create
     response.should redirect_to admin_activities_path
   end
 
   it 'POST create invalid' do
-    activity.stub :save => false
-
-    post :create, :activity => {}
+    Activity.any_instance.stub :save => false
+    post :create
     response.should be_success
     assigns(:activity).should be_an_instance_of Activity
     response.should render_template('new')
   end
   
   it 'GET edit' do
-    activity.stub :save => true
-    
     get :edit, :id => activity.id
     response.should be_success
     assigns(:activity).should be_an_instance_of Activity
@@ -57,16 +50,14 @@ describe Admin::ActivitiesController do
   end
 
   it 'PUT update valid' do
-    activity.stub :update_attributes => true
-
-    put :update, {:id => activity.id, :activity => {}} # Don't care about the attributes because we are not testing the model
+    Activity.any_instance.stub :update_attributes => true
+    put :update, :id => activity.id
     response.should redirect_to admin_activities_path
   end
   
   it 'PUT update invalid' do
-    activity.stub :update_attributes => false
-
-    put :update, {:id => activity.id, :activity => {}}
+    Activity.any_instance.stub :update_attributes => false
+    put :update, :id => activity.id
     response.should be_success
     assigns(:activity).should be_an_instance_of Activity
     assigns(:activity).id.should eq activity.id
@@ -74,9 +65,8 @@ describe Admin::ActivitiesController do
   end
   
   it 'DELETE destroy' do
-    activity.stub :destroy => true
-
     delete :destroy, :id => activity.id
+    Activity.exists?(activity.id).should be_false
     response.should redirect_to admin_activities_path
   end
 

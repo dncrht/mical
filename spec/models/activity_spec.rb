@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Activity do
-  
+
   it 'has a valid factory' do
     FactoryGirl.build(:activity).should be_valid
   end
@@ -15,8 +15,8 @@ describe Activity do
   end
 
   it 'is invalid without unique position' do
-    FactoryGirl.create(:activity)
-    FactoryGirl.build(:activity).should_not be_valid
+    existing_activity = FactoryGirl.create(:activity)
+    FactoryGirl.build(:activity, position: existing_activity.position).should_not be_valid
   end
 
   it 'is invalid without color, or improper color format' do
@@ -28,5 +28,5 @@ describe Activity do
 
     FactoryGirl.build(:activity, color: '#12345').should_not be_valid
   end
-  
+
 end

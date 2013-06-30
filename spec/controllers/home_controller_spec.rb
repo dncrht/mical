@@ -2,15 +2,18 @@ require 'spec_helper'
 
 describe HomeController do
   
+  let(:today) { Date.today }
+  let(:admin) { FactoryGirl.build(:user) }
+  let(:guest) { FactoryGirl.build(:user, can_edit_event: false) }
+  let(:event) { FactoryGirl.create(:event) }
+  
   context 'calendar' do
     
     before do
-      Event.stub(:first).and_return(FactoryGirl.build(:event))
+      Event.stub(:first).and_return(event)
     end
     
     it 'renders the current year' do
-      today = Date.today
-      
       get :index
       assigns(:activities).should_not be_nil
       assigns(:today).should eq today
@@ -22,7 +25,7 @@ describe HomeController do
     end
   
     it 'requesting the current year redirects to / to clean the URL' do
-      get :index, :year => Date.today.year
+      get :index, :year => today.year
       response.should redirect_to(root_path)
     end
   
@@ -31,7 +34,7 @@ describe HomeController do
       
       get :index, :year => selected
       assigns(:activities).should_not be_nil
-      assigns(:today).should eq Date.today
+      assigns(:today).should eq today
       assigns(:year).should eq selected
       assigns(:events).should be_an_instance_of ActiveSupport::HashWithIndifferentAccess
       
@@ -44,7 +47,7 @@ describe HomeController do
   context 'alter event' do
   
     before do
-      Event.stub(:replace).and_return(FactoryGirl.build(:event))
+      Event.stub(:replace).and_return(event)
     end
   
     it 'should not replace an event if not logged' do
@@ -53,58 +56,50 @@ describe HomeController do
     end
   
     it "should not replace an event if logged and can't edit event" do
-      @user = FactoryGirl.build(:user, can_edit_event: false)
-      sign_in_as(@user)
+      sign_in_as guest
     
       put :replace
       response.should redirect_to(root_path)
     end
   
     it 'should replace an event if logged and can edit event' do
-      @user = FactoryGirl.build(:user)
-      sign_in_as(@user)
+      sign_in_as admin
     
       put :replace
-      response.should redirect_to("#{root_path}#{Date.today.year}")
+      response.should redirect_to("#{root_path}#{today.year}")
     end
     
   end
   
   context 'delete event' do
   
-    before do
-      Event.stub(:find_by_day).and_return(FactoryGirl.build(:event))
-      Event.stub(:destroy).and_return(true)
-    end
-  
     it 'should not delete an event if not logged' do
-      delete :destroy
+      delete :destroy, :day => event.day
+      Event.exists?(event.id).should be_true
       response.should redirect_to(root_path)
     end
   
     it "should not delete an event if logged and can't edit event" do
-      @user = FactoryGirl.build(:user, can_edit_event: false)
-      sign_in_as(@user)
+      sign_in_as guest
     
-      delete :destroy
+      delete :destroy, :day => event.day
+      Event.exists?(event.id).should be_true
       response.should redirect_to(root_path)
     end
   
-    it 'should redirect to / harmlessly if you try to delete but you not provide a year' do
-      @user = FactoryGirl.build(:user)
-      sign_in_as(@user)
+    it 'should redirect to / harmlessly if you try to delete but you not provide a day' do
+      event
+      sign_in_as admin
     
       delete :destroy
+      Event.exists?(event.id).should be_true
       response.should redirect_to root_path
     end
   
     it 'should delete the given event if logged and can edit event' do
-      @user = FactoryGirl.build(:user)
-      sign_in_as(@user)
-    
-      today = Date.today
-      
-      delete :destroy, :day => today
+      sign_in_as admin
+      delete :destroy, :day => event.day
+      Event.exists?(event.id).should be_false
       response.should redirect_to("#{root_path}#{today.year}")
     end
   
