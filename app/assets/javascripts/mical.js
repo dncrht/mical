@@ -6,7 +6,7 @@ $('.day').click(function(e){
     } else {
         $('#delete').hide();
     }
-        
+
     if (!$('#replace').is(':visible')) {
         var month = $(this).closest('table').find('.caption th').html();
         var day = $(this).data('day').split('-')[2];
@@ -19,7 +19,7 @@ $('.day').click(function(e){
     if ($('#years').is(':visible')) $('#years').slideToggle();
 
     $('#activity_id option[value=' + $(this).data('activity') + ']').attr('selected', true);
-    $('#description').html($(this).attr('title'));
+    $('#description').html($(this).data('original-title'));
     $('#day').val($(this).data('day'));
 });
 
