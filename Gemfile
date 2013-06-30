@@ -11,7 +11,7 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'uglifier', '>= 1.3.0'
 
-gem 'anjlab-bootstrap-rails', '~> 2.2.1', :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', '~> 2.2.1', require: 'bootstrap-rails'
 
 gem 'jquery-rails'
 
@@ -21,6 +21,8 @@ gem 'turbolinks'
 gem 'clearance', '1.0.0.rc7'
 
 gem 'thin'
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.5.0'
