@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0' # Heroku's ruby version
 
 gem 'rails', '4.0.0'
 
