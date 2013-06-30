@@ -18,7 +18,7 @@ describe HomeController do
       assigns(:activities).should_not be_nil
       assigns(:today).should eq today
       assigns(:year).should eq today.year
-      assigns(:events).should be_an_instance_of ActiveSupport::HashWithIndifferentAccess
+      assigns(:events).should eq({event.day.to_s => event})
       
       response.should be_success
       response.should render_template('index')
@@ -36,7 +36,7 @@ describe HomeController do
       assigns(:activities).should_not be_nil
       assigns(:today).should eq today
       assigns(:year).should eq selected
-      assigns(:events).should be_an_instance_of ActiveSupport::HashWithIndifferentAccess
+      assigns(:events).should eq Hash.new
       
       response.should be_success
       response.should render_template('index')

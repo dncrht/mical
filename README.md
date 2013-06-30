@@ -1,6 +1,6 @@
 # Mical
 
-A small Rails 3 web application to keep track and share the activities you practice.
+A small Rails 4 web application to keep track and share the activities you practice.
 
 What can you do with mical?
 - Use it as a log of activities for you and your friends.
@@ -10,7 +10,7 @@ You can see my own mical at http://mical.herokuapp.com/ as a demonstration.
 
 ## Installation
 
-Check out the code and deploy in your server. Run bundler, it needs Rails 3.2.11
+Check out the code and deploy in your server. Run bundler, it needs Rails 4.0.0
 ```bash
     git clone git://github.com/dncrht/mical.git
     cd mical

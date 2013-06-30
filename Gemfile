@@ -1,24 +1,23 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.0.0'
 
 gem 'pg'
 
-gem 'json'
+gem 'sass-rails', '~> 4.0.0'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  
-  gem 'therubyracer', :platforms => :ruby # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.3.0'
 
 gem 'anjlab-bootstrap-rails', '~> 2.2.1', :require => 'bootstrap-rails'
 
 gem 'jquery-rails'
 
-gem 'clearance', '1.0.0.rc2'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+gem 'clearance', '1.0.0.rc7'
 
 gem 'thin'
 

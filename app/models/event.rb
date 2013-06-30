@@ -4,8 +4,6 @@ class Event < ActiveRecord::Base
   
   belongs_to :activity
   
-  attr_accessible :day, :activity_id, :description
-  
   def self.replace(day, activity_id, description)
     return nil if day.blank?
 
