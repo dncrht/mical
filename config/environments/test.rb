@@ -33,4 +33,7 @@ Mical::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Middleware that avoids wasting time spent visiting, loading, and submitting the sign in form.
+  config.middleware.use Clearance::BackDoor
 end
