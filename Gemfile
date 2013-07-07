@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0' # Heroku's ruby version
 
 gem 'rails', '4.0.0'
 
@@ -22,9 +23,16 @@ gem 'clearance', '1.0.0.rc7'
 gem 'thin'
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-debugger'
+end
+
+group :test do
   gem 'rspec-rails', '>= 2.5.0'
   gem 'sqlite3'
   gem 'factory_girl_rails'
-  gem 'pry'
-  gem 'pry-debugger'
+  gem 'selenium-webdriver'
+  gem 'cucumber-rails', :require => false # http://stackoverflow.com/questions/9866264/warning-cucumber-rails-required-outside-of-env-rb
+  gem 'database_cleaner'
 end
