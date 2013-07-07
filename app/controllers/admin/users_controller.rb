@@ -4,7 +4,7 @@ class Admin::UsersController < AdminController
   def index
     @users = User.order('email')
   end
-  
+
   def show
     redirect_to edit_admin_user_path(params[:id])
   end
@@ -14,7 +14,7 @@ class Admin::UsersController < AdminController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
 
     if @user.save
       redirect_to admin_users_path, :notice => 'User created'
@@ -30,7 +30,7 @@ class Admin::UsersController < AdminController
   def update
     @user = User.find(params[:id])
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to admin_users_path, :notice => 'User updated'
     else
       render 'edit'
@@ -49,13 +49,25 @@ class Admin::UsersController < AdminController
   end
 
   private
-  
+
   def restricted
     render(:text => 'Forbidden', :layout => true, :status => 403) and return unless current_user.is_admin
   end
-  
+
   def set_tab
     @tab = :users
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :email,
+      :password,
+      :can_download,
+      :can_edit_activity,
+      :can_edit_event,
+      :can_see_legend,
+      :can_see_description,
+      :is_admin)
   end
 
 end

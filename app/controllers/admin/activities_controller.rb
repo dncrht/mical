@@ -4,17 +4,17 @@ class Admin::ActivitiesController < AdminController
   def index
     @activities = Activity.order('position')
   end
-  
+
   def show
     redirect_to edit_admin_activity_path(params[:id])
   end
-  
+
   def new
     @activity = Activity.new(color: '#dddddd')
   end
 
   def create
-    @activity = Activity.new(params[:activity])
+    @activity = Activity.new(activity_params)
 
     if @activity.save
       redirect_to admin_activities_path, :notice => 'Activity created'
@@ -30,7 +30,7 @@ class Admin::ActivitiesController < AdminController
   def update
     @activity = Activity.find(params[:id])
 
-    if @activity.update_attributes(params[:activity])
+    if @activity.update_attributes(activity_params)
       redirect_to admin_activities_path, :notice => 'Activity updated'
     else
       render 'edit'
@@ -45,12 +45,16 @@ class Admin::ActivitiesController < AdminController
   end
 
   private
-  
+
   def restricted
     render(:text => 'Forbidden', :layout => true, :status => 403) and return unless current_user.can_edit_activity
   end
-  
+
   def set_tab
     @tab = :activities
+  end
+
+  def activity_params
+    params.require(:activity).permit!
   end
 end
