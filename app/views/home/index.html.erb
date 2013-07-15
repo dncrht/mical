@@ -21,7 +21,7 @@
 <% if signed_in? and current_user.can_see_legend %>
   <div id="legend">
     <% @activities.each do |i| %>
-      <p><span class="badge activity<%= i.id %>"></span><%= i.name %></p>
+      <p><span class="badge activity<%= i.id %>"> </span><%= i.name %></p>
     <% end %>
   </div>
 <% end %>
