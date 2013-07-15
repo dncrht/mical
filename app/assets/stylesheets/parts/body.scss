@@ -1,0 +1,11 @@
+/*******************************************************************************
+** BODY
+*******************************************************************************/
+
+body {position: relative;}
+#wrapper {
+  margin: 20px auto 0;
+  box-shadow: 0 10px 40px $gray;
+  width: 788px;
+  border-radius: $topRadius $bottomRadius;
+}

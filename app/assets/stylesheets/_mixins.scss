@@ -1,0 +1,9 @@
+/*******************************************************************************
+** MIXINS
+*******************************************************************************/
+
+@mixin gradient($direction, $to, $from) {
+  background: $from;
+  background: -moz-linear-gradient($direction, $to, $from);
+  background: -webkit-linear-gradient($direction, $to, $from);
+}
