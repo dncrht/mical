@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HomeController do
 
-  let(:today) { Date.today }
+  let(:today) { Date.current }
   let(:admin) { FactoryGirl.build(:user) }
   let(:guest) { FactoryGirl.build(:user, can_edit_event: false) }
   let!(:event) { FactoryGirl.create(:event) }

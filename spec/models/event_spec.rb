@@ -50,7 +50,7 @@ describe Event do
   end
 
   it 'first_year should return current year if there are no events' do
-    Event.first_year.should eq Date.today.year
+    Event.first_year.should eq Date.current.year
   end
 
   it 'first_year should return the year of the first event if there are several events' do

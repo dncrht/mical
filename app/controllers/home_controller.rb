@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   # GET /(:year)
   def index
-    @today = Date.today
+    @today = Date.current
 
     # Redirects to / when requesting /current_year, to clean the URL
     if request.path == "/#{@today.year}" and request.format == :html
@@ -19,15 +19,15 @@ class HomeController < ApplicationController
     # Prepares the event list of the requested year
     events = Event.where('day >= ? AND day <= ?', "#@year-01-01", "#@year-12-31").order('day')
     @events = Hash[*events.collect { |e| [e.day.to_s, e]}.flatten] #http://snippets.dzone.com/posts/show/302
-    
+
     # Prepares the activities list
     @activities = Activity.order('position')
-    
+
     respond_to do |format|
       if signed_in? and current_user.can_download
         format.csv {
           headers['Content-Type'] = 'text/csv'
-          headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")        
+          headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")
         }
       end
       format.html
