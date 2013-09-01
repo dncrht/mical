@@ -12,3 +12,13 @@ body {
   width: 788px;
   border-radius: $topRadius $bottomRadius;
 }
+#github {
+  margin-top: 40px;
+  text-align: center;
+  color: $footerText;
+  text-shadow: 1px 1px 1px lighten($footerText, 80%);
+  a {
+    color: $footerText;
+    text-decoration: underline;
+  }
+}
