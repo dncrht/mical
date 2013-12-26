@@ -200,6 +200,7 @@ PLATFORMS
 DEPENDENCIES
   anjlab-bootstrap-rails (~> 2.2.1)
   clearance (= 1.0.0.rc7)
+  coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
   factory_girl_rails
