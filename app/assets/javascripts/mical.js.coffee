@@ -1,51 +1,69 @@
-$('.day').tooltip()
+class @View extends AbstractView
+  events:
+    'click .day': 'dayClicked',
+    'click #cancel': 'cancelForm',
+    'click #delete': 'deleteForm',
+    'click #year':   'yearDropdown',
+    'click .close':  'closeX'
 
-$('.day').click (event) ->
-  if $(event.currentTarget).data('activity')
-    $('#delete').show()
-  else
-    $('#delete').hide()
+  constructor: ->
+    $('.day').tooltip()
+    $('.alert').append('<button type="button" class="close">×</button>')
 
-  if $('#replace').is(':visible')
-    return
+    $('.help-inline.error').closest('.control-group').addClass('error')
 
-  month = $(event.currentTarget).closest('table').find('.caption th').html()
-  day = $(event.currentTarget).data('day').split('-')[2]
-  $('#today').html(day + '<p>' + month + '</p>')
+    activityColor = $('#activity_color')
+    if activityColor.length != 0
+      activityColor.after('<div id="colorpicker"></div>')
+      $('#colorpicker').farbtastic('#activity_color')
 
-  $('#replace').slideToggle()
+  dayClicked: (event) ->
+    if $('#replace').is(':visible')
+      return
 
-  if $('#years').is(':visible')
-    $('#years').slideToggle()
+    $clickedDay = $(event.currentTarget)
 
-  $('#activity_id option[value=' + $(event.currentTarget).data('activity') + ']').attr('selected', true)
-  $('#description').html($(event.currentTarget).data('original-title'))
-  $('#day').val($(event.currentTarget).data('day'))
+    if $clickedDay.data('activity')
+      $('#delete').show()
+    else
+      $('#delete').hide()
 
-$('#cancel').click ->
-  $('#replace').slideToggle()
-  $('#today').html($('#today').data('day') + '<p>' + $('#today').data('month') + '</p>')
+    $('#replace').slideDown()
 
-$('#year').click ->
-  if $('#replace').is(':visible')
-    $('#replace').slideToggle()
-  $('#years').slideToggle()
+    @collapseIfVisible('#years')
 
-$('#delete').click ->
-  if not confirm('Are you sure?')
-    return
+    @displayDay($clickedDay)
 
-  $('input[name=_method]').val('delete')
-  $('#replace form').submit()
+    @fillForm($clickedDay)
 
-$('.alert').append('<button type="button" class="close">×</button>')
+  displayDay: ($day) ->
+    month = $day.closest('table').find('.caption th').html()
+    day = $day.data('day').split('-')[2]
+    $('#today').html(day + '<p>' + month + '</p>')
 
-$('.close').on click: (event) ->
-  $(event.currentTarget).parent().fadeOut()
+  fillForm: ($day) ->
+    $('#activity_id option[value=' + $day.data('activity') + ']').attr('selected', true)
+    $('#description').html($day.data('original-title'))
+    $('#day').val($day.data('day'))
 
-$('.help-inline.error').closest('.control-group').addClass('error')
+  cancelForm: ->
+    $('#replace').slideUp()
+    $('#today').html($('#today').data('day') + '<p>' + $('#today').data('month') + '</p>')
 
-activityColor = $('#activity_color')
-if activityColor.length != 0
-  activityColor.after('<div id="colorpicker"></div>')
-  $('#colorpicker').farbtastic('#activity_color')
+  deleteForm: ->
+    if not confirm('Are you sure?')
+      return
+
+    $('input[name=_method]').val('delete')
+    $('#replace form').submit()
+
+  closeX: (event) ->
+    $(event.currentTarget).parent().fadeOut()
+
+  yearDropdown: ->
+    @collapseIfVisible('#replace')
+    $('#years').slideDown()
+
+  collapseIfVisible: (selector) ->
+    if $(selector).is(':visible')
+      $(selector).slideUp()

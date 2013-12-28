@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-tooltip
 //= require farbtastic
+//= require abstract_view
 //= require mical
