@@ -35,7 +35,7 @@ group :test do
   gem 'rspec-rails', '>= 2.5.0'
   gem 'sqlite3'
   gem 'factory_girl_rails'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.39.0'
   gem 'cucumber-rails', :require => false # http://stackoverflow.com/questions/9866264/warning-cucumber-rails-required-outside-of-env-rb
   gem 'database_cleaner'
 end
