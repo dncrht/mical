@@ -7,94 +7,100 @@ describe HomeController do
   let(:guest) { FactoryGirl.build(:user, can_edit_event: false) }
   let!(:event) { FactoryGirl.create(:event) }
 
-  context 'calendar' do
+  describe '#index' do
+    before { get :index, params }
 
-    it 'renders the current year' do
-      get :index
-      assigns(:activities).should_not be_nil
-      assigns(:today).should eq today
-      assigns(:year).should eq today.year
-      assigns(:events).should eq({event.day.to_s => event})
+    context 'rendering current year by default' do
+      let(:params) { nil }
 
-      response.should be_success
-      response.should render_template('index')
+      it { assigns(:activities).should_not be_nil }
+      it { assigns(:today).should eq today }
+      it { assigns(:year).should eq today.year }
+      it { assigns(:events).should eq({event.day.to_s => event}) }
+      its(:response) { should be_success }
+      its(:response) { should render_template 'index' }
     end
 
-    it 'requesting the current year redirects to / to clean the URL' do
-      get :index, :year => today.year
-      response.should redirect_to(root_path)
+    context 'requesting the current year redirects to / to clean the URL' do
+      let(:params) { {year: today.year} }
+
+      its(:response) { should redirect_to root_path }
     end
 
-    it 'renders the selected year' do
-      selected = rand(1996..2000)
+    context 'rendering the year specified' do
+      let(:selected) { rand(1996..2000) }
+      let(:params) { {year: selected} }
 
-      get :index, :year => selected
-      assigns(:activities).should_not be_nil
-      assigns(:today).should eq today
-      assigns(:year).should eq selected
-      assigns(:events).should eq Hash.new
-
-      response.should be_success
-      response.should render_template('index')
+      it { assigns(:activities).should_not be_nil }
+      it { assigns(:today).should eq today }
+      it { assigns(:year).should eq selected }
+      it { assigns(:events).should eq Hash.new }
+      its(:response) { should be_success }
+      its(:response) { should render_template 'index' }
     end
-
   end
 
-  context 'alter event' do
-
-    it 'should not replace an event if not logged' do
-      put :replace
-      response.should redirect_to(root_path)
+  describe '#replace' do
+    let(:params) { nil }
+    before do
+      sign_in_as user
+      put :replace, params
     end
 
-    it "should not replace an event if logged and can't edit event" do
-      sign_in_as guest
+    context 'when not logged in' do
+      let(:user) { nil }
 
-      put :replace
-      response.should redirect_to(root_path)
+      its(:response) { should redirect_to root_path }
     end
 
-    it 'should replace an event if logged and can edit event' do
-      sign_in_as admin
+    context "when logged in but can't edit event" do
+      let(:user) { guest }
 
-      put :replace, day: event.day
-      response.should redirect_to("#{root_path}#{today.year}")
+      its(:response) { should redirect_to root_path }
     end
 
+    context 'when logged in and can edit event' do
+      let(:user) { admin }
+      let(:params) { {day: event.day} }
+
+      its(:response) { should redirect_to "#{root_path}#{today.year}" }
+    end
   end
 
-  context 'delete event' do
-
-    it 'should not delete an event if not logged' do
-      delete :destroy, :day => event.day
-      Event.exists?(event.id).should be_true
-      response.should redirect_to(root_path)
+  describe '#delete' do
+    let(:params) { {day: event.day} }
+    before do
+      sign_in_as user
+      delete :destroy, params
     end
 
-    it "should not delete an event if logged and can't edit event" do
-      sign_in_as guest
+    context 'when not logged in' do
+      let(:user) { nil }
 
-      delete :destroy, :day => event.day
-      Event.exists?(event.id).should be_true
-      response.should redirect_to(root_path)
+      it { Event.exists?(event.id).should be_true }
+      its(:response) { should redirect_to root_path }
     end
 
-    it 'should redirect to / harmlessly if you try to delete but you not provide a day' do
-      event
-      sign_in_as admin
+    context "when logged in but can't edit event" do
+      let(:user) { guest }
 
-      delete :destroy
-      Event.exists?(event.id).should be_true
-      response.should redirect_to root_path
+      it { Event.exists?(event.id).should be_true }
+      its(:response) { should redirect_to root_path }
     end
 
-    it 'should delete the given event if logged and can edit event' do
-      sign_in_as admin
-      delete :destroy, :day => event.day
-      Event.exists?(event.id).should be_false
-      response.should redirect_to("#{root_path}#{today.year}")
+    context 'when trying to delete but you not provides a day' do
+      let(:user) { guest }
+      let(:params) { nil }
+
+      it { Event.exists?(event.id).should be_true }
+      its(:response) { should redirect_to root_path }
     end
 
+    context 'when logged in and can edit event' do
+      let(:user) { admin }
+
+      it { Event.exists?(event.id).should be_false }
+      its(:response) { should redirect_to "#{root_path}#{today.year}" }
+    end
   end
-
 end
