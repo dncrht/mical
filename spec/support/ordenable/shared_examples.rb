@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples 'ordenable' do
+shared_examples 'sortable' do
 
   let(:tested_model) { described_class.name.downcase }
   let(:params) { {position: nil} }

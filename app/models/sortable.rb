@@ -1,4 +1,4 @@
-module Ordenable
+module Sortable
 
   def self.included(by)
     by.class_eval do

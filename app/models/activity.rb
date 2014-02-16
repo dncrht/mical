@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
 
-  include Ordenable
+  include Sortable
 
   validates :name, :presence => true
   validates :color, :format => /\A#[0-9A-Fa-f]{6}\z/

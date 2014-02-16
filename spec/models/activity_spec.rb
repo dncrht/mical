@@ -42,5 +42,5 @@ describe Activity do
     end
   end
 
-  it_should_behave_like 'ordenable'
+  it_should_behave_like 'sortable'
 end
