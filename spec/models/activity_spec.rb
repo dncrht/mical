@@ -2,22 +2,44 @@ require 'spec_helper'
 
 describe Activity do
 
-  it 'has a valid factory' do
-    FactoryGirl.build(:activity).should be_valid
-  end
+  describe '#valid?' do
+    subject { FactoryGirl.build(:activity, params) }
 
-  it 'is invalid without name' do
-    FactoryGirl.build(:activity, name: nil).should_not be_valid
-  end
+    context 'default factory' do
+      let(:params) { nil }
 
-  it 'is invalid without color, or improper color format' do
-    FactoryGirl.build(:activity, color: nil).should_not be_valid
+      it { should be_valid }
+    end
 
-    FactoryGirl.build(:activity, color: '#deadbeef').should_not be_valid
+    context 'without name' do
+      let(:params) { {name: nil} }
 
-    FactoryGirl.build(:activity, color: '##whatever').should_not be_valid
+      it { should_not be_valid }
+    end
 
-    FactoryGirl.build(:activity, color: '#12345').should_not be_valid
+    context 'without color' do
+      let(:params) { {color: nil} }
+
+      it { should_not be_valid }
+    end
+
+    context 'with valid but lengthy characters in color' do
+      let(:params) { {color: '#deadbeef'} }
+
+      it { should_not be_valid }
+    end
+
+    context 'with invalid characters in color' do
+      let(:params) { {color: '##whatever'} }
+
+      it { should_not be_valid }
+    end
+
+    context 'with shorter color' do
+      let(:params) { {color: '#12345'} }
+
+      it { should_not be_valid }
+    end
   end
 
   it_should_behave_like 'ordenable'
