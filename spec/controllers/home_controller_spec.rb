@@ -63,7 +63,7 @@ describe HomeController do
       let(:user) { admin }
       let(:params) { {day: event.day} }
 
-      its(:response) { should redirect_to "#{root_path}#{today.year}" }
+      its(:response) { should redirect_to year_path(today.year) }
     end
   end
 
@@ -100,7 +100,7 @@ describe HomeController do
       let(:user) { admin }
 
       it { Event.exists?(event.id).should be_false }
-      its(:response) { should redirect_to "#{root_path}#{today.year}" }
+      its(:response) { should redirect_to year_path(today.year) }
     end
   end
 end

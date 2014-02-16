@@ -9,7 +9,7 @@ Mical::Application.routes.draw do
 
   put 'action' => 'home#replace'
   delete 'action' => 'home#destroy'
-  match ':year' => 'home#index', year: /\d{4}/, via: [:get, :post]
+  match ':year' => 'home#index', year: /\d{4}/, via: [:get, :post], as: 'year'
   root 'home#index'
 
 end

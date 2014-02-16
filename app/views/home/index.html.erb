@@ -8,8 +8,8 @@
 <% content_for :header_year do %>
   <p id="year"><%= @year %></p>
   <ul id="years" class="span1">
-    <% @years.reverse.each do |year| %>
-      <li><h3><%= link_to year, "/#{year}" %></h3></li>
+    <% @years.to_a.reverse.each do |year| %>
+      <li><h3><%= link_to year, year_path(year) %></h3></li>
     <% end %>
   </ul>
 <% end %>

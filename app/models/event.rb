@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :activity
 
+  scope :in_year, -> (year) { where('day >= ? AND day <= ?', "#{year}-01-01", "#{year}-12-31").order('day') }
+
   def self.replace(day, activity_id, description)
     return nil if day.blank?
 
@@ -25,5 +27,9 @@ class Event < ActiveRecord::Base
 
   def to_s
     %(#{day},"#{activity.name}","#{description.strip}")
+  end
+
+  def self.to_h(events)
+    Hash[*events.map { |event| [event.day.to_s, event] }.flatten] #http://snippets.dzone.com/posts/show/302
   end
 end
