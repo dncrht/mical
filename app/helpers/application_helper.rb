@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 module ApplicationHelper
-  
+
   def print_month(year, month)
     out = ''
 
@@ -14,7 +14,7 @@ module ApplicationHelper
     out << %(<table class="span3 month)
     out << ' current' if month == @today.month
     out << %(">\n<tr class="caption"><th colspan="7">#{l(day, :format => :month)}</th></tr>)
-    
+
     # Print day of the week names
     out << %(<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>\n<tr>)
 
@@ -28,10 +28,10 @@ module ApplicationHelper
       out << %(<td data-day="#{today}")
 
       html_classes = ['day']
-      if @events.kind_of? Hash and @events.include? today
+      if @events.is_a?(Hash) && @events.include?(today)
         html_classes << "activity#{@events[today].activity_id}"
         out << %( data-activity="#{@events[today].activity_id}")
-        out << %( title="#{@events[today].description}") if signed_in? and current_user.can_see_description
+        out << %( title="#{@events[today].description}") if signed_in? && current_user.can_see_description
       end
 
       html_classes << 'current' if day == @today
@@ -58,12 +58,12 @@ module ApplicationHelper
     (8 - week_day).times { out << '<td></td>' } if week_day > 1
 
     out << "</tr>\n"
-    
+
     out << "</table>\n"
 
     out.html_safe
   end
-  
+
   # Wrap a HTML block within a DIV, every X iterations
   # We can't redefine this as an Array method because Array can't access with_output_buffer
   # http://blog.agile-pandas.com/2011/01/13/rails-capture-vs-with-output-buffer
@@ -80,7 +80,7 @@ module ApplicationHelper
       out << '</div>' if i % per_row == 0
     end
     out << '</div>' if i % per_row != 0
-    
+
     out.html_safe
   end
 
@@ -89,17 +89,16 @@ module ApplicationHelper
       %(<div class="alert alert-error error">#{entity.errors.to_a.join('<br>')}</div>).html_safe
     end
   end
-  
+
   def current_user_account
     current_user.email.split('@')[0] rescue 'guest'
   end
-  
+
   def current_tab(this_tab = nil)
     (@tab == this_tab) ? 'active' : nil
   end
-  
+
   def tick_or_x(bool)
     bool ? '✓' : '✗'
   end
-  
 end

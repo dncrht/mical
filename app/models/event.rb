@@ -9,16 +9,16 @@ class Event < ActiveRecord::Base
   def self.replace(day, activity_id, description)
     return nil if day.blank?
 
-    e = Event.find_by_day(day)
-    if e.nil?
-      e = Event.new
-      e.day = day
+    event = Event.find_by_day(day)
+    if event.nil?
+      event = Event.new
+      event.day = day
     end
-    e.activity_id = activity_id #there is only one activity per day
-    e.description = description
-    e.save
+    event.activity_id = activity_id #there is only one activity per day
+    event.description = description
+    event.save
 
-    e
+    event
   end
 
   def self.first_year

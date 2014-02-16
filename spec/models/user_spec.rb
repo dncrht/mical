@@ -33,5 +33,4 @@ describe User do
   it "can't delete the last admin" do
     expect { user.destroy }.to raise_error 'Must be at least one admin'
   end
-
 end

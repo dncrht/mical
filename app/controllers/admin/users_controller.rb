@@ -43,15 +43,15 @@ class Admin::UsersController < AdminController
     begin
       @user.destroy
       redirect_to admin_users_path, :notice => 'User deleted'
-    rescue => e
-      redirect_to admin_users_path, :alert => e.message
+    rescue => error
+      redirect_to admin_users_path, :alert => error.message
     end
   end
 
   private
 
   def restricted
-    render(:text => 'Forbidden', :layout => true, :status => 403) and return unless current_user.is_admin
+    render(:text => 'Forbidden', :layout => true, :status => 403) unless current_user.is_admin
   end
 
   def set_tab
@@ -67,7 +67,7 @@ class Admin::UsersController < AdminController
       :can_edit_event,
       :can_see_legend,
       :can_see_description,
-      :is_admin)
+      :is_admin
+    )
   end
-
 end

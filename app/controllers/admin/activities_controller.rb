@@ -47,7 +47,7 @@ class Admin::ActivitiesController < AdminController
   private
 
   def restricted
-    render(:text => 'Forbidden', :layout => true, :status => 403) and return unless current_user.can_edit_activity
+    render(:text => 'Forbidden', :layout => true, :status => 403) unless current_user.can_edit_activity
   end
 
   def set_tab

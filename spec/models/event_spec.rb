@@ -59,5 +59,4 @@ describe Event do
 
     Event.first_year.should eq first_event.day.year
   end
-
 end
