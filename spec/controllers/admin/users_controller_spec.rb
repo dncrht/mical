@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Admin::UsersController do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   before { sign_in_as user }
 
   context 'with a non admin user' do
-    let(:user) { FactoryGirl.build(:user, is_admin: false) }
+    let(:user) { build(:user, is_admin: false) }
 
     describe '#index' do
       before { get :index }
@@ -18,7 +18,7 @@ describe Admin::UsersController do
   end
 
   context 'with an existing user' do
-    let(:other_user) { FactoryGirl.create(:user) }
+    let(:other_user) { create(:user) }
 
     describe '#index' do
       before { get :index }
@@ -70,7 +70,7 @@ describe Admin::UsersController do
   end
 
   context 'with a new user' do
-    let(:other_user) { FactoryGirl.build(:user) }
+    let(:other_user) { build(:user) }
 
     describe '#new' do
       before { get :new }

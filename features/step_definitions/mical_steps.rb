@@ -1,9 +1,9 @@
 Given "there isn't an event for today" do
-  FactoryGirl.create :activity
+  create :activity
 end
 
 When 'I visit the calendar' do
-  visit root_path(as: FactoryGirl.create(:user))
+  visit root_path(as: create(:user))
 end
 
 Given 'I click on today because I want to create an event' do
@@ -11,7 +11,7 @@ Given 'I click on today because I want to create an event' do
 end
 
 Given "there's an event for today" do
-  FactoryGirl.create :event
+  create :event
 end
 
 Given 'I click on today because I want to modify an event' do

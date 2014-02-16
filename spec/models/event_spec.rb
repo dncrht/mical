@@ -2,29 +2,29 @@ require 'spec_helper'
 
 describe Event do
 
-  let(:event) { FactoryGirl.build(:event) }
+  let(:event) { build(:event) }
 
   it 'has a valid factory' do
     event.should be_valid
   end
 
   it 'is invalid without day' do
-    FactoryGirl.build(:event, day: nil).should_not be_valid
+    build(:event, day: nil).should_not be_valid
   end
 
   it 'day should be unique' do
-    FactoryGirl.create(:event)
+    create(:event)
 
     event.should_not be_valid
     event.should have(1).error_on(:day)
   end
 
   it 'is invalid without activity' do
-    FactoryGirl.build(:event, activity_id: nil).should_not be_valid
+    build(:event, activity_id: nil).should_not be_valid
   end
 
   it 'is invalid without description' do
-    FactoryGirl.build(:event, description: nil).should_not be_valid
+    build(:event, description: nil).should_not be_valid
   end
 
   it 'should not replace without day' do
@@ -32,7 +32,7 @@ describe Event do
   end
 
   it 'should replace when giving a date and the record exists' do
-    existing_event = FactoryGirl.create(:event)
+    existing_event = create(:event)
 
     replacement = Event.replace(existing_event.day, nil, nil)
 
@@ -41,7 +41,7 @@ describe Event do
   end
 
   it 'should replace when giving a date and the record is new' do
-    new_event = FactoryGirl.build(:event)
+    new_event = build(:event)
 
     replacement = Event.replace(new_event.day, nil, nil)
 
@@ -54,8 +54,8 @@ describe Event do
   end
 
   it 'first_year should return the year of the first event if there are several events' do
-    first_event = FactoryGirl.create(:event, day: '1979-03-12')
-    FactoryGirl.create(:event)
+    first_event = create(:event, day: '1979-03-12')
+    create(:event)
 
     Event.first_year.should eq first_event.day.year
   end

@@ -4,7 +4,7 @@ shared_examples 'sortable' do
 
   let(:tested_model) { described_class.name.downcase }
   let(:params) { {position: nil} }
-  let!(:model) { FactoryGirl.create(tested_model, params) }
+  let!(:model) { create(tested_model, params) }
 
   context 'set position to max position plus 10 if position is not specified' do
     it { expect(model.position).to eq 10 }
@@ -12,7 +12,7 @@ shared_examples 'sortable' do
   end
 
   context 'reordering in multiples of 10 after inserting a multiple of 5' do
-    let!(:new_model) { FactoryGirl.create(tested_model, position: 5) }
+    let!(:new_model) { create(tested_model, position: 5) }
 
     it { expect(new_model.reload.position).to eq 10 }
     it { expect(model.reload.position).to eq 20 }

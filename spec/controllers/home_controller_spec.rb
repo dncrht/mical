@@ -3,9 +3,9 @@ require 'spec_helper'
 describe HomeController do
 
   let(:today) { Date.current }
-  let(:admin) { FactoryGirl.build(:user) }
-  let(:guest) { FactoryGirl.build(:user, can_edit_event: false) }
-  let!(:event) { FactoryGirl.create(:event) }
+  let(:admin) { build(:user) }
+  let(:guest) { build(:user, can_edit_event: false) }
+  let!(:event) { create(:event) }
 
   describe '#index' do
     before { get :index, params }

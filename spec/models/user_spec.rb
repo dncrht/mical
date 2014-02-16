@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   describe '#valid?' do
-    subject { FactoryGirl.build(:user, params) }
+    subject { build(:user, params) }
 
     context 'default factory' do
       let(:params) { nil }
@@ -31,7 +31,7 @@ describe User do
 
     context 'is invalid if the email exists' do
       let(:params) { {password: nil} }
-      let!(:existing_user) { FactoryGirl.create(:user, email: subject.email) }
+      let!(:existing_user) { create(:user, email: subject.email) }
 
       it { should_not be_valid }
       it { should have(1).error_on(:email) }
@@ -39,7 +39,7 @@ describe User do
   end
 
   describe '#save' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     context 'accept a blank password if the user exists' do
       before { subject.password = '' }
@@ -50,7 +50,7 @@ describe User do
   end
 
   describe '#destroy' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     context "can't delete the last admin" do
       it { expect { subject.destroy }.to raise_error 'Must be at least one admin' }

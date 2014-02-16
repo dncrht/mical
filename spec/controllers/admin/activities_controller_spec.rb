@@ -5,7 +5,7 @@ describe Admin::ActivitiesController do
   before { sign_in }
 
   context 'with an existing activity' do
-    let!(:activity) { FactoryGirl.create(:activity) }
+    let!(:activity) { create(:activity) }
 
     describe '#index' do
       before { get :index }
@@ -56,7 +56,7 @@ describe Admin::ActivitiesController do
   end
 
   context 'with a new activity' do
-    let(:activity) { FactoryGirl.build(:activity) }
+    let(:activity) { build(:activity) }
 
     describe '#new' do
       before { get :new }

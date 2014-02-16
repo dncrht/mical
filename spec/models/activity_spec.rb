@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Activity do
 
   describe '#valid?' do
-    subject { FactoryGirl.build(:activity, params) }
+    subject { build(:activity, params) }
 
     context 'default factory' do
       let(:params) { nil }
