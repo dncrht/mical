@@ -12,8 +12,8 @@ describe Admin::UsersController do
     describe '#index' do
       before { get :index }
 
-      its(:response) { should_not be_success }
-      it { assigns(:users).should be_nil }
+      it { expect(response).to_not be_success }
+      it { expect(assigns(:users)).to be_nil }
     end
   end
 
@@ -23,23 +23,23 @@ describe Admin::UsersController do
     describe '#index' do
       before { get :index }
 
-      its(:response) { should be_success }
-      it { assigns(:users).should eq [user] }
-      its(:response) { should render_template 'index' }
+      it { expect(response).to be_success }
+      it { expect(assigns(:users)).to eq [user] }
+      it { expect(response).to render_template 'index' }
     end
 
     describe '#show' do
       before { get :show, :id => user.id }
 
-      its(:response) { should redirect_to edit_admin_user_path(user.id) }
+      it { expect(response).to redirect_to edit_admin_user_path(user.id) }
     end
 
     describe '#edit' do
       before { get :edit, :id => user.id }
 
-      its(:response) { should be_success }
-      it { assigns(:user).should eq user }
-      its(:response) { should render_template 'edit' }
+      it { expect(response).to be_success }
+      it { expect(assigns(:user)).to eq user }
+      it { expect(response).to render_template 'edit' }
     end
 
     describe '#update' do
@@ -48,15 +48,15 @@ describe Admin::UsersController do
       context 'valid user' do
         let(:user_attributes) { other_user.attributes }
 
-        its(:response) { should redirect_to admin_users_path }
+        it { expect(response).to redirect_to admin_users_path }
       end
 
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes.merge(email: nil) }
 
-        its(:response) { should be_success }
-        it { assigns(:user).should eq other_user }
-        its(:response) { should render_template 'edit' }
+        it { expect(response).to be_success }
+        it { expect(assigns(:user)).to eq other_user }
+        it { expect(response).to render_template 'edit' }
       end
     end
 
@@ -64,8 +64,8 @@ describe Admin::UsersController do
       # Try to delete other user because he's the last admin
       before { delete :destroy, id: other_user.id }
 
-      its(:response) { should redirect_to admin_users_path }
-      it { User.exists?(other_user.id).should be_false }
+      it { expect(response).to redirect_to admin_users_path }
+      it { expect(User.exists?(other_user.id)).to be_nil }
     end
   end
 
@@ -75,9 +75,9 @@ describe Admin::UsersController do
     describe '#new' do
       before { get :new }
 
-      its(:response) { should be_success }
-      it { assigns(:user).should be_a User }
-      its(:response) { should render_template 'new' }
+      it { expect(response).to be_success }
+      it { expect(assigns(:user)).to be_a User }
+      it { expect(response).to render_template 'new' }
     end
 
     describe '#create' do
@@ -86,15 +86,15 @@ describe Admin::UsersController do
       context 'valid user' do
         let(:user_attributes) { other_user.attributes.merge(password: 'any') }
 
-        its(:response) { should redirect_to admin_users_path }
+        it { expect(response).to redirect_to admin_users_path }
       end
 
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes }
 
-        its(:response) { should be_success }
-        it { assigns(:user).should be_a User }
-        its(:response) { should render_template 'new' }
+        it { expect(response).to be_success }
+        it { expect(assigns(:user)).to be_a User }
+        it { expect(response).to render_template 'new' }
       end
     end
   end

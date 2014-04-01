@@ -13,30 +13,30 @@ describe HomeController do
     context 'rendering current year by default' do
       let(:params) { nil }
 
-      it { assigns(:activities).should_not be_nil }
-      it { assigns(:today).should eq today }
-      it { assigns(:year).should eq today.year }
-      it { assigns(:events).should eq({event.day.to_s => event}) }
-      its(:response) { should be_success }
-      its(:response) { should render_template 'index' }
+      it { expect(assigns(:activities)).to_not be_nil }
+      it { expect(assigns(:today)).to eq today }
+      it { expect(assigns(:year)).to eq today.year }
+      it { expect(assigns(:events)).to eq({event.day.to_s => event}) }
+      it { expect(response).to be_success }
+      it { expect(response).to render_template 'index' }
     end
 
     context 'requesting the current year redirects to / to clean the URL' do
       let(:params) { {year: today.year} }
 
-      its(:response) { should redirect_to root_path }
+      it { expect(response).to redirect_to root_path }
     end
 
     context 'rendering the year specified' do
       let(:selected) { rand(1996..2000) }
       let(:params) { {year: selected} }
 
-      it { assigns(:activities).should_not be_nil }
-      it { assigns(:today).should eq today }
-      it { assigns(:year).should eq selected }
-      it { assigns(:events).should eq Hash.new }
-      its(:response) { should be_success }
-      its(:response) { should render_template 'index' }
+      it { expect(assigns(:activities)).to_not be_nil }
+      it { expect(assigns(:today)).to eq today }
+      it { expect(assigns(:year)).to eq selected }
+      it { expect(assigns(:events)).to eq Hash.new }
+      it { expect(response).to be_success }
+      it { expect(response).to render_template 'index' }
     end
   end
 
@@ -50,20 +50,20 @@ describe HomeController do
     context 'when not logged in' do
       let(:user) { nil }
 
-      its(:response) { should redirect_to root_path }
+      it { expect(response).to redirect_to root_path }
     end
 
     context "when logged in but can't edit event" do
       let(:user) { guest }
 
-      its(:response) { should redirect_to root_path }
+      it { expect(response).to redirect_to root_path }
     end
 
     context 'when logged in and can edit event' do
       let(:user) { admin }
       let(:params) { {day: event.day} }
 
-      its(:response) { should redirect_to year_path(today.year) }
+      it { expect(response).to redirect_to year_path(today.year) }
     end
   end
 
@@ -77,30 +77,30 @@ describe HomeController do
     context 'when not logged in' do
       let(:user) { nil }
 
-      it { Event.exists?(event.id).should be_true }
-      its(:response) { should redirect_to root_path }
+      it { expect(Event.exists?(event.id)).to be_present }
+      it { expect(response).to redirect_to root_path }
     end
 
     context "when logged in but can't edit event" do
       let(:user) { guest }
 
-      it { Event.exists?(event.id).should be_true }
-      its(:response) { should redirect_to root_path }
+      it { expect(Event.exists?(event.id)).to be_present }
+      it { expect(response).to redirect_to root_path }
     end
 
     context 'when trying to delete but you not provides a day' do
       let(:user) { guest }
       let(:params) { nil }
 
-      it { Event.exists?(event.id).should be_true }
-      its(:response) { should redirect_to root_path }
+      it { expect(Event.exists?(event.id)).to be_present }
+      it { expect(response).to redirect_to root_path }
     end
 
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { Event.exists?(event.id).should be_false }
-      its(:response) { should redirect_to year_path(today.year) }
+      it { expect(Event.exists?(event.id)).to be_nil }
+      it { expect(response).to redirect_to year_path(today.year) }
     end
   end
 end

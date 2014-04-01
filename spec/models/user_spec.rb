@@ -45,7 +45,7 @@ describe User do
       before { subject.password = '' }
 
       it { should be_valid }
-      it { expect(subject.save).to be_true }
+      it { expect(subject.save).to eq true }
     end
   end
 
