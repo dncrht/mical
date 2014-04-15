@@ -14,8 +14,12 @@
   </ul>
 <% end %>
 
-<%= each_with_wrapper(1..12, 4, 'row') do |month| %>
-  <%= print_month @year, month %>
+<%= (1..12).to_a.in_groups_of(4) do |months| %>
+  <div class="row">
+    <% months.each do |month| %>
+      <%= print_month @year, month %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if signed_in? && current_user.can_see_legend %>
