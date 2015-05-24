@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Admin::UsersController do
 
@@ -65,7 +65,7 @@ describe Admin::UsersController do
       before { delete :destroy, id: other_user.id }
 
       it { expect(response).to redirect_to admin_users_path }
-      it { expect(User.exists?(other_user.id)).to be_nil }
+      it { expect(User.exists?(other_user.id)).to be_falsey }
     end
   end
 

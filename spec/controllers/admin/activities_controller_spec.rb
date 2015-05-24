@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Admin::ActivitiesController do
 
@@ -51,7 +51,7 @@ describe Admin::ActivitiesController do
       before { delete :destroy, id: activity.id }
 
       it { expect(response).to redirect_to admin_activities_path }
-      it { expect(Activity.exists?(activity.id)).to be_nil }
+      it { expect(Activity.exists?(activity.id)).to be_falsey }
     end
   end
 

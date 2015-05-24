@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe HomeController do
 
@@ -99,7 +99,7 @@ describe HomeController do
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(Event.exists?(event.id)).to be_nil }
+      it { expect(Event.exists?(event.id)).to be_falsey }
       it { expect(response).to redirect_to year_path(today.year) }
     end
   end
