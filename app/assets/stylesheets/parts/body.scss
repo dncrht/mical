@@ -6,13 +6,13 @@ body {
   position: relative;
   padding: 40px 0;
 }
-#wrapper {
+#calendar {
   margin: 0 auto;
   box-shadow: 0 10px 40px $gray;
   width: 788px;
   border-radius: $topRadius $bottomRadius;
 }
-#github {
+footer {
   margin-top: 40px;
   text-align: center;
   color: $footerText;

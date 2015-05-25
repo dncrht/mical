@@ -1,15 +1,15 @@
 <% content_for :header_year do %>
-  <p id="year">Admin</p>
+  <p class="header-year">Admin</p>
 <% end %>
 
-<% content_for :body do %>
+<% content_for :main do %>
   <ul class="nav nav-tabs">
     <li class="<%= current_tab %>"><%= link_to 'Information', admin_path %></li>
-    
+
     <% if current_user.is_admin %>
       <li class="<%= current_tab :users %>"><%= link_to 'Users', admin_users_path %></li>
     <% end %>
-      
+
     <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
   </ul>
 

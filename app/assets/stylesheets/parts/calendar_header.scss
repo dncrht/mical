@@ -2,7 +2,7 @@
 ** CALENDAR HEADER
 *******************************************************************************/
 
-#header {
+header {
   position: relative;
   height: 120px;
   background: image-url('bg.png') repeat-x;
@@ -10,7 +10,7 @@
   border-top: 1px solid $headerTextLight;
 }
 
-#today {
+.header-day {
   position: absolute;
   top: 16px;
   left: 0;
@@ -20,15 +20,15 @@
   line-height: 50px;
   text-align: center;
   font-weight: bold;
-
-  p {
-    font-size: 20px;
-    line-height: 20px;
-    text-align: center;
-  }
 }
 
-#year {
+.header-month {
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.header-year {
   cursor: pointer;
   margin-top: 20px;
   color: $headerText;
@@ -39,7 +39,7 @@
   text-align: center;
 }
 
-#years {
+.header-years-dropdown {
   position: absolute;
   display: none;
   top: 84px;
@@ -70,7 +70,7 @@
   a {font-size: 20px;}
 }
 
-#user_box {
+.header-user-info {
   position: absolute;
   top: 28px;
   right: 20px;

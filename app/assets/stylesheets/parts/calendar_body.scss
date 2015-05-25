@@ -2,7 +2,7 @@
 ** CALENDAR BODY
 *******************************************************************************/
 
-#body {
+main {
   position: relative;
   @include gradient(top, $gray 0px, $white 7px);
   width: 768px;
@@ -13,7 +13,7 @@
 
 .row {margin-bottom: 20px;}
 
-.caption th {
+.month-header {
   padding: 4px;
   background: $monthCaptionBackground;
   text-align: left;
@@ -26,26 +26,30 @@
 .month {
   border-top: 1px solid $tableBorder;
   border-left: 1px solid $tableBorder;
-
-  td {
-    border: 1px solid $tableBorder;
-    border-top: 0;
-    border-left: 0;
-    color: $day;
-    text-align: center;
-  }
-  td.current {
-    font-weight: bold;
-    color: $daySelected;
-  }
-  td.day:hover {
-    @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
-    color: $white;
-    cursor: pointer;
-  }
 }
 
-.weekdays {
+.month-day {
+  border: 1px solid $tableBorder;
+  border-top: 0;
+  border-left: 0;
+  color: $day;
+  text-align: center;
+}
+.month-day_blank {
+  border-right: 1px solid $tableBorder;
+  border-bottom: 1px solid $tableBorder;
+}
+.month-day_current {
+  font-weight: bold;
+  color: $daySelected;
+}
+.month-day:hover {
+  @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
+  color: $white;
+  cursor: pointer;
+}
+
+.month-weekdays {
   border-right: 1px solid $tableBorder;
 
   th {
@@ -57,12 +61,12 @@
   }
 }
 
-.current {
-  .caption th {
+.month_current {
+  .month-header {
     @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
     color: $white;
   }
-  .weekdays th {
+  .month-weekdays th {
     background: $monthCaptionBackgroundSelectedTo;
     color: $white;
   }

@@ -2,7 +2,7 @@
 ** COLLAPSABLE FORM TO MANAGE EVENTS
 *******************************************************************************/
 
-#replace {
+.event-form {
   position: absolute;
   display: none;
   padding: 10px;
@@ -14,17 +14,17 @@
   border-top: 0;
   @include gradient(top, $gray 0px, $white 7px);
   box-shadow: 0 7px 10px $shadow;
+  textarea, select {width: 270px;}
 }
 
-#input {
+.event-form-inputs {
   float: left;
   width: 290px;
   padding: 10px;
   border-right: 1px solid $tableBorder;
 }
-textarea, #replace select {width: 270px;}
 
-#buttons {
+.event-form-buttons {
   float: right;
   width: 100px;
   padding: 10px;

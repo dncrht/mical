@@ -1,13 +1,13 @@
 <% content_for :header_day do %>
-  <div id="today" class="span3" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
+  <div id="today" class="span3 header-day" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
     <%= @today.day %>
-    <p><%= l(@today, :format => :month) %></p>
+    <p class="header-month"><%= l(@today, :format => :month) %></p>
   </div>
 <% end %>
 
 <% content_for :header_year do %>
-  <p id="year"><%= @year %></p>
-  <ul id="years" class="span1">
+  <p class="header-year js-year-selection"><%= @year %></p>
+  <ul class="span1 header-years-dropdown">
     <% @years.to_a.reverse.each do |year| %>
       <li><h3><%= link_to year, year_path(year) %></h3></li>
     <% end %>
@@ -23,7 +23,7 @@
 <% end %>
 
 <% if signed_in? && current_user.can_see_legend %>
-  <div id="legend">
+  <div class="legend">
     <% @activities.each do |i| %>
       <p><span class="badge activity<%= i.id %>"> </span><%= i.name %></p>
     <% end %>
@@ -31,9 +31,9 @@
 <% end %>
 
 <% if signed_in? && current_user.can_edit_event %>
-  <div id="replace">
+  <div class="event-form js-form">
     <%= form_tag action_path, :method => :put do %>
-      <div id="input">
+      <div class="event-form-inputs">
         <%= label_tag :activity_id %>
         <%= select_tag :activity_id, options_from_collection_for_select(@activities, :id, :name) %>
 
@@ -42,10 +42,10 @@
 
         <%= hidden_field_tag :day %>
       </div>
-      <div id="buttons">
-        <button type="submit" id="save" class="btn btn-primary">Save</button>
-        <button type="button" id="cancel" class="btn">Cancel</button>
-        <button type="button" id="delete" class="btn btn-danger">Delete</button>
+      <div class="event-form-buttons">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn js-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger js-delete">Delete</button>
       </div>
     <% end %>
   </div>

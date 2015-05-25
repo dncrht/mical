@@ -15,7 +15,7 @@ Given "there's an event for today" do
 end
 
 Given 'I click on today because I want to modify an event' do
-  find('td.current').click
+  find('.month-day_current').click
   expect(find('#description')).to have_content(Event.last.description)
 end
 
@@ -37,9 +37,9 @@ end
 
 Then /^there must( not|) be an event for today$/ do |negation|
   if negation.present?
-    expect(page).to_not have_css('td.current.activity1')
+    expect(page).to_not have_css('.month-day_current.activity1')
   else
-    expect(page).to have_css('td.current.activity1')
+    expect(page).to have_css('.month-day_current.activity1')
   end
 end
 

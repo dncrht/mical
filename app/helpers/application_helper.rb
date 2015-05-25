@@ -12,14 +12,14 @@ module ApplicationHelper
 
     # Print month name
     out << %(<table class="span3 month)
-    out << ' current' if month == @today.month
-    out << %(">\n<tr class="caption"><th colspan="7">#{l(day, :format => :month)}</th></tr>)
+    out << ' month_current' if month == @today.month
+    out << %(">\n<tr><th class="month-header" colspan="7">#{l(day, :format => :month)}</th></tr>)
 
     # Print day of the week names
-    out << %(<tr class="weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>\n<tr>)
+    out << %(<tr class="month-weekdays"><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>\n<tr>)
 
     # Leave as many blanks as last month's days are left
-    (week_day - 1).times { out << '<td></td>' }
+    (week_day - 1).times { out << '<td class="month-day_blank"></td>' }
 
     # Iterate days
     day.end_of_month.day.times do
@@ -27,14 +27,14 @@ module ApplicationHelper
 
       out << %(<td data-day="#{today}")
 
-      html_classes = ['day']
+      html_classes = ['month-day js-day-click']
       if @events.is_a?(Hash) && @events.include?(today)
         html_classes << "activity#{@events[today].activity_id}"
         out << %( data-activity="#{@events[today].activity_id}")
         out << %( title="#{@events[today].description}") if signed_in? && current_user.can_see_description
       end
 
-      html_classes << 'current' if day == @today
+      html_classes << 'month-day_current' if day == @today
 
       unless html_classes.empty?
         out << %( class="#{html_classes.join(' ')}")
@@ -55,7 +55,7 @@ module ApplicationHelper
     week_day = 7 if week_day == 0
 
     # Fill with blank days unless the month ends in last day of the week
-    (8 - week_day).times { out << '<td></td>' } if week_day > 1
+    (8 - week_day).times { out << '<td class="month-day_blank"></td>' } if week_day > 1
 
     out << "</tr>\n"
 
