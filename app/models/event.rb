@@ -25,10 +25,6 @@ class Event < ActiveRecord::Base
     Event.first.nil? ? Date.current.year : Event.first.day.year
   end
 
-  def to_s
-    %(#{day},"#{activity.name}","#{description.strip}")
-  end
-
   def self.to_h(events)
     Hash[*events.map { |event| [event.day.to_s, event] }.flatten] #http://snippets.dzone.com/posts/show/302
   end
