@@ -10,7 +10,9 @@
       <li class="<%= current_tab :users %>"><%= link_to 'Users', admin_users_path %></li>
     <% end %>
 
-    <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
+    <% if current_user.can_edit_activity %>
+      <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
+    <% end %>
   </ul>
 
   <%= yield %>
