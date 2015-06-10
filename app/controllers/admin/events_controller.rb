@@ -1,5 +1,6 @@
 class Admin::EventsController < AdminController
-  before_filter :set_tab, :restricted
+  set_tab :events
+  access_to { |user| user.can_download && user.can_edit_event }
 
   def index
     respond_to do |format|
@@ -17,15 +18,5 @@ class Admin::EventsController < AdminController
   end
 
   def create
-  end
-
-  private
-
-  def restricted
-    render(:text => 'Forbidden', :layout => true, :status => 403) unless current_user.can_download && current_user.can_edit_event
-  end
-
-  def set_tab
-    @tab = :events
   end
 end

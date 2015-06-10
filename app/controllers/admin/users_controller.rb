@@ -1,5 +1,6 @@
 class Admin::UsersController < AdminController
-  before_filter :set_tab, :restricted
+  set_tab :users
+  access_to { |user| user.is_admin }
 
   def index
     @users = User.order('email')
@@ -49,14 +50,6 @@ class Admin::UsersController < AdminController
   end
 
   private
-
-  def restricted
-    render(:text => 'Forbidden', :layout => true, :status => 403) unless current_user.is_admin
-  end
-
-  def set_tab
-    @tab = :users
-  end
 
   def user_params
     params.require(:user).permit(

@@ -1,5 +1,6 @@
 class Admin::ActivitiesController < AdminController
-  before_filter :set_tab, :restricted
+  set_tab :activities
+  access_to { |user| user.can_edit_activity }
 
   def index
     @activities = Activity.order('position')
@@ -45,14 +46,6 @@ class Admin::ActivitiesController < AdminController
   end
 
   private
-
-  def restricted
-    render(:text => 'Forbidden', :layout => true, :status => 403) unless current_user.can_edit_activity
-  end
-
-  def set_tab
-    @tab = :activities
-  end
 
   def activity_params
     params.require(:activity).permit!
