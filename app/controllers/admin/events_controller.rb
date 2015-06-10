@@ -18,5 +18,16 @@ class Admin::EventsController < AdminController
   end
 
   def create
+    Event.delete_all
+
+    CSV.foreach(params[:file].tempfile.path, headers: false, col_sep: "\t") do |r|
+      Event.create(
+        day: r[0],
+        activity_id: Activity.find_by(name: r[1]).id,
+        description: r[2]
+      )
+    end
+
+    redirect_to root_path
   end
 end

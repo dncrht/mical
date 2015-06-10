@@ -1,5 +1,19 @@
-  <div class="row">
-    <div class="span4">
-      <%= link_to '↯ Download all as .csv', admin_events_path(format: :csv) %>
+<%= form_tag admin_events_path, multipart: true, class: 'form-horizontal' do %>
+  <div class="control-group">
+    <%= label_tag :_, 'Export all events', class: 'control-label' %>
+    <div class="controls">
+      <%= link_to '↯ Export .csv', admin_events_path(format: :csv), class: 'btn btn-small' %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= label_tag :file, 'Import all events', class: 'control-label' %>
+    <div class="controls">
+      <%= file_field_tag :file %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag 'Import', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
