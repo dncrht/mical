@@ -13,6 +13,10 @@
     <% if current_user.can_edit_activity %>
       <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
     <% end %>
+
+    <% if current_user.can_download && current_user.can_edit_event %>
+      <li class="<%= current_tab :events %>"><%= link_to 'Events', admin_events_path %></li>
+    <% end %>
   </ul>
 
   <%= yield %>
