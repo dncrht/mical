@@ -55,7 +55,7 @@
   <% if signed_in? && current_user.can_download %>
     <div class="row">
       <div class="span4">
-        <%= link_to '↯ Download as .csv', "#@year.csv" %>
+        <%= link_to "↯ Export #{@year} events as .csv", "#{@year}.csv" %>
       </div>
     </div>
   <% end %>
