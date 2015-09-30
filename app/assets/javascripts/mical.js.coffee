@@ -33,7 +33,7 @@ class @View extends AbstractView
   cancelForm: ->
     $('.js-form').slideUp()
     dayIndicator = $('.header-day')
-    @_renderDay(dayIndicator.data('day'), dayIndicator.data('month'))
+    @_renderDay(dayIndicator.data('month'), dayIndicator.data('day'))
 
   deleteForm: ->
     if not confirm('Are you sure?')
