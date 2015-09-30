@@ -21,24 +21,14 @@ class @View extends AbstractView
     if $('.js-form').is(':visible')
       return
 
-    $clickedDay = $(event.currentTarget)
-
-    if $clickedDay.data('activity')
-      $('.js-delete').show()
-    else
-      $('.js-delete').hide()
-
     $('.js-form').slideDown()
 
     @_collapseIfVisible('.header-years-dropdown')
 
+    $clickedDay = $(event.currentTarget)
     month = $clickedDay.closest('table').find('.month-header').html()
     day = $clickedDay.data('day').split('-')[2]
     @_renderDay(month, day)
-
-    $('#activity_id option[value=' + $clickedDay.data('activity') + ']').attr('selected', true)
-    $('#description').html($clickedDay.data('original-title'))
-    $('#day').val($clickedDay.data('day'))
 
   cancelForm: ->
     $('.js-form').slideUp()

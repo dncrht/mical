@@ -40,7 +40,11 @@ module ApplicationHelper
         out << %( class="#{html_classes.join(' ')}")
       end
 
-      out << ">#{day.day}</td>"
+      if signed_in? && current_user.can_see_description
+        out << '>' << link_to(day.day, event_path(id: today), 'data-remote' => true) << "</td>"
+      else
+        out << ">#{day.day}</td>"
+      end
 
       if day.wday == 0
         if day < day.end_of_month

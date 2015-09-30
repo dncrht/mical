@@ -34,6 +34,11 @@ main {
   border-left: 0;
   color: $day;
   text-align: center;
+  &:hover {
+    @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
+    color: $white;
+    cursor: pointer;
+  }
 }
 .month-day_blank {
   border-right: 1px solid $tableBorder;
@@ -43,10 +48,11 @@ main {
   font-weight: bold;
   color: $daySelected;
 }
-.month-day:hover {
-  @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
-  color: $white;
-  cursor: pointer;
+.month-day a {
+  color: inherit;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
 }
 
 .month-weekdays {

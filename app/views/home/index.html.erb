@@ -32,22 +32,7 @@
 
 <% if signed_in? && current_user.can_edit_event %>
   <div class="event-form js-form">
-    <%= form_tag action_path, :method => :put do %>
-      <div class="event-form-inputs">
-        <%= label_tag :activity_id %>
-        <%= select_tag :activity_id, options_from_collection_for_select(@activities, :id, :name) %>
-
-        <%= label_tag :description %>
-        <%= text_area_tag :description %>
-
-        <%= hidden_field_tag :day %>
-      </div>
-      <div class="event-form-buttons">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn js-cancel">Cancel</button>
-        <button type="button" class="btn btn-danger js-delete">Delete</button>
-      </div>
-    <% end %>
+    <%= render 'events/form' %>
   </div>
 <% end %>
 

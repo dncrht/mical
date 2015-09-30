@@ -6,21 +6,6 @@ class Event < ActiveRecord::Base
 
   scope :in_year, -> (year) { where('day >= ? AND day <= ?', "#{year}-01-01", "#{year}-12-31").order('day') }
 
-  def self.replace(day, activity_id, description)
-    return nil if day.blank?
-
-    event = Event.find_by_day(day)
-    if event.nil?
-      event = Event.new
-      event.day = day
-    end
-    event.activity_id = activity_id #there is only one activity per day
-    event.description = description
-    event.save
-
-    event
-  end
-
   def self.first_year
     Event.first.nil? ? Date.current.year : Event.first.day.year
   end
@@ -31,5 +16,22 @@ class Event < ActiveRecord::Base
 
   def self.to_h(events)
     Hash[*events.map { |event| [event.day.to_s, event] }.flatten] #http://snippets.dzone.com/posts/show/302
+  end
+
+  def url
+    Dragonfly.app.remote_url_for(image_uid)
+  end
+
+  # Creates an Asset from params if it's a local upload
+  # or from a URL if it was uploaded to S3.
+  # image_url is named "singular" but can contain a list of urls.
+  def self.create_from_params(params)
+    if params.include? :image_url
+      params[:image_url].split(',').each do |image_url|
+        self.create(image_url: image_url)
+      end
+    else
+      self.create(params)
+    end
   end
 end
