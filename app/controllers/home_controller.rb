@@ -1,3 +1,5 @@
+require 'csv'
+
 class HomeController < ApplicationController
 
   before_filter :clean_current_year_url, :set_year, only: :index
@@ -14,7 +16,12 @@ class HomeController < ApplicationController
     @activities = Activity.order('position')
 
     respond_to do |format|
-      format.csv { csv_headers } if signed_in? && current_user.can_download
+      if signed_in? && current_user.can_download
+        format.csv do
+          headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")
+          render text: csv_file
+        end
+      end
       format.html
     end
   end
@@ -37,8 +44,11 @@ class HomeController < ApplicationController
     @year = params[:year].blank? ? @today.year : params[:year].to_i
   end
 
-  def csv_headers
-    headers['Content-Type'] = 'text/csv'
-    headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")
+  def csv_file
+    CSV.generate(force_quotes: true) do |csv|
+      @events.each do |day, event|
+        csv << [day, event.activity.name, event.description.strip]
+      end
+    end
   end
 end
