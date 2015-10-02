@@ -55,3 +55,16 @@ class @View extends AbstractView
 
   _renderDay: (month, day) ->
     $('.header-day').html(day + '<p class="header-month">' + month + '</p>')
+
+# Adapted from https://github.com/blueimp/jQuery-File-Upload/wiki/Drop-zone-effects
+$(document).bind 'dragover', (e) =>
+  timeout = window.dropZoneTimeout
+  if timeout
+    clearTimeout timeout
+  node = e.target
+  found = $('.js-upload-dropzone')[0] == node
+  $('.js-upload-dropzone').toggleClass 'hover', found
+  window.dropZoneTimeout = setTimeout(=>
+    window.dropZoneTimeout = null
+    $('.js-upload-dropzone').removeClass 'hover'
+  , 100)

@@ -1,5 +1,5 @@
-<%= form_for @event || Event.new do |f| %>
-  <div class="event-form-inputs">
+<%= form_for @event, html: {class: 'row-fluid'} do |f| %>
+  <div class="span9">
     <%= f.label :activity_id %>
     <%= f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id) %>
 
@@ -7,14 +7,16 @@
     <%= f.text_area :description %>
 
     <%= f.hidden_field :day %>
-
-    <%#= image_tag(Dragonfly.app.remote_url_for(asset.image_uid), alt: 'missing image', class: 'asset-list-element img-responsive') %>
   </div>
-  <div class="event-form-buttons">
+  <div class="span3">
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" class="btn js-cancel">Cancel</button>
-    <% unless f.object.new_record? %>
+    <% unless @event.new_record? %>
       <button type="button" class="btn btn-danger js-delete">Delete</button>
     <% end %>
   </div>
 <% end %>
+
+<div class='event-form-assets js-assets-list'>
+  <%= render('assets/index', event: @event) unless @event.new_record? %>
+</div>

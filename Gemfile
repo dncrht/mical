@@ -19,7 +19,8 @@ gem 'turbolinks'
 
 gem 'clearance', '1.0.1'
 
-gem 'thin'
+gem 'dragonfly', '~>1.0.3'
+gem 'dragonfly-s3_data_store'
 
 gem 'rails_12factor', group: :production
 

@@ -11,6 +11,7 @@ class HomeController < ApplicationController
 
     # Prepares the event list of the requested year
     @events = Event.to_h(Event.in_year(@year))
+    @event = Event.new
 
     # Prepares the activities list
     @activities = Activity.order('position')
