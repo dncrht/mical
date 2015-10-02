@@ -37,7 +37,6 @@ main {
   &:hover {
     @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
     color: $white;
-    cursor: pointer;
   }
 }
 .month-day_blank {
@@ -50,6 +49,7 @@ main {
 }
 .month-day a {
   color: inherit;
+  display: block;
   &:hover, &:active, &:focus {
     text-decoration: none;
   }
