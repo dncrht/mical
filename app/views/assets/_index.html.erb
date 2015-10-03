@@ -2,23 +2,20 @@
 <% assets.in_groups_of(4, false) do |group| %>
   <div class='row'>
     <% group.each do |asset| %>
-      <div class='span3 asset-element'>
+      <div class='col-sm-3 asset-element'>
 
         <% if asset == :dropzone %>
           <div class="upload-dropzone js-upload-dropzone">
             <progress value="0" max="100"></progress>
-            Drop a photo here
+            <small>Drop a photo here</small>
             <p>or</p>
-            <button class="btn">Select a file</button>
+            <button class="btn btn-primary btn-xs form-control">Select a file</button>
             <%= fields_for event.assets.build do |f| %>
               <%= f.file_field :image, 'data-url' => assets_path(event_id: event.id), class: 'js-upload-asset hide' %>
             <% end %>
           </div>
         <% else %>
-          <div class='asset-options js-asset-options'>
-            <%= link_to 'x', asset_path(asset), class: 'glyphicon glyphicon-remove', method: :delete, 'data-remote' => true %>
-          </div>
-          <br/>
+          <%= link_to '✗', asset_path(asset), method: :delete, 'data-remote' => true %>
           <%= image_tag(Dragonfly.app.remote_url_for(asset.image_uid), class: 'asset-list-element img-responsive') %>
         <% end %>
 

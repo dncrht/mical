@@ -11,9 +11,6 @@ header {
 }
 
 .header-day {
-  position: absolute;
-  top: 16px;
-  left: 0;
   color: $headerText;
   text-shadow: 1px 1px 1px $headerTextLight;
   font-size: 50px;
@@ -29,8 +26,8 @@ header {
 }
 
 .header-year {
+  display: block;
   cursor: pointer;
-  margin-top: 20px;
   color: $headerText;
   text-shadow: 1px 1px 1px $headerTextLight;
   font-weight: bold;
@@ -42,8 +39,8 @@ header {
 .header-years-dropdown {
   position: absolute;
   display: none;
-  top: 84px;
-  left: 308px;
+  top: 68px;
+  left: 123px;
   width: 200px;
   padding: 5px 0 5px 20px;
   list-style: none;
@@ -71,10 +68,6 @@ header {
 }
 
 .header-user-info {
-  position: absolute;
-  top: 28px;
-  right: 20px;
-
   div {
     border: 1px solid rgba(black, 0.4);
     border-radius: 5px;

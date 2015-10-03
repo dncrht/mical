@@ -11,7 +11,8 @@ module ApplicationHelper
     week_day = 7 if week_day == 0
 
     # Print month name
-    out << %(<table class="span3 month)
+    out << %(<div class="col-sm-3">)
+    out << %(<table class="month)
     out << ' month_current' if month == @today.month
     out << %(">\n<tr><th class="month-header" colspan="7">#{l(day, :format => :month)}</th></tr>)
 
@@ -64,6 +65,7 @@ module ApplicationHelper
     out << "</tr>\n"
 
     out << "</table>\n"
+    out << "</div>\n"
 
     out.html_safe
   end

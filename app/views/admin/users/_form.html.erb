@@ -5,55 +5,77 @@
 
   <%= show_errors @user %>
 
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-sm-2' %>
+    <div class="col-sm-6">
       <% if @user.is_admin %>
         <span class="uneditable-input"><%= @user.email %></span>
       <% else %>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, class: 'form-control' %>
       <% end %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :password, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password %>
+  <div class="form-group">
+    <%= f.label :password, :class => 'control-label col-sm-2' %>
+    <div class="col-sm-6">
+      <%= f.password_field :password, class: 'form-control' %>
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label">Permissions</label>
-    <div class="controls">
-          <label class="checkbox">
-            <%= f.check_box :can_edit_activity %>
-            <span>Can manage activities on admin</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :can_edit_event %>
-            <span>Can add/edit/delete events</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :can_see_legend %>
-            <span>Can see a legend besides the calendar</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :can_see_description %>
-            <span>Can see description hovering over a day</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :can_download %>
-            <span>Can download events as CSV</span>
-          </label>
-          <label class="checkbox">
-            <%= f.check_box :is_admin %>
-            <span>Can manage users on admin</span>
-          </label>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Permissions</label>
+    <div class="col-sm-6">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :can_edit_activity %>
+          <span>Can manage activities on admin</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :can_edit_event %>
+          <span>Can add/edit/delete events</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :can_see_legend %>
+          <span>Can see a legend besides the calendar</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :can_see_description %>
+          <span>Can see description hovering over a day</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :can_download %>
+          <span>Can download events as CSV</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-offset-2">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :is_admin %>
+          <span>Can manage users on admin</span>
+        </label>
+      </div>
     </div>
   </div>
 
-  <div class="form-actions">
+  <div class="col-sm-6 col-sm-offset-2">
     <%= submit_tag 'Save', :class => 'btn btn-primary' %>
     <%= link_to 'Cancel', admin_users_path, :class => 'btn' %>
   </div>

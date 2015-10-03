@@ -1,22 +1,28 @@
-<%= form_for @event, html: {class: 'row-fluid'} do |f| %>
-  <div class="span9">
-    <%= f.label :activity_id %>
-    <%= f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id) %>
+<%= form_for @event, html: {class: 'row'} do |f| %>
+  <div class="event-form-inputs col-sm-9">
+    <div class="form-group">
+      <%= f.label :activity_id %>
+      <%= f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id), {}, class: 'form-control' %>
+    </div>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
 
     <%= f.hidden_field :day %>
   </div>
-  <div class="span3">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" class="btn js-cancel">Cancel</button>
+  <div class="event-form-buttons col-sm-3">
+    <button type="submit" class="btn btn-primary form-control">Save</button>
+    <button type="button" class="btn btn-default js-cancel form-control">Close</button>
     <% unless @event.new_record? %>
-      <button type="button" class="btn btn-danger js-delete">Delete</button>
+      <button type="button" class="btn btn-danger js-delete form-control">Delete</button>
     <% end %>
   </div>
 <% end %>
 
-<div class='event-form-assets js-assets-list'>
-  <%= render('assets/index', event: @event) unless @event.new_record? %>
-</div>
+<% unless @event.new_record? %>
+  <div class='event-form-assets js-assets-list'>
+    <%= render('assets/index', event: @event) %>
+  </div>
+<% end %>

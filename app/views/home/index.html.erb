@@ -1,17 +1,19 @@
 <% content_for :header_day do %>
-  <div id="today" class="span3 header-day" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
+  <div id="today" class="col-sm-3 header-day" data-day="<%= @today.day %>" data-month="<%= l(@today, :format => :month) %>">
     <%= @today.day %>
     <p class="header-month"><%= l(@today, :format => :month) %></p>
   </div>
 <% end %>
 
 <% content_for :header_year do %>
-  <p class="header-year js-year-selection"><%= @year %></p>
-  <ul class="span1 header-years-dropdown">
-    <% @years.to_a.reverse.each do |year| %>
-      <li><h3><%= link_to year, year_path(year) %></h3></li>
-    <% end %>
-  </ul>
+  <div id="today" class="col-sm-6">
+    <span class="header-year js-year-selection"><%= @year %></span>
+    <ul class="col-sm-1 header-years-dropdown">
+      <% @years.to_a.reverse.each do |year| %>
+        <li><h3><%= link_to year, year_path(year) %></h3></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <%= (1..12).to_a.in_groups_of(4) do |months| %>
@@ -38,10 +40,6 @@
 
 <% content_for :footer do %>
   <% if signed_in? && current_user.can_download %>
-    <div class="row">
-      <div class="span4">
-        <%= link_to '↯ Download as .csv', "#@year.csv" %>
-      </div>
-    </div>
+    <%= link_to '↯ Download as .csv', "#@year.csv" %>
   <% end %>
 <% end %>
