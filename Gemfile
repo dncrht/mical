@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.2' # Heroku's ruby version
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.4'
 
 gem 'pg'
 

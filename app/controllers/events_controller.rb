@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
     def show
       @activities = Activity.order('position')
+
       @event = Event.find_by(day: params[:id]) || Event.new(day: params[:id])
     end
 

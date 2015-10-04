@@ -21,16 +21,48 @@ describe 'routes.rb' do
     }
 
     it {
-      expect(put: '/action').to route_to(
-        controller: 'home',
-        action:     'replace'
+      expect(get: '/events/2015-06-04').to route_to(
+        controller: 'events',
+        action:     'show',
+        id:         '2015-06-04'
       )
     }
 
     it {
-      expect(delete: '/action').to route_to(
-        controller: 'home',
-        action:     'destroy'
+      expect(post: '/events').to route_to(
+        controller: 'events',
+        action:     'create'
+      )
+    }
+
+    it {
+      expect(patch: '/events/2015-06-04').to route_to(
+        controller: 'events',
+        action:     'update',
+        id:         '2015-06-04'
+      )
+    }
+
+    it {
+      expect(delete: '/events/1').to route_to(
+        controller: 'events',
+        action:     'destroy',
+        id:         '1'
+      )
+    }
+
+    it {
+      expect(post: '/assets').to route_to(
+        controller: 'assets',
+        action:     'create'
+      )
+    }
+
+    it {
+      expect(delete: '/assets/1').to route_to(
+        controller: 'assets',
+        action:     'destroy',
+        id:         '1'
       )
     }
 
@@ -48,20 +80,6 @@ describe 'routes.rb' do
         controller: 'home',
         action:     'index',
         year:       'dummy_string'
-      )
-    }
-
-    it {
-      expect(post: '/action').to_not route_to(
-        controller: 'home',
-        action:     'replace'
-      )
-    }
-
-    it {
-      expect(get: '/action').to_not route_to(
-        controller: 'home',
-        action:     'destroy'
       )
     }
   end
