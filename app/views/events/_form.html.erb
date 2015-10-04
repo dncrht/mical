@@ -13,8 +13,8 @@
     <%= f.hidden_field :day %>
   </div>
   <div class="event-form-buttons col-sm-3">
-    <button type="submit" class="btn btn-primary form-control">Save</button>
     <button type="button" class="btn btn-default js-cancel form-control">Close</button>
+    <button type="submit" class="btn btn-primary form-control">Save</button>
     <% unless @event.new_record? %>
       <button type="button" class="btn btn-danger js-delete form-control">Delete</button>
     <% end %>
