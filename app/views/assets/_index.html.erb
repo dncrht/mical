@@ -2,7 +2,7 @@
 <% assets.in_groups_of(4, false) do |group| %>
   <div class='row'>
     <% group.each do |asset| %>
-      <div class='col-sm-3 asset-element'>
+      <div class='col-sm-<%= (assets.count == 1) ? 12 : 3 %> asset-element'>
 
         <% if asset == :dropzone %>
           <div class="upload-dropzone js-upload-dropzone">
