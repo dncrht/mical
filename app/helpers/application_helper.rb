@@ -70,12 +70,6 @@ module ApplicationHelper
     out.html_safe
   end
 
-  def show_errors(entity)
-    if entity.errors.any?
-      %(<div class="alert alert-error error">#{entity.errors.to_a.join('<br>')}</div>).html_safe
-    end
-  end
-
   def current_user_account
     current_user.email.split('@')[0] rescue 'guest'
   end
