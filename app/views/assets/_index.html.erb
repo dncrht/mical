@@ -17,7 +17,7 @@
           </div>
         <% else %>
           <%= link_to '✗', asset_path(asset), method: :delete, 'data-remote' => true %>
-          <%= image_tag(Dragonfly.app.remote_url_for(asset.image_uid), class: 'asset-list-element img-responsive') %>
+          <%= image_tag asset.image.thumb('320x240#').url, class: 'asset-list-element img-responsive' %>
         <% end %>
 
       </div>
