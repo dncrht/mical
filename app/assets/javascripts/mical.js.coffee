@@ -4,6 +4,7 @@ class @View extends AbstractView
     'click .js-cancel': 'cancelForm',
     'click .js-delete': 'deleteForm',
     'click .js-year-selection': 'yearDropdown',
+    'click .js-upload-dropzone button': 'openFile',
     'click .js-close': 'closeX'
 
   constructor: ->
@@ -48,6 +49,9 @@ class @View extends AbstractView
   yearDropdown: ->
     @_collapseIfVisible('.js-form')
     $('.header-years-dropdown').slideToggle()
+
+  openFile: ->
+    $('.js-upload-asset').click()
 
   _collapseIfVisible: (selector) ->
     if $(selector).is(':visible')
