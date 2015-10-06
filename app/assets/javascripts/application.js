@@ -16,6 +16,7 @@
 //= require jquery.ui.widget
 //= require jquery.iframe-transport
 //= require jquery.fileupload
+//= require jquery.colorbox-min
 //= require farbtastic
 //= require abstract_view
 //= require mical
