@@ -27,28 +27,6 @@ describe Event do
     expect(build(:event, description: nil)).to_not be_valid
   end
 
-  it 'should not replace without day' do
-    expect(Event.replace(nil, nil, nil)).to be_nil
-  end
-
-  it 'should replace when giving a date and the record exists' do
-    existing_event = create(:event)
-
-    replacement = Event.replace(existing_event.day, nil, nil)
-
-    expect(replacement).to be_an_instance_of Event
-    expect(replacement.description).to be_nil
-  end
-
-  it 'should replace when giving a date and the record is new' do
-    new_event = build(:event)
-
-    replacement = Event.replace(new_event.day, nil, nil)
-
-    expect(replacement).to be_an_instance_of Event
-    expect(replacement.description).to be_nil
-  end
-
   it 'first_year should return current year if there are no events' do
     expect(Event.first_year).to eq Date.current.year
   end

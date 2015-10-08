@@ -12,6 +12,10 @@ body {
   width: 788px;
   border-radius: $topRadius $bottomRadius;
 }
+.container-fluid {
+  width: 100%;
+  padding: 20px 15px;
+}
 footer {
   margin-top: 40px;
   text-align: center;
@@ -21,4 +25,7 @@ footer {
     color: $footerText;
     text-decoration: underline;
   }
+}
+progress {
+  width: 100%;
 }

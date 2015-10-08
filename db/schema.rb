@@ -9,25 +9,35 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114184415) do
+ActiveRecord::Schema.define(version: 20150610221604) do
 
-  create_table "activities", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
     t.text    "name"
     t.text    "color"
     t.integer "position"
   end
 
-  create_table "events", :force => true do |t|
-    t.date    "day",         :null => false
+  create_table "assets", force: :cascade do |t|
+    t.string   "image_uid"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.date    "day",         null: false
     t.integer "activity_id"
     t.text    "description"
   end
 
-  add_index "events", ["day"], :name => "day_idx"
+  add_index "events", ["day"], name: "day_idx", using: :btree
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: :cascade do |t|
     t.text    "email"
     t.boolean "can_download"
     t.boolean "can_edit_activity"
@@ -35,9 +45,9 @@ ActiveRecord::Schema.define(:version => 20130114184415) do
     t.boolean "can_see_legend"
     t.boolean "can_see_description"
     t.boolean "is_admin"
-    t.string  "encrypted_password",  :limit => 128
-    t.string  "confirmation_token",  :limit => 128
-    t.string  "remember_token",      :limit => 128
+    t.string  "encrypted_password",  limit: 128
+    t.string  "confirmation_token",  limit: 128
+    t.string  "remember_token",      limit: 128
   end
 
 end

@@ -11,7 +11,7 @@ main {
   min-height: 440px;
 }
 
-.row {margin-bottom: 20px;}
+.row {margin-bottom: $grid-gutter-width;}
 
 .month-header {
   padding: 4px;
@@ -24,6 +24,7 @@ main {
 }
 
 .month {
+  width: 100%;
   border-top: 1px solid $tableBorder;
   border-left: 1px solid $tableBorder;
 }
@@ -34,6 +35,10 @@ main {
   border-left: 0;
   color: $day;
   text-align: center;
+  &:hover {
+    @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
+    color: $white;
+  }
 }
 .month-day_blank {
   border-right: 1px solid $tableBorder;
@@ -43,10 +48,12 @@ main {
   font-weight: bold;
   color: $daySelected;
 }
-.month-day:hover {
-  @include gradient(top, $monthCaptionBackgroundSelected, $monthCaptionBackgroundSelectedTo);
-  color: $white;
-  cursor: pointer;
+.month-day a {
+  color: inherit;
+  display: block;
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
 }
 
 .month-weekdays {
@@ -58,6 +65,7 @@ main {
     font-weight: normal;
     font-size: 11px;
     border-bottom: 1px solid $tableBorder;
+    text-align: center;
   }
 }
 

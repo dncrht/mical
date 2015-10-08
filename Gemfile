@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.2' # Heroku's ruby version
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.4'
 
 gem 'pg'
 
@@ -9,7 +9,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '~> 1.3'
 gem 'execjs'
 
-gem 'bootstrap-sass', '~> 2.3.2'
+gem 'bootstrap-sass', '~> 3.3.5'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -19,11 +19,15 @@ gem 'turbolinks'
 
 gem 'clearance', '1.0.1'
 
-gem 'thin'
+gem 'sal-engine'
+
+gem 'dragonfly', '~>1.0.3'
+gem 'dragonfly-s3_data_store'
 
 gem 'rails_12factor', group: :production
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'

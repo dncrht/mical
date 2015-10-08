@@ -5,7 +5,7 @@
 .event-form {
   position: absolute;
   display: none;
-  padding: 10px;
+  padding: 20px 10px 0;
   width: 440px;
   overflow: hidden;
   top: 0;
@@ -14,24 +14,32 @@
   border-top: 0;
   @include gradient(top, $gray 0px, $white 7px);
   box-shadow: 0 7px 10px $shadow;
-  textarea, select {width: 270px;}
 }
 
 .event-form-inputs {
-  float: left;
-  width: 290px;
-  padding: 10px;
-  border-right: 1px solid $tableBorder;
+  border-right: 1px solid $table-border-color;
+}
+
+.event-form-assets {
+  margin-top: -10px;
+  padding-top: 10px;
+  border-top: 1px solid $table-border-color;
 }
 
 .event-form-buttons {
-  float: right;
-  width: 100px;
-  padding: 10px;
-
   button {
-    width: 100px;
-    height: 40px;
-    margin-bottom: 15px !important;
+    margin-bottom: 15px;
+  }
+}
+
+.col-sm-3 .upload-dropzone small {
+  white-space: pre-line;
+}
+.upload-dropzone {
+  text-align: center;
+  padding: 5px;
+  border: 1px dashed $table-border-color;
+  &.hover {
+    border: 1px dashed $brand-primary;
   }
 }

@@ -11,7 +11,8 @@ module ApplicationHelper
     week_day = 7 if week_day == 0
 
     # Print month name
-    out << %(<table class="span3 month)
+    out << %(<div class="col-sm-3">)
+    out << %(<table class="month)
     out << ' month_current' if month == @today.month
     out << %(">\n<tr><th class="month-header" colspan="7">#{l(day, :format => :month)}</th></tr>)
 
@@ -40,7 +41,11 @@ module ApplicationHelper
         out << %( class="#{html_classes.join(' ')}")
       end
 
-      out << ">#{day.day}</td>"
+      if signed_in? && current_user.can_see_description
+        out << '>' << link_to(day.day, event_path(id: today), 'data-remote' => true) << "</td>"
+      else
+        out << ">#{day.day}</td>"
+      end
 
       if day.wday == 0
         if day < day.end_of_month
@@ -60,14 +65,9 @@ module ApplicationHelper
     out << "</tr>\n"
 
     out << "</table>\n"
+    out << "</div>\n"
 
     out.html_safe
-  end
-
-  def show_errors(entity)
-    if entity.errors.any?
-      %(<div class="alert alert-error error">#{entity.errors.to_a.join('<br>')}</div>).html_safe
-    end
   end
 
   def current_user_account
