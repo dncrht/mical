@@ -8,9 +8,9 @@
 <% content_for :header_year do %>
   <div id="today" class="col-sm-6">
     <span class="header-year js-year-selection"><%= @year %></span>
-    <ul class="col-sm-1 header-years-dropdown">
+    <ul class="col-sm-1 header-years-dropdown row">
       <% @years.to_a.reverse.each do |year| %>
-        <li><h3><%= link_to year, year_path(year) %></h3></li>
+        <li class="col-sm-4"><h4><%= link_to year, year_path(year) %></h4></li>
       <% end %>
     </ul>
   </div>
