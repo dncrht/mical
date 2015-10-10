@@ -1,0 +1,72 @@
+//******************************************************************************
+//** CALENDAR BODY
+//******************************************************************************
+
+main
+  position: relative
+  width: 768px
+  border-radius: 0 0 6px 6px
+  padding: 20px 10px 0
+  min-height: 440px
+  @include gradient(top, $gray-dark 0px, $dropdown-bg 9px)
+
+.row
+  margin-bottom: $grid-gutter-width
+
+.month-header
+  padding: 4px
+  background: $table-border-color
+  text-align: left
+  font-weight: bold
+  font-size: 16px
+  color: $gray-dark
+  border-right: 1px solid $table-border-color
+
+.month
+  width: 100%
+  border-top: 1px solid $table-border-color
+  border-left: 1px solid $table-border-color
+
+.month-day
+  border: 1px solid $table-border-color
+  border-top: 0
+  border-left: 0
+  color: $gray-light
+  text-align: center
+  &:hover
+    color: $label-color
+    @include gradient(top, $brand-primary, $brand-primary-darker)
+  a
+    color: inherit
+    display: block
+    &:hover, &:active, &:focus
+      text-decoration: none
+
+.month-day_blank
+  border-right: 1px solid $table-border-color
+  border-bottom: 1px solid $table-border-color
+
+.month-day_current
+  font-weight: bold
+  color: $brand-primary
+
+.month-weekdays
+  border-right: 1px solid $table-border-color
+  th
+    color: $gray-light
+    background: $table-border-color
+    font-weight: normal
+    font-size: 11px
+    border-bottom: 1px solid $table-border-color
+    text-align: center
+
+.month_current
+  .month-header
+    color: $label-color
+    @include gradient(top, $brand-primary, $brand-primary-darker)
+  .month-weekdays th
+    background: $brand-primary-darker
+    color: $label-color
+
+.tooltip
+  margin-top: -19px !important
