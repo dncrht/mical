@@ -267,7 +267,6 @@ DEPENDENCIES
   dotenv-rails
   dragonfly (~> 1.0.3)
   dragonfly-s3_data_store
-  execjs
   factory_girl_rails
   jquery-rails
   pg
