@@ -6,14 +6,16 @@ class AssetsController < ApplicationController
       event = Event.find(params[:event_id])
       asset = event.assets.build(asset_params)
       asset.save
-
-      render partial: 'assets/index', locals: {event: event}
+      render json: {
+        id: asset.id,
+        attributes: AssetAttributes.new(asset).call(asset_path(asset))
+      }
     end
 
     def destroy
       asset = Asset.find_by(id: params[:id])
       asset.destroy
-      @event = asset.event
+      render json: {id: params[:id]}
     end
 
     private

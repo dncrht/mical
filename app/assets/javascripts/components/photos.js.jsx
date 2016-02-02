@@ -1,0 +1,116 @@
+Dropzone = function(props) {
+  props.size += ' event-form-asset';
+
+  return (
+    <div className={props.size}>
+      <div className="upload-dropzone js-upload-dropzone">
+        <progress value="0" max="100"></progress>
+        <small>Drop a
+        photo here</small>
+        <p>or</p>
+        <button className="btn btn-primary btn-xs form-control">Select a file</button>
+        <input data-url={props.url} className="js-upload-asset hide" type="file" name="asset[image]" />
+      </div>
+    </div>
+  );
+}
+
+Photo = React.createClass({
+  render: function() {
+    return (
+      <div className="col-sm-3 event-form-asset">
+        <a onClick={this.props.delete}>✗</a>
+        <a href={this.props.href} className="gallery">
+          <img src={this.props.src} className="img-responsive" />
+        </a>
+      </div>
+    );
+  }
+});
+
+Photos = React.createClass({
+  getInitialState: function() {
+    return {photos: this.props.photos};
+  },
+
+  deletePhoto: function(url) {
+    $.ajax(
+      url, {
+        method: 'delete',
+        success: function(props) {
+          this.setState({photos: _.omit(this.state.photos, props.id)});
+        }.bind(this)
+      }
+    );
+  },
+
+  componentDidMount: function() {
+    this.attachGallery();
+
+    $(document).bind('dragover', function(e) {
+      var dropZone = $('.js-upload-dropzone');
+      var timeout = window.dropZoneTimeout;
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      var found = false;
+      var node = e.target;
+      do {
+        if (node === dropZone[0]) {
+          found = true;
+          break;
+        }
+        node = node.parentNode;
+      } while (node != null);
+      if (found) {
+        dropZone.addClass('hover');
+      } else {
+        dropZone.removeClass('hover');
+      }
+      window.dropZoneTimeout = setTimeout(function() {
+        window.dropZoneTimeout = null;
+        dropZone.removeClass('hover');
+      }, 100);
+    });
+
+    $('.js-upload-asset').fileupload({
+      dropZone: $('.js-upload-dropzone'),
+      progressall: function(event, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('progress').val(progress);
+      },
+      done: function(event, data) {
+        $('progress').val(0);
+        var props = data.result;
+        var photos = this.state.photos;
+        photos[props.id] = props.attributes;
+        this.setState({photos: photos});
+        this.attachGallery();
+      }.bind(this)
+    });
+  },
+
+  attachGallery: function() {
+    $('.gallery').colorbox({
+      rel: 'gallery',
+      maxWidth: $(window).width(),
+      maxHeight: $(window).height()
+    });
+  },
+
+  render: function() {
+    var size = (Object.keys(this.state.photos).length == 0) ? 'col-sm-12' : 'col-sm-3';
+    var photos = _.map(this.state.photos,
+      function(photo, id) {
+        return <Photo src={photo.src} href={photo.href} main={photo.main} delete={this.deletePhoto.bind(this, photo.deleteUrl)} key={id} />;
+      }.bind(this)
+    );
+
+    return (
+      <div className="row">
+        {photos}
+        <Dropzone url={this.props.url} size={size} />
+      </div>
+    );
+  }
+});

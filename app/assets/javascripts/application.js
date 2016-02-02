@@ -17,6 +17,26 @@
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require jquery.colorbox-min
+//= require react
+//= require components
 //= require farbtastic
 //= require abstract_view
 //= require mical
+
+_ = {
+  map: function(hash, lambda) {
+    return Object.keys(hash).map(function(key) {
+      return lambda(hash[key], key);
+    });
+  },
+
+  omit: function(hash, unwanted) {
+    var tmp = {};
+    Object.keys(hash).map(function(key) {
+      if (key !== unwanted) {
+        tmp[key] = hash[key];
+      }
+    });
+    return tmp;
+  }
+}

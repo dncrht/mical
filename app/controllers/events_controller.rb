@@ -6,6 +6,11 @@ class EventsController < ApplicationController
       @activities = Activity.order('position')
 
       @event = Event.find_by(day: params[:id]) || Event.new(day: params[:id])
+
+      @assets = @event.assets.reduce({}) do |hash, asset|
+        hash[asset.id] = AssetAttributes.new(asset).call(asset_path(asset))
+        hash
+      end
     end
 
     def create

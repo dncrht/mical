@@ -22,7 +22,5 @@
 <% end %>
 
 <% unless @event.new_record? %>
-  <div class='event-form-assets js-assets-list'>
-    <%= render('assets/index', event: @event) %>
-  </div>
+  <div id="js-assets" class="event-form-assets"></div>
 <% end %>
