@@ -26,7 +26,7 @@ Feature: Manage the calendar events once I'm logged in
     And I visit the calendar
     And I click on today because I want to modify an event
     And I add a description
-    And I click on Cancel
+    And I click on Close
 
     Then the calendar should reload
     And the event must not have been updated

@@ -16,11 +16,11 @@ end
 
 Given 'I click on today because I want to modify an event' do
   find('.month-day_current').click
-  expect(find('#description')).to have_content(Event.last.description)
+  expect(find('#event_description')).to have_content(Event.last.description)
 end
 
 When 'I add a description' do
-  fill_in 'description', :with => 'new_description'
+  fill_in 'event_description', :with => 'new_description'
 end
 
 When /^I click on (\w+)$/ do |button|
