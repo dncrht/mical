@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150610221604) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "activities", force: :cascade do |t|
     t.text    "name"
     t.text    "color"
@@ -30,12 +27,12 @@ ActiveRecord::Schema.define(version: 20150610221604) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.date    "day",         null: false
+    t.date    "day"
     t.integer "activity_id"
     t.text    "description"
   end
 
-  add_index "events", ["day"], name: "day_idx", using: :btree
+  add_index "events", ["day"], name: "index_events_on_day"
 
   create_table "users", force: :cascade do |t|
     t.text    "email"
@@ -44,10 +41,13 @@ ActiveRecord::Schema.define(version: 20150610221604) do
     t.boolean "can_edit_event"
     t.boolean "can_see_legend"
     t.boolean "can_see_description"
-    t.boolean "is_admin"
     t.string  "encrypted_password",  limit: 128
     t.string  "confirmation_token",  limit: 128
     t.string  "remember_token",      limit: 128
+    t.boolean "is_admin"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
