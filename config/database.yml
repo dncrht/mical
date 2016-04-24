@@ -4,8 +4,6 @@ development:
   encoding: unicode
   database: mical
   pool: 5
-  username: dummy
-  password: dummy
   
 test: &test
   adapter: sqlite3
