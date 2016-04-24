@@ -20,6 +20,12 @@ require 'database_cleaner'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+# prepare at boot or rake task
+# why this app is so fast?
+# in ht tests are slower
+#diskutil erasevolume HFS+ 'RAM Disk' `hdiutil attach -nomount ram://65536`
+FileUtils.cp 'db/test.sqlite3', "/Volumes/RAM Disk"
+
 RSpec.configure do |config|
   config.before(:each) { ActionMailer::Base.deliveries.clear }
 
