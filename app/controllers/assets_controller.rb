@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
 
-    before_filter :only_logged_and_capable
+    before_action :only_logged_and_capable
 
     def create
       event = Event.find(params[:event_id])

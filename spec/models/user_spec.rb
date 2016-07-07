@@ -8,44 +8,33 @@ describe User do
     context 'default factory' do
       let(:params) { nil }
 
-      it { should be_valid }
+      it { is_expected.to be_valid }
     end
 
     context 'without email' do
       let(:params) { {email: nil} }
 
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context 'with invalid email' do
       let(:params) { {email: 'nil@'} }
 
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context 'without password' do
       let(:params) { {password: nil} }
 
-      it { should_not be_valid }
+      it { is_expected.to_not be_valid }
     end
 
     context 'is invalid if the email exists' do
       let(:params) { {password: nil} }
       let!(:existing_user) { create(:user, email: subject.email) }
 
-      it { should_not be_valid }
-      it { should have(1).error_on(:email) }
-    end
-  end
-
-  describe '#save' do
-    subject { create(:user) }
-
-    context 'accept a blank password if the user exists' do
-      before { subject.password = '' }
-
-      it { should be_valid }
-      it { expect(subject.save).to eq true }
+      it { is_expected.to_not be_valid }
+      it { is_expected.to have(1).error_on(:email) }
     end
   end
 

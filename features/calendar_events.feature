@@ -1,5 +1,7 @@
 @javascript
 Feature: Manage the calendar events once I'm logged in
+  Background:
+    Given a logged in user
 
   Scenario: Create a new event
     Given there isn't an event for today

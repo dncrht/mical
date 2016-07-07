@@ -11,14 +11,14 @@ describe EventsController do
     before { sign_in_as admin }
 
     it 'prepares an empty form' do
-      xhr :get, :show, id: '1997-06-04', format: :js
+      get :show, xhr: true, params: {id: '1997-06-04'}, format: :js
 
       expect(assigns(:activities)).to eq [event.activity]
       expect(assigns(:event).id).to be_nil
     end
 
     it 'prepares a form for an event' do
-      xhr :get, :show, id: event.day, format: :js
+      get :show, xhr: true, params: {id: event.day}, format: :js
 
       expect(assigns(:activities)).to eq [event.activity]
       expect(assigns(:event)).to eq event
@@ -29,7 +29,7 @@ describe EventsController do
     before do
       event = build(:event)
       sign_in_as user
-      post :create, id: event.day, event: event.attributes
+      post :create, params: {id: event.day, event: event.attributes}
     end
 
     context 'when not logged in' do
@@ -54,7 +54,7 @@ describe EventsController do
   describe '#update' do
     before do
       sign_in_as user
-      patch :update, id: event.id, event: {description: 'different'}
+      patch :update, params: {id: event.id, event: {description: 'different'}}
     end
 
     context 'when not logged in' do
@@ -79,7 +79,7 @@ describe EventsController do
   describe '#delete' do
     before do
       sign_in_as user
-      delete :destroy, id: event.id
+      delete :destroy, params: {id: event.id}
     end
 
     context 'when not logged in' do

@@ -29,13 +29,13 @@ describe Admin::UsersController do
     end
 
     describe '#show' do
-      before { get :show, :id => user.id }
+      before { get :show, params: {id: user.id} }
 
       it { expect(response).to redirect_to edit_admin_user_path(user.id) }
     end
 
     describe '#edit' do
-      before { get :edit, :id => user.id }
+      before { get :edit, params: {id: user.id} }
 
       it { expect(response).to be_success }
       it { expect(assigns(:user)).to eq user }
@@ -43,7 +43,7 @@ describe Admin::UsersController do
     end
 
     describe '#update' do
-      before { put :update, id: other_user.id, user: user_attributes }
+      before { patch :update, params: {id: other_user.id, user: user_attributes} }
 
       context 'valid user' do
         let(:user_attributes) { other_user.attributes }
@@ -52,17 +52,23 @@ describe Admin::UsersController do
       end
 
       context 'invalid user' do
-        let(:user_attributes) { other_user.attributes.merge(email: nil) }
+        let(:user_attributes) { other_user.attributes.merge('email' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:user)).to eq other_user }
         it { expect(response).to render_template 'edit' }
       end
+
+      context 'accept a blank password if the user exists' do
+        let(:user_attributes) { other_user.attributes.merge('password' => '') }
+
+        it { expect(response).to redirect_to admin_users_path }
+      end
     end
 
     describe '#destroy' do
       # Try to delete other user because he's the last admin
-      before { delete :destroy, id: other_user.id }
+      before { delete :destroy, params: {id: other_user.id} }
 
       it { expect(response).to redirect_to admin_users_path }
       it { expect(User.exists?(other_user.id)).to be_falsey }
@@ -81,10 +87,10 @@ describe Admin::UsersController do
     end
 
     describe '#create' do
-      before { post :create, user: user_attributes }
+      before { post :create, params: {user: user_attributes} }
 
       context 'valid user' do
-        let(:user_attributes) { other_user.attributes.merge(password: 'any') }
+        let(:user_attributes) { other_user.attributes.merge('password' => 'any') }
 
         it { expect(response).to redirect_to admin_users_path }
       end

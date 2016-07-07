@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-    before_filter :only_logged_and_capable
+    before_action :only_logged_and_capable
 
     def show
       @activities = Activity.order('position')

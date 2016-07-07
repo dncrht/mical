@@ -2,7 +2,7 @@ require 'csv'
 
 class HomeController < ApplicationController
 
-  before_filter :clean_current_year_url, :set_year, only: :index
+  before_action :clean_current_year_url, :set_year, only: :index
 
   # GET /(:year)
   def index

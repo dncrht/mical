@@ -52,15 +52,21 @@ class Admin::UsersController < AdminController
   private
 
   def user_params
-    params.require(:user).permit(
-      :email,
-      :password,
-      :can_download,
-      :can_edit_activity,
-      :can_edit_event,
-      :can_see_legend,
-      :can_see_description,
-      :is_admin
+    permitted_params = %i(
+      email
+      password
+      can_download
+      can_edit_activity
+      can_edit_event
+      can_see_legend
+      can_see_description
+      is_admin
     )
+
+    if params.dig(:user, :password).blank?
+      permitted_params.delete :password
+    end
+
+    params.require(:user).permit(*permitted_params)
   end
 end

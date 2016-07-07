@@ -3,7 +3,7 @@ Given "there isn't an event for today" do
 end
 
 When 'I visit the calendar' do
-  visit root_path(as: create(:user))
+  visit root_path
 end
 
 Given 'I click on today because I want to create an event' do
@@ -47,4 +47,16 @@ Then /^the event must( not|) have been updated$/ do |negation|
   original_title = negation.present? ? 'original' : 'new'
 
   expect(find(:xpath, %(//td[@data-original-title="#{original_title}_description"]))).to have_content(Event.last.day.day)
+end
+
+Given 'a logged in user' do
+  user = create :user, password: 'kk'
+  visit sign_in_path
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: 'kk'
+  click_button 'Log me in!'
+end
+
+When 'debugger' do
+  binding.pry
 end

@@ -6,7 +6,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 
 # Clearance's custom matchers
-require 'clearance/testing'
+require 'clearance/rspec'
 require 'factory_girl_rails'
 
 require 'database_cleaner'

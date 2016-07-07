@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
-ruby '2.1.2' # Heroku's ruby version
+ruby '2.3.0' # Heroku's ruby version
 
-gem 'rails', '4.2.4'
+gem 'rails', '5.0.0'
 
 gem 'pg'
 
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '~> 1.3'
+gem 'sass-rails'
+gem 'uglifier', '~> 2.7'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 gem 'jquery-rails'
 
 gem 'puma'
@@ -18,11 +18,11 @@ gem 'puma'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-gem 'clearance', '1.0.1'
+gem 'clearance'
 
 gem 'sal-engine'
 
-gem 'react-rails', '~> 1.5.0'
+gem 'react-rails'
 
 gem 'dragonfly', '~>1.0.3'
 gem 'dragonfly-s3_data_store'
@@ -37,7 +37,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
   gem 'factory_girl_rails'

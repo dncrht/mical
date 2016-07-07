@@ -16,13 +16,13 @@ describe Admin::ActivitiesController do
     end
 
     describe '#show' do
-      before { get :show, :id => activity.id }
+      before { get :show, params: {id: activity.id} }
 
       it { expect(response).to redirect_to edit_admin_activity_path(activity.id) }
     end
 
     describe '#edit' do
-      before { get :edit, :id => activity.id }
+      before { get :edit, params: {id: activity.id} }
 
       it { expect(response).to be_success }
       it { expect(assigns(:activity)).to eq activity }
@@ -30,7 +30,7 @@ describe Admin::ActivitiesController do
     end
 
     describe '#update' do
-      before { put :update, id: activity.id, activity: activity_attributes }
+      before { patch :update, params: {id: activity.id, activity: activity_attributes} }
 
       context 'valid activity'  do
         let(:activity_attributes) { activity.attributes }
@@ -39,7 +39,7 @@ describe Admin::ActivitiesController do
       end
 
       context 'invalid activity' do
-        let(:activity_attributes) { activity.attributes.merge(name: nil) }
+        let(:activity_attributes) { activity.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:activity)).to eq activity }
@@ -48,7 +48,7 @@ describe Admin::ActivitiesController do
     end
 
     describe '#destroy' do
-      before { delete :destroy, id: activity.id }
+      before { delete :destroy, params: {id: activity.id} }
 
       it { expect(response).to redirect_to admin_activities_path }
       it { expect(Activity.exists?(activity.id)).to be_falsey }
@@ -67,7 +67,7 @@ describe Admin::ActivitiesController do
     end
 
     describe '#create' do
-      before { post :create, activity: activity_attributes }
+      before { post :create, params: {activity: activity_attributes} }
 
       context 'valid activity' do
         let(:activity_attributes) { activity.attributes }
@@ -76,7 +76,7 @@ describe Admin::ActivitiesController do
       end
 
       context 'invalid activity' do
-        let(:activity_attributes) { activity.attributes.merge(name: nil) }
+        let(:activity_attributes) { activity.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:activity)).to be_an Activity }

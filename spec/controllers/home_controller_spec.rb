@@ -8,7 +8,7 @@ describe HomeController do
   let!(:event) { create(:event) }
 
   describe '#index' do
-    before { get :index, params }
+    before { get :index, params: params }
 
     context 'rendering current year by default' do
       let(:params) { nil }
