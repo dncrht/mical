@@ -20,7 +20,6 @@
 //= require react
 //= require components
 //= require farbtastic
-//= require abstract_view
 //= require mical
 
 _ = {
