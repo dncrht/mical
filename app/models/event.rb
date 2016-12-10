@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   validates :day, :activity_id, :description, :presence => true
   validates :day, :uniqueness => true
 

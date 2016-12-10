@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Clearance::User
 
   before_destroy :at_least_one_admin

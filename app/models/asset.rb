@@ -1,4 +1,4 @@
-class Asset < ActiveRecord::Base
+class Asset < ApplicationRecord
   dragonfly_accessor :image
   validates_presence_of :image
 
