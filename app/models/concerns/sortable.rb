@@ -1,11 +1,10 @@
 module Sortable
+  extend ActiveSupport::Concern
 
-  def self.included(by)
-    by.class_eval do
-      before_save :set_position
-      after_save :reorder
-      validate :position_is_multiple_of_five, :on => :update
-    end
+  included do
+    before_save :set_position
+    after_save :reorder
+    validate :position_is_multiple_of_five, :on => :update
   end
 
   private
