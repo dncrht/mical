@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610221604) do
+ActiveRecord::Schema.define(version: 20161210110424) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.text    "name"
@@ -27,12 +29,12 @@ ActiveRecord::Schema.define(version: 20150610221604) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.date    "day"
+    t.date    "day",         null: false
     t.integer "activity_id"
     t.text    "description"
+    t.integer "rating"
+    t.index ["day"], name: "day_idx", using: :btree
   end
-
-  add_index "events", ["day"], name: "index_events_on_day"
 
   create_table "users", force: :cascade do |t|
     t.text    "email"
@@ -41,13 +43,10 @@ ActiveRecord::Schema.define(version: 20150610221604) do
     t.boolean "can_edit_event"
     t.boolean "can_see_legend"
     t.boolean "can_see_description"
+    t.boolean "is_admin"
     t.string  "encrypted_password",  limit: 128
     t.string  "confirmation_token",  limit: 128
     t.string  "remember_token",      limit: 128
-    t.boolean "is_admin"
   end
-
-  add_index "users", ["email"], name: "index_users_on_email"
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
