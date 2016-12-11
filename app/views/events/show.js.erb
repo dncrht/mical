@@ -1,5 +1,13 @@
 $('.js-form').html('<%= escape_javascript render('form') %>');
+
 ReactDOM.render(
-  React.createElement(Photos, {photos: <%= raw @assets.to_json %>, url: "<%= assets_path(event_id: @event.id) %>"}),
-  document.getElementById('js-assets')
+  React.createElement(Rating, {rating: <%= @event.rating.to_i %>}),
+  document.getElementById('js-rating')
 );
+
+<% unless @event.new_record? %>
+  ReactDOM.render(
+    React.createElement(Photos, {photos: <%= raw @assets.to_json %>, url: "<%= assets_path(event_id: @event.id) %>"}),
+    document.getElementById('js-assets')
+  );
+<% end %>

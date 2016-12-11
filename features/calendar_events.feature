@@ -8,6 +8,7 @@ Feature: Manage the calendar events once I'm logged in
     And I visit the calendar
     And I click on today because I want to create an event
     And I add a description
+    And I add a rating
     And I click on Save
 
     Then the calendar should reload

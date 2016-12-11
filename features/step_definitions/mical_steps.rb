@@ -11,7 +11,8 @@ Given 'I click on today because I want to create an event' do
 end
 
 Given "there's an event for today" do
-  create :event
+  @event = create :event
+  @event_attributes = @event.attributes
 end
 
 Given 'I click on today because I want to modify an event' do
@@ -23,6 +24,10 @@ When 'I add a description' do
   fill_in 'event_description', :with => 'new_description'
 end
 
+When 'I add a rating' do
+  find_all('.event-form-rating span').last.click
+end
+
 When /^I click on (\w+)$/ do |button|
   click_button button
 end
@@ -32,7 +37,7 @@ When 'I accept the confirm' do
 end
 
 Then 'the calendar should reload' do
-  expect(current_path).to eq root_path
+  page.driver.browser.navigate.refresh
 end
 
 Then /^there must( not|) be an event for today$/ do |negation|
@@ -40,13 +45,15 @@ Then /^there must( not|) be an event for today$/ do |negation|
     expect(page).to_not have_css('.month-day_current.activity1')
   else
     expect(page).to have_css('.month-day_current.activity1')
+    expect(Event.last.description).to eq 'new_description'
+    expect(Event.last.rating).to eq 5
   end
 end
 
 Then /^the event must( not|) have been updated$/ do |negation|
   original_title = negation.present? ? 'original' : 'new'
 
-  expect(find(:xpath, %(//td[@data-original-title="#{original_title}_description"]))).to have_content(Event.last.day.day)
+  expect(Event.last.description).to eq "#{original_title}_description"
 end
 
 Given 'a logged in user' do

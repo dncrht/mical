@@ -32,7 +32,8 @@ module ApplicationHelper
       if @events.is_a?(Hash) && @events.include?(today)
         html_classes << "activity#{@events[today].activity_id}"
         out << %( data-activity="#{@events[today].activity_id}")
-        out << %( title="#{@events[today].description}") if signed_in? && current_user.can_see_description
+        rating = @events[today].rating.to_i.zero? ? nil : "#{@events[today].rating}★\n"
+        out << %( title="#{rating}#{@events[today].description}") if signed_in? && current_user.can_see_description
       end
 
       html_classes << 'month-day_current' if day == @today
