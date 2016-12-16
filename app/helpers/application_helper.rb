@@ -72,7 +72,8 @@ module ApplicationHelper
   end
 
   def current_user_account
-    current_user.email.split('@')[0] rescue 'guest'
+    return 'guest' unless current_user
+    current_user.email.split('@')[0]
   end
 
   def current_tab(this_tab = nil)
