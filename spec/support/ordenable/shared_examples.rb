@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples 'sortable' do
+RSpec.shared_examples 'sortable' do
 
   let(:tested_model) { described_class.name.downcase }
   let(:params) { {position: nil} }

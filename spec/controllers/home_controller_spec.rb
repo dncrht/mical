@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HomeController do
+RSpec.describe HomeController do
 
   let(:today) { Date.current }
   let(:admin) { build(:user) }

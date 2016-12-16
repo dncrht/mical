@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+RSpec.describe User do
 
   describe '#valid?' do
     subject { build(:user, params) }

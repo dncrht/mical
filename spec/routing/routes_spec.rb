@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'routes.rb' do
+RSpec.describe 'routes.rb' do
 
   # RESTful resources are supposed to be ok
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Activity do
+RSpec.describe Activity do
 
   describe '#valid?' do
     subject { build(:activity, params) }

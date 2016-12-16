@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EventsController do
+RSpec.describe EventsController do
 
   let(:today) { Date.current }
   let(:admin) { build(:user) }

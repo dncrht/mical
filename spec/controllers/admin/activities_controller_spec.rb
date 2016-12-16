@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Admin::ActivitiesController do
+RSpec.describe Admin::ActivitiesController do
 
   before { sign_in }
 
