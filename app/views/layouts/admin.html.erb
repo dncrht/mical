@@ -5,21 +5,7 @@
 <% end %>
 
 <% content_for :main do %>
-  <ul class="nav nav-tabs">
-    <li class="<%= current_tab %>"><%= link_to 'Information', admin_path %></li>
-
-    <% if current_user.is_admin %>
-      <li class="<%= current_tab :users %>"><%= link_to 'Users', admin_users_path %></li>
-    <% end %>
-
-    <% if current_user.can_edit_activity %>
-      <li class="<%= current_tab :activities %>"><%= link_to 'Activities', admin_activities_path %></li>
-    <% end %>
-
-    <% if current_user.can_download && current_user.can_edit_event %>
-      <li class="<%= current_tab :events %>"><%= link_to 'Events', admin_events_path %></li>
-    <% end %>
-  </ul>
+  <%= cell(:navigation, current_user, tab: @tab) %>
 
   <%= yield %>
 <% end %>

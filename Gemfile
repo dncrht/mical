@@ -15,6 +15,9 @@ gem 'jquery-rails'
 
 gem 'puma'
 
+gem 'cells-rails'
+gem 'cells-erb'
+
 gem 'clearance'
 
 gem 'sal-engine'
