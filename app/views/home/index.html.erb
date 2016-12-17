@@ -19,7 +19,7 @@
 <%= (1..12).to_a.in_groups_of(4) do |months| %>
   <div class="row">
     <% months.each do |month| %>
-      <%= print_month @year, month %>
+      <%= cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description) %>
     <% end %>
   </div>
 <% end %>
