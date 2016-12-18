@@ -1,0 +1,9 @@
+- content_for :header_year do
+  .col-sm-6.col-sm-offset-3
+    %p.header-year Admin
+
+- content_for :main do
+  = cell(:navigation, current_user, tab: @tab)
+  = yield
+
+= render template: 'layouts/application'

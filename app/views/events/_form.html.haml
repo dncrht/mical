@@ -1,0 +1,24 @@
+= form_for @event, html: {class: 'row'} do |f|
+  .event-form-inputs.col-sm-9
+    .form-group
+      = f.label :activity_id
+      = f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id), {}, class: 'form-control'
+
+    .form-group
+      = f.label :description
+      = f.text_area :description, class: 'form-control'
+
+    .form-group
+      = f.label :rating
+      #js-rating.event-form-rating
+
+    = f.hidden_field :day
+
+  .event-form-buttons.col-sm-3
+    %button.btn.btn-default.js-cancel.form-control{type: 'button'} Close
+    %button.btn.btn-primary.form-control{type: 'submit'} Save
+    - unless @event.new_record?
+      %button.btn.btn-danger.js-delete.form-control{type: 'button'} Delete
+
+- unless @event.new_record?
+  #js-assets.event-form-assets

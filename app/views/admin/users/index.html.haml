@@ -1,0 +1,27 @@
+= messages_bar
+
+%p
+  = link_to 'New user', new_admin_user_path, class: 'btn btn-default btn-lg'
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Email
+      %th Can I manage the activities?
+      %th Can I modify events?
+      %th Can I see the legend?
+      %th Can I see the description?
+      %th Can I download events as CSV?
+      %th Can manage the users?
+      %th
+  %tbody
+    - @users.each do |i|
+      %tr
+        %td= link_to i.email, edit_admin_user_path(i.id)
+        %td= tick_or_x i.can_edit_activity
+        %td= tick_or_x i.can_edit_event
+        %td= tick_or_x i.can_see_legend
+        %td= tick_or_x i.can_see_description
+        %td= tick_or_x i.can_download
+        %td= tick_or_x i.is_admin
+        %td= link_to 'Delete', admin_user_path(i), class: 'btn btn-danger', data: {confirm: "Clicking 'Yes' will delete user #{i.email}. Are you sure?"}, method: :delete

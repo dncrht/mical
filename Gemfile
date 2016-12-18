@@ -15,8 +15,10 @@ gem 'jquery-rails'
 
 gem 'puma'
 
+gem 'hamlit'
+
 gem 'cells-rails'
-gem 'cells-erb'
+gem 'cells-hamlit'
 
 gem 'clearance'
 

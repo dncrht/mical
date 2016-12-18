@@ -1,0 +1,20 @@
+= messages_bar
+
+%p
+  = link_to 'New activity', new_admin_activity_path, class: 'btn btn-default btn-lg'
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Color
+      %th Position
+      %th
+  %tbody
+    - @activities.each do |i|
+      %tr
+        %td= link_to i.name, edit_admin_activity_path(i.id)
+        %td
+          %span.uneditable-input{style: "background:#{i.color}"}= i.color
+        %td= i.position
+        %td= link_to 'Delete', admin_activity_path(i), class: 'btn btn-danger', data: {confirm: "Clicking 'Yes' will delete activity #{i.name}. Are you sure?"}, method: :delete

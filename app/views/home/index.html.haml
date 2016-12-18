@@ -1,0 +1,32 @@
+- content_for :header_day do
+  .col-sm-3.header-day{"data-day" => "#{@today.day}", "data-month" => "#{l(@today, format: :month)}"}
+    = @today.day
+    %p.header-month= l(@today, format: :month)
+
+- content_for :header_year do
+  .col-sm-6
+    %span.header-year.js-year-selection= @year
+    %ul.col-sm-1.header-years-dropdown.row
+      - @years.to_a.reverse.each do |year|
+        %li.col-sm-4
+          %h4= link_to year, year_path(year)
+
+= (1..12).to_a.in_groups_of(4) do |months|
+  .row
+    - months.each do |month|
+      = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description)
+
+- if signed_in? && current_user.can_see_legend
+  .legend
+    - @activities.each do |i|
+      %p
+        %span{class: "badge activity#{i.id}"}= ' '
+        = i.name
+
+- if signed_in? && current_user.can_edit_event
+  .event-form.js-form
+    = render 'events/form'
+
+- content_for :footer do
+  - if signed_in? && current_user.can_download
+    = link_to "↯ Export #{@year} events as .csv", "#@year.csv"

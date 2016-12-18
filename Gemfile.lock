@@ -63,9 +63,9 @@ GEM
     cells (4.1.5)
       tilt (>= 1.4, < 3)
       uber (>= 0.1.0, < 0.2.0)
-    cells-erb (0.1.0)
+    cells-hamlit (0.2.0)
       cells (~> 4.0)
-      erbse (>= 0.1.1)
+      hamlit
     cells-rails (0.0.6)
       actionpack (>= 3.0)
       cells (>= 4.1)
@@ -116,8 +116,6 @@ GEM
       fog-aws
     email_validator (1.6.0)
       activemodel
-    erbse (0.1.1)
-      temple
     erubis (2.7.0)
     excon (0.50.1)
     execjs (2.7.0)
@@ -146,6 +144,10 @@ GEM
     gherkin (4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hamlit (2.7.5)
+      temple (~> 0.7.6)
+      thor
+      tilt
     i18n (0.7.0)
     ipaddress (0.8.3)
     jquery-rails (4.1.1)
@@ -288,7 +290,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   capybara
-  cells-erb
+  cells-hamlit
   cells-rails
   clearance
   coffee-rails
@@ -298,6 +300,7 @@ DEPENDENCIES
   dragonfly (~> 1.0.3)
   dragonfly-s3_data_store
   factory_girl_rails
+  hamlit
   jquery-rails
   pg
   pry

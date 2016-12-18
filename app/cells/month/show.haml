@@ -1,0 +1,14 @@
+.col-sm-3
+  %table{class: month_class}
+    %tr
+      %th.month-header(colspan="7")= I18n.l(start_day, format: :month)
+    %tr.month-weekdays
+      %th mon
+      %th tue
+      %th wed
+      %th thu
+      %th fri
+      %th sat
+      %th sun
+    %tr
+      = table

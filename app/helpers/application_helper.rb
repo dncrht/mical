@@ -7,4 +7,10 @@ module ApplicationHelper
   def tick_or_x(bool)
     bool ? '✓' : '✗'
   end
+
+  def activities_style(activities)
+    activities.map do |i|
+      ".activity#{i.id} {background: #{i.color};}"
+    end.join("\n")
+  end
 end
