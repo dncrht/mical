@@ -1,4 +1,4 @@
-@javascript
+@javascript @calendar
 Feature: Manage the calendar events once I'm logged in
   Background:
     Given a logged in user

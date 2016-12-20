@@ -46,6 +46,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem 'cucumber-rails', :require => false # http://stackoverflow.com/questions/9866264/warning-cucumber-rails-required-outside-of-env-rb
+  gem 'turnip'
   gem 'database_cleaner'
 end
