@@ -1,4 +1,5 @@
 steps_for :calendar do
+
   step "there isn't an event for today" do
     FactoryGirl.create :activity
   end
@@ -12,8 +13,7 @@ steps_for :calendar do
   end
 
   step "there's an event for today" do
-    @event = FactoryGirl.create :event
-    @event_attributes = @event.attributes
+    FactoryGirl.create :event
   end
 
   step 'I click on today because I want to modify an event' do
@@ -42,13 +42,15 @@ steps_for :calendar do
   end
 
   step 'there must be an event for today' do
-    expect(page).to have_css('.month-day_current.activity1')
+    activity_selector = ".month-day_current.activity#{Event.last.activity.id}"
+
+    expect(page).to have_css(activity_selector)
     expect(Event.last.description).to eq 'new_description'
     expect(Event.last.rating).to eq 5
   end
 
   step 'there must not be an event for today' do
-    expect(page).to_not have_css('.month-day_current.activity1')
+    expect(Event.last).to be_nil
   end
 
   step 'the event must have been updated' do
