@@ -27,6 +27,12 @@ RSpec.describe Event do
     expect(build(:event, description: nil)).to_not be_valid
   end
 
+  it 'is invalid with out of range ratings' do
+    expect(build(:event, rating: -1)).to_not be_valid
+    expect(build(:event, rating: 99)).to_not be_valid
+    expect(build(:event, rating: 'x')).to_not be_valid
+  end
+
   it 'first_year should return current year if there are no events' do
     expect(Event.first_year).to eq Date.current.year
   end

@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  TOP = 5
+  TOP = 10
 
   validates :day, :activity_id, :description, presence: true
   validates :day, uniqueness: true

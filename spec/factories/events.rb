@@ -4,5 +4,6 @@ FactoryGirl.define do
     day Date.current
     activity
     description 'original_description'
+    rating nil
   end
 end

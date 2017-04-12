@@ -46,7 +46,7 @@ steps_for :calendar do
 
     expect(page).to have_css(activity_selector)
     expect(Event.last.description).to eq 'new_description'
-    expect(Event.last.rating).to eq 5
+    expect(Event.last.rating).to eq Event::TOP
   end
 
   step 'there must not be an event for today' do
