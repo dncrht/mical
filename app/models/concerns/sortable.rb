@@ -4,7 +4,7 @@ module Sortable
   included do
     before_save :set_position
     after_save :reorder
-    validate :position_is_multiple_of_five, :on => :update
+    validate :position_is_multiple_of_five, on: :update
   end
 
   private

@@ -18,7 +18,7 @@ class Admin::UsersController < AdminController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_users_path, :notice => 'User created'
+      redirect_to admin_users_path, notice: 'User created'
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      redirect_to admin_users_path, :notice => 'User updated'
+      redirect_to admin_users_path, notice: 'User updated'
     else
       render 'edit'
     end
@@ -43,9 +43,9 @@ class Admin::UsersController < AdminController
 
     begin
       @user.destroy
-      redirect_to admin_users_path, :notice => 'User deleted'
+      redirect_to admin_users_path, notice: 'User deleted'
     rescue => error
-      redirect_to admin_users_path, :alert => error.message
+      redirect_to admin_users_path, alert: error.message
     end
   end
 

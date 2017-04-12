@@ -18,7 +18,7 @@ class Admin::ActivitiesController < AdminController
     @activity = Activity.new(activity_params)
 
     if @activity.save
-      redirect_to admin_activities_path, :notice => 'Activity created'
+      redirect_to admin_activities_path, notice: 'Activity created'
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class Admin::ActivitiesController < AdminController
     @activity = Activity.find(params[:id])
 
     if @activity.update_attributes(activity_params)
-      redirect_to admin_activities_path, :notice => 'Activity updated'
+      redirect_to admin_activities_path, notice: 'Activity updated'
     else
       render 'edit'
     end
@@ -42,7 +42,7 @@ class Admin::ActivitiesController < AdminController
     @activity = Activity.find(params[:id])
 
     @activity.destroy
-    redirect_to admin_activities_path, :notice => 'Activity deleted'
+    redirect_to admin_activities_path, notice: 'Activity deleted'
   end
 
   private

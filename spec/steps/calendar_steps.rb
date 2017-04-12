@@ -22,7 +22,7 @@ steps_for :calendar do
   end
 
   step 'I add a description' do
-    fill_in 'event_description', :with => 'new_description'
+    fill_in 'event_description', with: 'new_description'
   end
 
   step 'I add a rating' do

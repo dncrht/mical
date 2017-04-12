@@ -1,10 +1,10 @@
 class UpgradeClearanceToDiesel < ActiveRecord::Migration
   def self.up
     change_table :users  do |t|
-      t.string :encrypted_password, :limit => 128
-      t.string :confirmation_token, :limit => 128
-      t.string :remember_token, :limit => 128
-      
+      t.string :encrypted_password, limit: 128
+      t.string :confirmation_token, limit: 128
+      t.string :remember_token, limit: 128
+
       t.remove :password
     end
 
