@@ -1,7 +1,9 @@
 class Event < ApplicationRecord
+  TOP = 5
+
   validates :day, :activity_id, :description, :presence => true
   validates :day, :uniqueness => true
-  validates :rating, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 5}, allow_nil: true
+  validates :rating, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: TOP}, allow_nil: true
 
   belongs_to :activity
   has_many :assets

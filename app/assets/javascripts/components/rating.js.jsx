@@ -8,14 +8,15 @@ Rating = React.createClass({
   },
 
   render: function() {
-    var stars = _.map([1, 2, 3, 4, 5],
-      function(i) {
-        let star = this.state.rating < i ? '☆' : '★';
-        let prevRating = (this.props.rating == this.state.rating) ? '' : ` (was ${this.props.rating}/5)`;
-        let title = `${this.state.rating}/5${prevRating}`
-        return <span onClick={this.setRating.bind(this, i)} key={i} title={title}>{star}</span>;
-      }.bind(this)
-    );
+    var stars = [];
+    for (var i = 1; i <= this.props.top; i++) {
+      let star = this.state.rating < i ? '☆' : '★';
+      let prevRating = (this.props.rating == this.state.rating) ? '' : ` (was ${this.props.rating}/${this.props.top})`;
+      let title = `${this.state.rating}/${this.props.top}${prevRating}`
+      stars.push(
+        <span onClick={this.setRating.bind(this, i)} key={i} title={title}>{star}</span>
+      );
+    }
 
     return(
       <div>
