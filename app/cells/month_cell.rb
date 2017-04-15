@@ -41,7 +41,7 @@ class MonthCell < Cell::ViewModel
   end
 
   def month_class
-    return 'month month_current' if month == today.month
+    return 'month month_current' if month == today.month && year == today.year
     'month'
   end
 

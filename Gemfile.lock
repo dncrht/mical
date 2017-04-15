@@ -213,6 +213,9 @@ GEM
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
+    rspec-cells (0.3.4)
+      cells (>= 4.0.0, < 6.0.0)
+      rspec-rails (~> 3.2)
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.5.0)
@@ -301,6 +304,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_12factor
   react-rails
+  rspec-cells
   rspec-collection_matchers
   rspec-rails
   sal-engine

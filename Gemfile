@@ -41,6 +41,7 @@ end
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'rspec-cells'
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
   gem 'factory_girl_rails'
