@@ -21,6 +21,7 @@
     - @activities.each do |i|
       %p
         %span{class: "badge activity#{i.id}"}= ' '
+        = i.count_during_year(@year)
         = i.name
 
 - if signed_in? && current_user.can_edit_event

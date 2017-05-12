@@ -43,4 +43,14 @@ RSpec.describe Activity do
   end
 
   it_should_behave_like 'sortable'
+
+  describe '#count_during_year' do
+    it 'counts the number of activities the given year' do
+      activity = create(:activity)
+      create(:event, day: '2000-01-01', activity: activity)
+      create(:event, day: '2000-12-31', activity: activity)
+
+      expect(activity.count_during_year(2000)).to eq 2
+    end
+  end
 end
