@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0' # Heroku's ruby version
 
-gem 'rails', '5.0.0'
+gem 'rails', '5.1.2'
 
 gem 'pg'
 
@@ -31,6 +31,8 @@ gem 'dragonfly-s3_data_store'
 
 gem 'rails_12factor', group: :production
 
+gem 'listen', group: :development
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'pry'
@@ -45,8 +47,9 @@ group :test do
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
   gem 'factory_girl_rails'
-  gem 'selenium-webdriver'
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
   gem 'turnip'
   gem 'database_cleaner'
 end

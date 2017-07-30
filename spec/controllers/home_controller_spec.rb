@@ -11,7 +11,7 @@ RSpec.describe HomeController do
     before { get :index, params: params }
 
     context 'rendering current year by default' do
-      let(:params) { nil }
+      let(:params) { {} }
 
       it { expect(assigns(:activities)).to_not be_nil }
       it { expect(assigns(:today)).to eq today }

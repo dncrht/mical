@@ -20,6 +20,10 @@ require 'database_cleaner'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
 RSpec.configure do |config|
   config.before(:each) { ActionMailer::Base.deliveries.clear }
 
