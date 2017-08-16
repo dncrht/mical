@@ -10,43 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412073254) do
+ActiveRecord::Schema.define(version: 20170816104944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", force: :cascade do |t|
-    t.text    "name"
-    t.text    "color"
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.text "name"
+    t.text "color"
     t.integer "position"
   end
 
-  create_table "assets", force: :cascade do |t|
-    t.string   "image_uid"
-    t.integer  "event_id"
+  create_table "events", id: :serial, force: :cascade do |t|
+    t.date "day", null: false
+    t.integer "activity_id"
+    t.text "description"
+    t.integer "rating"
+    t.index ["day"], name: "day_idx"
+  end
+
+  create_table "photos", id: :serial, force: :cascade do |t|
+    t.string "image_uid"
+    t.integer "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.date    "day",         null: false
-    t.integer "activity_id"
-    t.text    "description"
-    t.integer "rating"
-    t.index ["day"], name: "day_idx", using: :btree
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.text    "email"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.text "email"
     t.boolean "can_download"
     t.boolean "can_edit_activity"
     t.boolean "can_edit_event"
     t.boolean "can_see_legend"
     t.boolean "can_see_description"
     t.boolean "is_admin"
-    t.string  "encrypted_password",  limit: 128
-    t.string  "confirmation_token",  limit: 128
-    t.string  "remember_token",      limit: 128
+    t.string "encrypted_password", limit: 128
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128
   end
 
 end

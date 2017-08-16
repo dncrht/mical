@@ -52,15 +52,15 @@ RSpec.describe 'routes.rb' do
     }
 
     it {
-      expect(post: '/assets').to route_to(
-        controller: 'assets',
+      expect(post: '/photos').to route_to(
+        controller: 'photos',
         action:     'create'
       )
     }
 
     it {
-      expect(delete: '/assets/1').to route_to(
-        controller: 'assets',
+      expect(delete: '/photos/1').to route_to(
+        controller: 'photos',
         action:     'destroy',
         id:         '1'
       )

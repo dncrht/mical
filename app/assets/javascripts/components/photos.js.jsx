@@ -1,5 +1,5 @@
 Dropzone = function(props) {
-  props.size += ' event-form-asset';
+  props.size += ' event-form-photo';
 
   return (
     <div className={props.size}>
@@ -9,7 +9,7 @@ Dropzone = function(props) {
         photo here</small>
         <p>or</p>
         <button className="btn btn-primary btn-xs form-control">Select a file</button>
-        <input data-url={props.url} className="js-upload-asset hide" type="file" name="asset[image]" />
+        <input data-url={props.url} className="js-upload-photo hide" type="file" name="photo[image]" />
       </div>
     </div>
   );
@@ -18,7 +18,7 @@ Dropzone = function(props) {
 Photo = React.createClass({
   render: function() {
     return (
-      <div className="col-sm-3 event-form-asset">
+      <div className="col-sm-3 event-form-photo">
         <a onClick={this.props.delete}>✗</a>
         <a href={this.props.href} className="gallery">
           <img src={this.props.src} className="img-responsive" />
@@ -73,7 +73,7 @@ Photos = React.createClass({
       }, 100);
     });
 
-    $('.js-upload-asset').fileupload({
+    $('.js-upload-photo').fileupload({
       dropZone: $('.js-upload-dropzone'),
       progressall: function(event, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);

@@ -1,4 +1,4 @@
-class Asset < ApplicationRecord
+class Photo < ApplicationRecord
   dragonfly_accessor :image
   validates_presence_of :image
 

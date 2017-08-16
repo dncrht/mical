@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#index'
 
   namespace :api do
-    resources :assets, only: :create
+    resources :photos, only: :create
   end
 
   resources :events, only: %i(show create update destroy)
-  resources :assets, only: %i(create destroy)
+  resources :photos, only: %i(create destroy)
   match ':year' => 'home#index', year: /\d{4}/, via: [:get, :post], as: 'year'
   root 'home#index'
 

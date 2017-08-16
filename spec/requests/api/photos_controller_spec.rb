@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module Api
-  RSpec.describe AssetsController do
+  RSpec.describe PhotosController do
 
     let(:params) { {event_id: event.id, image: fixture_file_upload('spec/fixtures/files/surfer.png')} }
     let(:password) { '123456' }
@@ -9,10 +9,10 @@ module Api
     let(:guest) { create(:user, password: password, can_edit_event: false) }
     let(:event) { create(:event) }
 
-    describe 'POST /api/assets' do
+    describe 'POST /api/photos' do
       before do
         basic_auth = ActionController::HttpAuthentication::Basic.encode_credentials user.email, password
-        post api_assets_path, params: params, headers: {'HTTP_AUTHORIZATION' => basic_auth}
+        post api_photos_path, params: params, headers: {'HTTP_AUTHORIZATION' => basic_auth}
       end
 
       context 'no auth' do
@@ -38,7 +38,7 @@ module Api
         let(:user) { admin }
 
         it { expect(response.status).to eq 200 }
-        it { expect(JSON.parse(response.body)).to eq({'id' => Asset.last.id}) }
+        it { expect(JSON.parse(response.body)).to eq({'id' => Photo.last.id}) }
       end
     end
   end

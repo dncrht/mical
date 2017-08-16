@@ -50,7 +50,7 @@ mical = (->
     $('.header-years-dropdown').slideToggle()
 
   openFile: ->
-    $('.js-upload-asset').click()
+    $('.js-upload-photo').click()
 )()
 
 mical.initialize()
