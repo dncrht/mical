@@ -19,7 +19,7 @@ Photo = React.createClass({
   render: function() {
     return (
       <div className="col-sm-3 event-form-photo">
-        <a onClick={this.props.delete}>✗</a>
+        <a onClick={this.props.delete} role="button">✗</a>
         <a href={this.props.href} className="gallery">
           <img src={this.props.src} className="img-responsive" />
         </a>
