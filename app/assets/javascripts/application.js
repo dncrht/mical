@@ -39,3 +39,16 @@ _ = {
     return tmp;
   }
 }
+
+bus$ = function() {
+  var subscribers = [];
+  return {
+    push: function(action) {
+      subscribers.every(function(callback) {callback(action)});
+    },
+
+    onValue: function(callback) {
+      subscribers.push(callback);
+    }
+  };
+}();
