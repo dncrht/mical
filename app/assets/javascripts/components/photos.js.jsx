@@ -15,18 +15,16 @@ Dropzone = function(props) {
   );
 }
 
-Photo = React.createClass({
-  render: function() {
-    return (
-      <div className="col-sm-3 event-form-photo">
-        <a onClick={this.props.delete} role="button">✗</a>
-        <a href={this.props.href} className="gallery">
-          <img src={this.props.src} className="img-responsive" />
-        </a>
-      </div>
-    );
-  }
-});
+Photo = function(props) {
+  return (
+    <div className="col-sm-3 event-form-photo">
+      <a onClick={props.delete} role="button">✗</a>
+      <a href={props.href} className="gallery">
+        <img src={props.src} className="img-responsive" />
+      </a>
+    </div>
+  );
+}
 
 Photos = React.createClass({
   getInitialState: function() {
