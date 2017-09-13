@@ -44,7 +44,7 @@ bus$ = function() {
   var subscribers = [];
   return {
     push: function(action) {
-      subscribers.every(function(callback) {callback(action)});
+      subscribers.map(function(callback) {callback(action)});
     },
 
     onValue: function(callback) {
