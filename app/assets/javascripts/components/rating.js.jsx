@@ -22,7 +22,6 @@ RatingApplet = React.createClass({
   }
 });
 
-
 Rating = function(props) {
   var stars = [];
   for (var i = 1; i <= props.top; i++) {

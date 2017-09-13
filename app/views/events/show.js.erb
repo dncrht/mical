@@ -7,7 +7,7 @@ ReactDOM.render(
 
 <% unless @event.new_record? %>
   ReactDOM.render(
-    React.createElement(Photos, {photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}),
+    React.createElement(PhotosApplet, {photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}),
     document.getElementById('js-photos')
   );
 <% end %>

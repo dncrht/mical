@@ -1,3 +1,5 @@
+PHOTO_DELETED = 'PHOTO_DELETED';
+
 Dropzone = function(props) {
   props.size += ' event-form-photo';
 
@@ -18,7 +20,7 @@ Dropzone = function(props) {
 Photo = function(props) {
   return (
     <div className="col-sm-3 event-form-photo">
-      <a onClick={props.delete} role="button">✗</a>
+      <a onClick={()=>bus$.push({type: PHOTO_DELETED, url: props.deleteUrl})} role="button">✗</a>
       <a href={props.href} className="gallery">
         <img src={props.src} className="img-responsive" />
       </a>
@@ -26,24 +28,29 @@ Photo = function(props) {
   );
 }
 
-Photos = React.createClass({
+PhotosApplet = React.createClass({
   getInitialState: function() {
     return {photos: this.props.photos};
   },
 
-  deletePhoto: function(url) {
-    $.ajax(
-      url, {
-        method: 'delete',
-        success: function(props) {
-          this.setState({photos: _.omit(this.state.photos, props.id)});
-        }.bind(this)
-      }
-    );
-  },
-
   componentDidMount: function() {
     this.attachGallery();
+
+    bus$.onValue((function(action) {
+      switch (action.type) {
+        case PHOTO_DELETED:
+          $.ajax(
+            action.url,
+            {
+              method: 'delete',
+              success: function(props) {
+                this.setState({photos: _.omit(this.state.photos, props.id)});
+              }.bind(this)
+            }
+          );
+          break;
+      }
+    }).bind(this));
 
     $(document).bind('dragover', function(e) {
       var dropZone = $('.js-upload-dropzone');
@@ -100,7 +107,7 @@ Photos = React.createClass({
     var size = (Object.keys(this.state.photos).length == 0) ? 'col-sm-12' : 'col-sm-3';
     var photos = _.map(this.state.photos,
       function(photo, id) {
-        return <Photo src={photo.src} href={photo.href} main={photo.main} delete={this.deletePhoto.bind(this, photo.deleteUrl)} key={id} />;
+        return <Photo src={photo.src} href={photo.href} main={photo.main} deleteUrl={photo.deleteUrl} key={id} />;
       }.bind(this)
     );
 
