@@ -1,7 +1,7 @@
 $('.js-form').html('<%= escape_javascript render('form') %>');
 
 ReactDOM.render(
-  React.createElement(RatingApplet, {rating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}),
+  Applet(RatingApplet, {rating: <%= @event.rating.to_i %>, prevRating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}),
   document.getElementById('js-rating')
 );
 
