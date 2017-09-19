@@ -6,7 +6,7 @@ gem 'rails', '5.1.2'
 gem 'pg'
 
 gem 'sass-rails'
-gem 'uglifier', '~> 2.7'
+gem 'uglifier'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
