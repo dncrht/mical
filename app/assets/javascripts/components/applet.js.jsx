@@ -1,5 +1,5 @@
 Applet = function(applet, init) {
-  return React.createElement(
+  return(React.createElement(
     React.createClass({
       updateModel: function(model) {
         this.setState(model);
@@ -18,5 +18,5 @@ Applet = function(applet, init) {
       }
     }),
     init
-  );
+  ));
 };
