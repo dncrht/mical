@@ -3,9 +3,7 @@
 %p
   Your password has been reset. Choose a new password below.
 
-= form_for :user,                                                  |
-  url: user_password_path(@user, token: @user.confirmation_token), |
-  html: {method: :put} do |f|                                      |
+= form_with scope: :user, url: user_password_path(@user, token: @user.confirmation_token), method: :patch, local: true do |f|
 
   .password_field
     = f.label :password, 'Choose password'

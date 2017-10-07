@@ -1,4 +1,4 @@
-= form_for [:admin, @activity], html: {class: 'form-horizontal'} do |f|
+= form_with model: [:admin, @activity], class: 'form-horizontal', local: true do |f|
 
   = errors_bar @activity
 

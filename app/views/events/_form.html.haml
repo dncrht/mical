@@ -1,4 +1,4 @@
-= form_for @event, html: {class: 'row'} do |f|
+= form_with model: @event, class: 'row', local: true do |f|
   .event-form-inputs.col-sm-9
     .form-group
       = f.label :activity_id
