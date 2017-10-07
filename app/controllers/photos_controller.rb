@@ -6,16 +6,13 @@ class PhotosController < ApplicationController
     event = Event.find(params[:event_id])
     photo = event.photos.build(photo_params)
     photo.save
-    render json: {
-      id: photo.id,
-      attributes: PhotoAttributes.new(photo).call(photo_path(photo))
-    }
+    render json: PhotoAttributes.new(photo).call(photo_path(photo))
   end
 
   def destroy
     photo = Photo.find_by(id: params[:id])
     photo.destroy
-    render json: {id: params[:id]}
+    head :ok
   end
 
   private

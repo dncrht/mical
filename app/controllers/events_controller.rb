@@ -7,9 +7,8 @@ class EventsController < ApplicationController
 
     @event = Event.find_by(day: params[:id]) || Event.new(day: params[:id])
 
-    @photos = @event.photos.reduce({}) do |hash, photo|
-      hash[photo.id] = PhotoAttributes.new(photo).call(photo_path(photo))
-      hash
+    @photos = @event.photos.map do |photo|
+      PhotoAttributes.new(photo).call(photo_path(photo))
     end
   end
 

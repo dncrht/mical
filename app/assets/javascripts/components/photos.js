@@ -29,9 +29,9 @@ Photo = function(props) {
 
 Photos = function(props) {
   var size = (Object.keys(props.photos).length == 0) ? 'col-sm-12' : 'col-sm-3';
-  var photos = _.map(props.photos,
-    function(photo, id) {
-      return h(Photo, {src: photo.src, href: photo.href, main: photo.main, deleteUrl: photo.deleteUrl, key: id});
+  var photos = props.photos.map(
+    function(photo) {
+      return h(Photo, {src: photo.src, href: photo.href, main: photo.main, deleteUrl: photo.deleteUrl, key: photo.id});
     }
   );
 
@@ -79,9 +79,9 @@ PhotosApplet = {
         self.updateModel({progress: progress});
       },
       done: function(event, data) {
-        var props = data.result;
         var photos = self.model().photos;
-        photos[props.id] = props.attributes;
+        photos.push(data.result);
+        console.log(photos)
         self.updateModel({photos: photos, progress: 0});
       }
     });
@@ -93,8 +93,13 @@ PhotosApplet = {
           message.url,
           {
             method: 'delete',
-            success: function(props) {
-              this.updateModel({photos: _.omit(this.model().photos, props.id)});
+            success: function() {
+              var photos = this.model().photos.filter(
+                function(photo) {
+                  return photo.deleteUrl != message.url
+                }
+              );
+              this.updateModel({photos: photos});
             }.bind(this)
           }
         );

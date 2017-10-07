@@ -22,24 +22,6 @@
 //= require farbtastic
 //= require mical
 
-_ = {
-  map: function(hash, lambda) {
-    return Object.keys(hash).map(function(key) {
-      return lambda(hash[key], key);
-    });
-  },
-
-  omit: function(hash, unwanted) {
-    var tmp = {};
-    Object.keys(hash).map(function(key) {
-      if (key !== unwanted) {
-        tmp[key] = hash[key];
-      }
-    });
-    return tmp;
-  }
-}
-
 // TODO: 1 bus per Applet to avoid mixed messages
 bus$ = function() {
   var subscribers = [];
