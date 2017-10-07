@@ -8,15 +8,15 @@ Rating = function(model) {
     let title = `${model.rating}/${model.top}${prevRating}`;
     let key = parseInt(i);
     stars.push(
-      <span onClick={()=>bus$.push({type: RATING_CHANGED, rating: key})} key={i} title={title}>{star}</span>
+      h('span', {onClick: ()=>bus$.push({type: RATING_CHANGED, rating: key}), key: i, title: title}, star)
     );
   }
 
   return(
-    <div>
-      <p className="event-form-rating">{stars}</p>
-      <input type="hidden" name="event[rating]" value={model.rating} />
-    </div>
+    h('div', null, [
+      h('p', {className: "event-form-rating"}, stars),
+      h('input', {type: "hidden", name: "event[rating]", value: model.rating}, null)
+    ])
   );
 }
 

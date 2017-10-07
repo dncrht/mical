@@ -17,7 +17,7 @@
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require jquery.colorbox-min
-//= require react
+//= require preact
 //= require components
 //= require farbtastic
 //= require mical
@@ -40,6 +40,7 @@ _ = {
   }
 }
 
+// TODO: 1 bus per Applet to avoid mixed messages
 bus$ = function() {
   var subscribers = [];
   return {

@@ -1,13 +1,19 @@
 $('.js-form').html('<%= escape_javascript render('form') %>');
 
-ReactDOM.render(
-  Applet(RatingApplet, {rating: <%= @event.rating.to_i %>, prevRating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}),
-  document.getElementById('js-rating')
-);
-
 <% unless @event.new_record? %>
-  ReactDOM.render(
-    React.createElement(PhotosApplet, {photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}),
+  render(
+    h(Applet, {
+      applet: PhotosApplet,
+      initialModel: {progress: 0, photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}
+    }),
     document.getElementById('js-photos')
   );
 <% end %>
+
+render(
+  h(Applet, {
+    applet: RatingApplet,
+    initialModel: {rating: <%= @event.rating.to_i %>, prevRating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}
+  }),
+  document.getElementById('js-rating')
+);

@@ -48,9 +48,6 @@ mical = (->
   yearDropdown: ->
     collapseIfVisible('.js-form')
     $('.header-years-dropdown').slideToggle()
-
-  openFile: ->
-    $('.js-upload-photo').click()
 )()
 
 mical.initialize()
@@ -59,7 +56,6 @@ $('body').on 'click', '.js-day-click', mical.dayClicked.bind(mical)
 $('body').on 'click', '.js-cancel', mical.cancelForm.bind(mical)
 $('body').on 'click', '.js-delete', mical.deleteForm.bind(mical)
 $('body').on 'click', '.js-year-selection', mical.yearDropdown.bind(mical)
-$('body').on 'click', '.js-upload-dropzone button', mical.openFile.bind(mical)
 $('body').on 'click', '.js-close', mical.closeX.bind(mical)
 
 # Adapted from https://github.com/blueimp/jQuery-File-Upload/wiki/Drop-zone-effects

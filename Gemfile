@@ -24,8 +24,6 @@ gem 'clearance'
 
 gem 'sal-engine'
 
-gem 'react-rails'
-
 gem 'dragonfly', '~>1.0.3'
 gem 'dragonfly-s3_data_store'
 
