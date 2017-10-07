@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :only_logged_and_capable
+  skip_before_action :verify_authenticity_token, only: :destroy
 
   def show
     @activities = Activity.order('position')
@@ -27,14 +28,7 @@ class EventsController < ApplicationController
 
   def destroy
     event = Event.find_by(id: params[:id])
-    redirection = if event
-                    event.destroy
-                    year_path(event.day.year)
-                  else
-                    root_path
-                  end
-
-    redirect_to redirection
+    event.destroy
   end
 
   private

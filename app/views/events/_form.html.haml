@@ -18,7 +18,7 @@
     %button.btn.btn-default.js-cancel.form-control{type: 'button'} Close
     %button.btn.btn-primary.form-control{type: 'submit'} Save
     - unless @event.new_record?
-      %button.btn.btn-danger.js-delete.form-control{type: 'button'} Delete
+      = link_to 'Delete', event_path(@event), class: 'btn btn-danger form-control', data: {confirm: 'Are you sure?'}, remote: true, method: :delete
 
 - unless @event.new_record?
   #js-photos.event-form-photos

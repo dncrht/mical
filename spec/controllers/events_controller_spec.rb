@@ -79,7 +79,7 @@ RSpec.describe EventsController do
   describe '#delete' do
     before do
       sign_in_as user
-      delete :destroy, params: {id: event.id}
+      delete :destroy, params: {id: event.id}, format: :js
     end
 
     context 'when not logged in' do
@@ -93,14 +93,12 @@ RSpec.describe EventsController do
       let(:user) { guest }
 
       it { expect(Event.exists?(event.id)).to be_present }
-      it { expect(response).to redirect_to root_path }
     end
 
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(Event.exists?(event.id)).to be_falsey }
-      it { expect(response).to redirect_to year_path(today.year) }
+      it { expect(Event.exists?(event.id)).to be false }
     end
   end
 end

@@ -35,13 +35,6 @@ mical = (->
     dayIndicator = $('.header-day')
     renderDay(dayIndicator.data('month'), dayIndicator.data('day'))
 
-  deleteForm: ->
-    if not confirm('Are you sure?')
-      return
-
-    $('input[name=_method]').val('delete')
-    $('.js-form form').submit()
-
   closeX: (event) ->
     $(event.currentTarget).parent().fadeOut()
 
@@ -54,7 +47,6 @@ mical.initialize()
 
 $('body').on 'click', '.js-day-click', mical.dayClicked.bind(mical)
 $('body').on 'click', '.js-cancel', mical.cancelForm.bind(mical)
-$('body').on 'click', '.js-delete', mical.deleteForm.bind(mical)
 $('body').on 'click', '.js-year-selection', mical.yearDropdown.bind(mical)
 $('body').on 'click', '.js-close', mical.closeX.bind(mical)
 
