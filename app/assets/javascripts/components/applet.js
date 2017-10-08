@@ -16,7 +16,9 @@ class Applet extends Component {
 
   componentDidMount() {
     bus$.onValue(this.props.applet.update.bind(this));
-    this.props.applet.init(this);
+    if (this.props.applet.init) {
+      this.props.applet.init(this);
+    }
   }
 
   render() {
