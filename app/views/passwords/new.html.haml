@@ -1,13 +1,16 @@
-%h2 Reset your password
+- content_for :header_day do
+  .col-sm-3
 
-%p
-  We will email you a link to reset your password.
+- content_for :header_year do
+  .col-sm-6
 
 = form_with scope: :password, url: passwords_path, class: 'col-sm-4 col-sm-offset-4' do |f|
 
-  .text_field
-    = f.label :email, 'Email address'
-    = f.text_field :email, type: 'email'
+  - unless notice.blank?
+    .alert.alert-danger= notice
 
-  .submit_field
-    = f.submit 'Reset password'
+  .form-group
+    = f.label :email
+    = f.text_field :email, type: 'email', class: 'form-control'
+
+  = f.submit 'Reset password', class: 'btn btn-primary'

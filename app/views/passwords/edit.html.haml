@@ -1,15 +1,15 @@
-%h2 Change your password
+- content_for :header_day do
+  .col-sm-3
 
-%p
-  Your password has been reset. Choose a new password below.
+- content_for :header_year do
+  .col-sm-6
 
-= form_with scope: :user, url: user_password_path(@user, token: @user.confirmation_token), method: :patch, local: true do |f|
+%p Your password has been reset. Choose a new password below.
 
 = form_with scope: :user, class: 'col-sm-4 col-sm-offset-4', url: user_password_path(@user, token: @user.confirmation_token), method: :patch do |f|
 
   .form-group
     = f.label :password, 'Choose password'
-    = f.password_field :password
+    = f.password_field :password, class: 'form-control'
 
-  .submit_field
-    = f.submit 'Save this password'
+  = f.submit 'Save this password', class: 'btn btn-primary'
