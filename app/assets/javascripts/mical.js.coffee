@@ -49,16 +49,3 @@ $('body').on 'click', '.js-day-click', mical.dayClicked.bind(mical)
 $('body').on 'click', '.js-cancel', mical.cancelForm.bind(mical)
 $('body').on 'click', '.js-year-selection', mical.yearDropdown.bind(mical)
 $('body').on 'click', '.js-close', mical.closeX.bind(mical)
-
-# Adapted from https://github.com/blueimp/jQuery-File-Upload/wiki/Drop-zone-effects
-$(document).bind 'dragover', (e) =>
-  timeout = window.dropZoneTimeout
-  if timeout
-    clearTimeout timeout
-  node = e.target
-  found = $('.js-upload-dropzone')[0] == node
-  $('.js-upload-dropzone').toggleClass 'hover', found
-  window.dropZoneTimeout = setTimeout(=>
-    window.dropZoneTimeout = null
-    $('.js-upload-dropzone').removeClass 'hover'
-  , 100)

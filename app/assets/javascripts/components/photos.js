@@ -81,7 +81,6 @@ PhotosApplet = {
       done: function(event, data) {
         var photos = self.model().photos;
         photos.push(data.result);
-        console.log(photos)
         self.updateModel({photos: photos, progress: 0});
       }
     });
