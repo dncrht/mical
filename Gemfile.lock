@@ -270,8 +270,6 @@ GEM
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (3.2.0)
-      execjs (>= 0.3.0, < 3)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -313,7 +311,6 @@ DEPENDENCIES
   selenium-webdriver
   sqlite3
   turnip
-  uglifier
 
 RUBY VERSION
    ruby 2.4.1p111
