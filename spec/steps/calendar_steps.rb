@@ -18,11 +18,11 @@ steps_for :calendar do
 
   step 'I click on today because I want to modify an event' do
     find('.month-day_current').click
-    expect(find('#event_description')).to have_content(Event.last.description)
+    expect(find('textarea[name=event\[description\]]')).to have_content(Event.last.description)
   end
 
   step 'I add a description' do
-    fill_in 'event_description', with: 'new_description'
+    fill_in 'event[description]', with: 'new_description'
   end
 
   step 'I add a rating' do
@@ -30,7 +30,7 @@ steps_for :calendar do
   end
 
   step 'I click on :button' do |button|
-    click_button button
+    click_on button
   end
 
   step 'I accept the confirm' do
@@ -41,7 +41,7 @@ steps_for :calendar do
     page.driver.browser.navigate.refresh
   end
 
-  step 'there must be an event for today' do
+  step 'there must be an event for today with top rating' do
     activity_selector = ".month-day_current.activity#{Event.last.activity.id}"
 
     expect(page).to have_css(activity_selector)
@@ -64,8 +64,8 @@ steps_for :calendar do
   step 'a logged in user' do
     user = FactoryGirl.create :user, password: 'kk'
     visit sign_in_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'kk'
+    fill_in 'session[email]', with: user.email
+    fill_in 'session[password]', with: 'kk'
     click_button 'Log me in!'
   end
 

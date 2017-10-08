@@ -12,7 +12,7 @@ Feature: Manage the calendar events once I'm logged in
     And I click on Save
 
     Then the calendar should reload
-    And there must be an event for today
+    And there must be an event for today with top rating
 
   Scenario: Edit existing event
     Given there's an event for today
