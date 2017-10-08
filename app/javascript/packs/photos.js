@@ -1,6 +1,8 @@
-PHOTO_DELETED = 'PHOTO_DELETED';
+import { h, render } from 'preact'
 
-Dropzone = function(props) {
+const PHOTO_DELETED = 'PHOTO_DELETED';
+
+const Dropzone = function(props) {
   props.size += ' event-form-photo';
 
   return (
@@ -16,7 +18,7 @@ Dropzone = function(props) {
   );
 }
 
-Photo = function(props) {
+const Photo = function(props) {
   return (
     h('div', {className: "col-sm-3 event-form-photo"}, [
       h('a', {onClick: ()=>bus$.push({type: PHOTO_DELETED, url: props.deleteUrl}), role: "button"}, '✗'),
@@ -27,7 +29,7 @@ Photo = function(props) {
   );
 }
 
-Photos = function(props) {
+const Photos = function(props) {
   var size = (Object.keys(props.photos).length == 0) ? 'col-sm-12' : 'col-sm-3';
   var photos = props.photos.map(
     function(photo) {
@@ -43,7 +45,7 @@ Photos = function(props) {
   );
 }
 
-PhotosApplet = {
+const PhotosApplet = {
   view: Photos,
   init: function(self) {
     $(document).bind('dragover', function(e) {
@@ -106,3 +108,5 @@ PhotosApplet = {
     }
   }
 }
+
+export default PhotosApplet;

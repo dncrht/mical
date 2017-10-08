@@ -1,19 +1,13 @@
 $('.js-form').html('<%= escape_javascript render('form') %>');
 
-render(
-  h(Applet, {
-    applet: RatingApplet,
-    initialModel: {rating: <%= @event.rating.to_i %>, prevRating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}
-  }),
-  document.getElementById('js-rating')
-);
+renderApplet('js-rating', {
+  applet: RatingApplet,
+  initialModel: {rating: <%= @event.rating.to_i %>, prevRating: <%= @event.rating.to_i %>, top: <%= Event::TOP %>}
+});
 
 <% unless @event.new_record? %>
-  render(
-    h(Applet, {
-      applet: PhotosApplet,
-      initialModel: {progress: 0, photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}
-    }),
-    document.getElementById('js-photos')
-  );
+  renderApplet('js-photos', {
+    applet: PhotosApplet,
+    initialModel: {progress: 0, photos: <%= raw @photos.to_json %>, url: "<%= photos_path(event_id: @event.id) %>"}
+  });
 <% end %>
