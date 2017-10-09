@@ -6,6 +6,8 @@ gem 'rails', '5.1.2'
 gem 'pg'
 
 gem 'sass-rails'
+gem 'uglifier'
+gem 'webpacker'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 

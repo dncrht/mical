@@ -1,6 +1,6 @@
-const { Component, h, render } = window.preact;
+import { Component, h, render } from 'preact'
 
-class Applet extends Component {
+export default class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.initialModel;

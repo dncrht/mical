@@ -1,6 +1,8 @@
-RATING_CHANGED = 'RATING_CHANGED';
+import { h, render } from 'preact'
 
-Rating = function(model) {
+const RATING_CHANGED = 'RATING_CHANGED';
+
+const Rating = function(model) {
   var stars = [];
   for (var i = 1; i <= model.top; i++) {
     let star = model.rating < i ? '☆' : '★';
@@ -20,7 +22,7 @@ Rating = function(model) {
   );
 }
 
-RatingApplet = {
+const RatingApplet = {
   view: Rating,
   update: function(message) {
     switch (message.type) {
@@ -30,3 +32,5 @@ RatingApplet = {
     }
   }
 }
+
+export default RatingApplet;

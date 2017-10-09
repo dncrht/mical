@@ -17,8 +17,6 @@
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require jquery.colorbox-min
-//= require preact
-//= require components
 //= require farbtastic
 //= require mical
 
