@@ -2,7 +2,7 @@ import { h, render } from 'preact'
 
 const RATING_CHANGED = 'RATING_CHANGED';
 
-const Rating = function(model) {
+const Rating = function(model, context) {
   var stars = [];
   for (var i = 1; i <= model.top; i++) {
     let star = model.rating < i ? '☆' : '★';
@@ -10,7 +10,7 @@ const Rating = function(model) {
     let title = `${model.rating}/${model.top}${prevRating}`;
     let key = parseInt(i);
     stars.push(
-      h('span', {onClick: ()=>bus$.push({type: RATING_CHANGED, rating: key}), key: i, title: title}, star)
+      h('span', {onClick: ()=>context.bus$.push({type: RATING_CHANGED, rating: key}), key: i, title: title}, star)
     );
   }
 

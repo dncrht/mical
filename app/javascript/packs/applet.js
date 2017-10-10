@@ -1,9 +1,15 @@
 import { Component, h, render } from 'preact'
+import Bus from './bus';
 
 export default class Applet extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.initialModel;
+    this.bus$ = new Bus();
+  }
+
+  getChildContext() {
+    return {bus$: this.bus$};
   }
 
   updateModel(model) {
@@ -15,7 +21,7 @@ export default class Applet extends Component {
   }
 
   componentDidMount() {
-    bus$.onValue(this.props.applet.update.bind(this));
+    this.bus$.onValue(this.props.applet.update.bind(this));
     if (this.props.applet.init) {
       this.props.applet.init(this);
     }

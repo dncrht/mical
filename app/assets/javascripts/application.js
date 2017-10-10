@@ -19,17 +19,3 @@
 //= require jquery.colorbox-min
 //= require farbtastic
 //= require mical
-
-// TODO: 1 bus per Applet to avoid mixed messages
-bus$ = function() {
-  var subscribers = [];
-  return {
-    push: function(action) {
-      subscribers.map(function(callback) {callback(action)});
-    },
-
-    onValue: function(callback) {
-      subscribers.push(callback);
-    }
-  };
-}();
