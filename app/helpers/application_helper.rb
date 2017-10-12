@@ -27,7 +27,7 @@ module ApplicationHelper
   def render_react_components
     return if @js.blank?
     components = @js.map do |mount_point, component|
-      "render(h(#{component[:name]}, #{component[:options].to_json}), document.getElementById('#{mount_point}'));"
+      "renderApplet('#{mount_point}', {applet: #{component[:name]}, initialModel: #{component[:options].to_json}});"
     end
 
     content_tag(:script, components.join("\n").html_safe)

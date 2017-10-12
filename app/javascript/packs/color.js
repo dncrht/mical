@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { TwitterPicker } from 'react-color';
 
-export default class ColorApplet extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props;
-  }
+const COLOR_CHANGED = 'COLOR_CHANGED';
 
-  handleChangeComplete(color) {
-    console.log(color.hex)
-    this.setState({color: color.hex});
-  }
+const Color = function(model, context) {
+  return h('div', null, [
+    h('input', {type: 'hidden', name: 'activity[color]', value: model.color}, null),
+    h(TwitterPicker, {color: model.color, onChangeComplete: (color)=>context.bus$.push({type: COLOR_CHANGED, color: color.hex})}, null),
+  ]);
+};
 
-  render() {
-    return h('div', null, [
-      h('input', {type: 'hidden', name: 'activity[color]', value: this.state.color}, null),
-      h(TwitterPicker, {color: this.state.color, onChangeComplete: this.handleChangeComplete.bind(this)}, null),
-    ]);
+const ColorApplet = {
+  view: Color,
+  update: function(message) {
+    switch (message.type) {
+      case COLOR_CHANGED:
+        this.updateModel({color: message.color});
+        break;
+    }
   }
 }
+
+export default ColorApplet;
