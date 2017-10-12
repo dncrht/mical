@@ -13,4 +13,23 @@ module ApplicationHelper
       ".activity#{i.id} {background: #{i.color};}"
     end.join("\n")
   end
+
+  def react_component(name, options = {})
+    @js = {} if @js.blank?
+
+    mount_point = "react_component#{rand(100)}"
+
+    @js[mount_point] = {name: name, options: options}
+
+    content_tag(:div, nil, id: mount_point)
+  end
+
+  def render_react_components
+    return if @js.blank?
+    components = @js.map do |mount_point, component|
+      "render(h(#{component[:name]}, #{component[:options].to_json}), document.getElementById('#{mount_point}'));"
+    end
+
+    content_tag(:script, components.join("\n").html_safe)
+  end
 end
