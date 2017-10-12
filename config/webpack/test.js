@@ -1,3 +1,5 @@
 const environment = require('./environment')
+const preactCompat = require('./preact-compat')
+const merge = require('webpack-merge')
 
-module.exports = environment.toWebpackConfig()
+module.exports = merge(environment.toWebpackConfig(), preactCompat);
