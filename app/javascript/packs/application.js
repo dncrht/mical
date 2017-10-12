@@ -7,9 +7,7 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-const h = React.createElement;
+import { h, render } from 'preact'
 window.render = render;
 window.h = h;
 

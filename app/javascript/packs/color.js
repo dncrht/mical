@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react';    // Using preact-compat here
+import { render } from 'react-dom';          // because react-color below
 import { TwitterPicker } from 'react-color';
 
 const COLOR_CHANGED = 'COLOR_CHANGED';
