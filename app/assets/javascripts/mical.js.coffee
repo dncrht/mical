@@ -12,11 +12,6 @@ mical = (->
 
     $('.help-inline.error').closest('.control-group').addClass('error')
 
-    activityColor = $('#activity_color')
-    if activityColor.length != 0
-      activityColor.after('<div id="colorpicker"></div>')
-      $('#colorpicker').farbtastic('#activity_color')
-
   dayClicked: (event) ->
     if $('.js-form').is(':visible')
       return
