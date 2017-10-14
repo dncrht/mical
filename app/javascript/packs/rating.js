@@ -1,5 +1,3 @@
-import { h, render } from 'preact'
-
 const RATING_CHANGED = 'RATING_CHANGED';
 
 const Rating = function(model, context) {

@@ -1,18 +1,19 @@
-import { h, render } from 'preact'
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 
 const PHOTO_DELETED = 'PHOTO_DELETED';
+const PHOTO_DROPPED = 'PHOTO_DROPPED';
 
-const Dropzone = function(props) {
+const PhotoUpload = function(props, context) {
   props.size += ' event-form-photo';
 
   return (
     h('div', {className: props.size},
-      h('div', {className: "upload-dropzone js-upload-dropzone"}, [
-        h('progress', {value: props.progress, max: 100}),
+      h(Dropzone, {className: "upload-dropzone", activeClassName: "upload-dropzone-active", disablePreview: true, onDrop: (files)=>context.bus$.push({type: PHOTO_DROPPED, file: files[0]}), multiple: false, accept: 'image/*'}, [
+        h('progress', {value: isNaN(props.progress) ? 0 : props.progress, max: 100}),
         h('small', null, 'Drop a photo here'),
         h('p', null, 'or'),
-        h('button', {onClick: ()=>{$('.js-upload-photo').click()}, className: "btn btn-primary btn-xs form-control"}, 'Select a file'),
-        h('input', {'data-url': props.url, className: "js-upload-photo hide", type: "file", name: "photo[image]"})
+        h('button', {className: "btn btn-primary btn-xs form-control"}, 'Select a file')
       ])
     )
   );
@@ -40,70 +41,42 @@ const Photos = function(props) {
   return (
     h('div', {className: "row"}, [
       photos,
-      h(Dropzone, {progress: props.progress, url: props.url, size: size})
+      h(PhotoUpload, {progress: props.progress, url: props.url, size: size})
     ])
   );
 }
 
 const PhotosApplet = {
   view: Photos,
-  init: function(self) {
-    $(document).bind('dragover', function(e) {
-      var dropZone = $('.js-upload-dropzone');
-      var timeout = window.dropZoneTimeout;
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      var found = false;
-      var node = e.target;
-      do {
-        if (node === dropZone[0]) {
-          found = true;
-          break;
-        }
-        node = node.parentNode;
-      } while (node != null);
-      if (found) {
-        dropZone.addClass('hover');
-      } else {
-        dropZone.removeClass('hover');
-      }
-      window.dropZoneTimeout = setTimeout(function() {
-        window.dropZoneTimeout = null;
-        dropZone.removeClass('hover');
-      }, 100);
-    });
-
-    $('.js-upload-photo').fileupload({
-      dropZone: $('.js-upload-dropzone'),
-      progressall: function(event, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        self.updateModel({progress: progress});
-      },
-      done: function(event, data) {
-        var photos = self.model().photos;
-        photos.push(data.result);
-        self.updateModel({photos: photos, progress: 0});
-      }
-    });
-  },
   update: function(message) {
     switch (message.type) {
       case PHOTO_DELETED:
-        $.ajax(
-          message.url,
-          {
-            method: 'delete',
-            success: function() {
-              var photos = this.model().photos.filter(
-                function(photo) {
-                  return photo.deleteUrl != message.url
-                }
-              );
-              this.updateModel({photos: photos});
-            }.bind(this)
-          }
-        );
+        request.delete(message.url).set('X-CSRF-Token', $.rails.csrfToken()).end(function() {
+          var photos = this.model().photos.filter(
+            function(photo) {
+              return photo.deleteUrl != message.url
+            }
+          );
+          this.updateModel({photos: photos});
+        }.bind(this));
+        break;
+      case PHOTO_DROPPED:
+        request
+          .post(this.model().url)
+          .set('X-CSRF-Token', $.rails.csrfToken())
+          .on('progress', function(e) {
+            this.updateModel({progress: e.percent});
+          }.bind(this))
+          .field('photo[image]', message.file)
+          .end(function(err, response) {
+            if (err) {
+              console.error(err);
+            }
+
+            var photos = this.model().photos;
+            photos.push(JSON.parse(response.text));
+            this.updateModel({photos: photos, progress: 0});
+          }.bind(this));
         break;
     }
   }
