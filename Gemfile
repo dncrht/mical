@@ -30,7 +30,10 @@ gem 'dragonfly-s3_data_store'
 
 gem 'rails_12factor', group: :production
 
-gem 'listen', group: :development
+group :development do
+  gem 'listen'
+  gem 'spring-commands-rspec'
+end
 
 group :development, :test do
   gem 'dotenv-rails'
