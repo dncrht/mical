@@ -16,5 +16,6 @@ module Mical
     # -- all .rb files in that directory are automatically loaded.
 
     config.action_view.form_with_generates_remote_forms = false
+    config.action_controller.include_all_helpers = false
   end
 end
