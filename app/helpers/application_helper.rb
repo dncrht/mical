@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Sal::ApplicationHelper
+
   def current_user_account
     return 'guest' unless current_user
     current_user.email.split('@')[0]

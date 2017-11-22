@@ -10,8 +10,6 @@ mical = (->
     $('.js-day-click').tooltip()
     $('.alert').prepend('<button type="button" class="close js-close">×</button>')
 
-    $('.help-inline.error').closest('.control-group').addClass('error')
-
   dayClicked: (event) ->
     if $('.js-form').is(':visible')
       return

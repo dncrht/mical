@@ -1,22 +1,22 @@
-= form_with model: [:admin, @activity], class: 'form-horizontal' do |f|
+= form_with model: [:admin, @activity] do |f|
 
   = errors_bar @activity
 
-  .form-group
-    = f.label :name, class: 'control-label col-sm-2'
+  .form-group.row
+    = f.label :name, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = f.text_field :name, class: 'form-control'
 
-  .form-group
-    = f.label :color, class: 'control-label col-sm-2'
+  .form-group.row
+    = f.label :color, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = react_applet 'ColorApplet', color: @activity.color
 
-  .form-group
-    = f.label :position, class: 'control-label col-sm-2'
+  .form-group.row
+    = f.label :position, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = f.text_field :position, class: 'form-control'
 
-  .col-sm-6.col-sm-offset-2
+  .col-sm-10.ml-sm-auto
     = submit_tag 'Save', class: 'btn btn-primary'
-    = link_to 'Cancel', admin_activities_path, class: 'btn'
+    = link_to 'Cancel', admin_activities_path, class: 'btn btn-link'

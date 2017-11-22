@@ -1,4 +1,4 @@
-= form_with model: [:admin, @user], class: 'form-horizontal' do |f|
+= form_with model: [:admin, @user] do |f|
 
   - if @user.is_admin
     .controls.control-group
@@ -7,52 +7,52 @@
 
   = errors_bar @user
 
-  .form-group
-    = f.label :email, class: 'control-label col-sm-2'
+  .form-group.row
+    = f.label :email, class: 'col-sm-2 col-form-label'
     .col-sm-6
       - if @user.is_admin
         %span.uneditable-input= @user.email
       - else
         = f.text_field :email, class: 'form-control'
 
-  .form-group
-    = f.label :password, class: 'control-label col-sm-2'
+  .form-group.row
+    = f.label :password, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = f.password_field :password, class: 'form-control'
 
-  .form-group
-    %label.control-label.col-sm-2 Permissions
+  .form-group.row
+    %label.col-sm-2.col-form-label Permissions
     .col-sm-6
       .checkbox
         %label
           = f.check_box :can_edit_activity
           %span Can manage activities on admin
-    .col-sm-6.col-sm-offset-2
+    .col-sm-10.ml-sm-auto
       .checkbox
         %label
           = f.check_box :can_edit_event
           %span Can add/edit/delete events
-    .col-sm-6.col-sm-offset-2
+    .col-sm-10.ml-sm-auto
       .checkbox
         %label
           = f.check_box :can_see_legend
           %span Can see a legend besides the calendar
-    .col-sm-6.col-sm-offset-2
+    .col-sm-10.ml-sm-auto
       .checkbox
         %label
           = f.check_box :can_see_description
           %span Can see description hovering over a day
-    .col-sm-6.col-sm-offset-2
+    .col-sm-10.ml-sm-auto
       .checkbox
         %label
           = f.check_box :can_download
           %span Can download events as CSV
-    .col-sm-6.col-sm-offset-2
+    .col-sm-10.ml-sm-auto
       .checkbox
         %label
           = f.check_box :is_admin
           %span Can manage users on admin
 
-  .col-sm-6.col-sm-offset-2
+  .col-sm-10.ml-sm-auto
     = submit_tag 'Save', class: 'btn btn-primary'
-    = link_to 'Cancel', admin_users_path, class: 'btn'
+    = link_to 'Cancel', admin_users_path, class: 'btn btn-link'

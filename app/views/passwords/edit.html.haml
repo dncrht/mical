@@ -6,10 +6,11 @@
 
 %p Your password has been reset. Choose a new password below.
 
-= form_with scope: :user, class: 'col-sm-4 col-sm-offset-4', url: user_password_path(@user, token: @user.confirmation_token), method: :patch do |f|
+.row.justify-content-center
+  = form_with scope: :user, class: 'col-4', url: user_password_path(@user, token: @user.confirmation_token), method: :patch do |f|
 
-  .form-group
-    = f.label :password, 'Choose password'
-    = f.password_field :password, class: 'form-control'
+    .form-group
+      = f.label :password, 'Choose password'
+      = f.password_field :password, class: 'form-control'
 
-  = f.submit 'Save this password', class: 'btn btn-primary'
+    = f.submit 'Save this password', class: 'btn btn-primary'

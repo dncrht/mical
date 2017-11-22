@@ -8,7 +8,7 @@ main
   border-radius: 0 0 6px 6px
   padding: 20px 10px 0
   min-height: 440px
-  @include gradient(top, $gray-dark 0px, $dropdown-bg 9px)
+  @include gradient(top, $gray-800 0px, $dropdown-bg 9px)
 
 .row
   margin-bottom: $grid-gutter-width
@@ -19,7 +19,7 @@ main
   text-align: left
   font-weight: bold
   font-size: 16px
-  color: $gray-dark
+  color: $gray-800
   border-right: 1px solid $table-border-color
 
 .month
@@ -31,10 +31,10 @@ main
   border: 1px solid $table-border-color
   border-top: 0
   border-left: 0
-  color: $gray-light
+  color: $gray-700
   text-align: center
   &:hover
-    color: $label-color
+    color: $white
     @include gradient(top, $brand-primary, $brand-primary-darker)
   a
     color: inherit
@@ -53,7 +53,7 @@ main
 .month-weekdays
   border-right: 1px solid $table-border-color
   th
-    color: $gray-light
+    color: $gray-700
     background: $table-border-color
     font-weight: normal
     font-size: 11px
@@ -62,11 +62,11 @@ main
 
 .month_current
   .month-header
-    color: $label-color
+    color: $white
     @include gradient(top, $brand-primary, $brand-primary-darker)
   .month-weekdays th
     background: $brand-primary-darker
-    color: $label-color
+    color: $white
 
 .tooltip
   margin-top: -19px !important

@@ -1,9 +1,9 @@
 %ul.nav.nav-tabs
-  %li{class: current_tab}= link_to 'Information', admin_path
+  %li{class: 'nav-item'}= link_to 'Information', admin_path, class: "nav-link #{current_tab}"
   - if user.is_admin
-    %li{class: "#{current_tab :users}"}= link_to 'Users', admin_users_path
+    %li{class: 'nav-item'}= link_to 'Users', admin_users_path, class: "nav-link #{current_tab :users}"
   - if user.can_edit_activity
-    %li{class: "#{current_tab :activities}"}= link_to 'Activities', admin_activities_path
+    %li{class: 'nav-item'}= link_to 'Activities', admin_activities_path, class: "nav-link #{current_tab :activities}"
   - if user.can_download && user.can_edit_event
-    %li{class: "#{current_tab :events}"}= link_to 'Events', admin_events_path
+    %li{class: 'nav-item'}= link_to 'Events', admin_events_path, class: "nav-link #{current_tab :events}"
 %br
