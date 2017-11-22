@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-tooltip
+//= require popper.min
+//= require bootstrap/util
+//= require bootstrap/tooltip
+//= require bootstrap/modal
 //= require jquery.colorbox-min
 //= require mical

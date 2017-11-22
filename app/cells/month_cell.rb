@@ -17,7 +17,7 @@ class MonthCell < Cell::ViewModel
       out << %(<td data-day="#{day.to_s}" #{day_attributes(day.to_s)}>)
 
       if show_desc
-        out << link_to(day.day, event_path(id: day.to_s), 'data-remote' => true) << '</td>'
+        out << link_to(day.day, event_path(id: day.to_s), remote: true) << '</td>'
       else
         out << "#{day.day}</td>"
       end
@@ -47,7 +47,7 @@ class MonthCell < Cell::ViewModel
 
   def day_attributes(day)
     out = []
-    clazz = 'month-day js-day-click'
+    clazz = 'month-day'
 
     if events.has_key?(day)
       clazz << " activity#{events[day].activity_id}"

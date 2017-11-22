@@ -15,7 +15,7 @@
     = f.hidden_field :day
 
   .event-form-buttons.col-sm-3
-    %button.btn.btn-light.js-cancel.form-control{type: 'button'} Close
+    %button.btn.btn-light.form-control{type: 'button', 'data-dismiss' => 'modal', 'aria-label' => 'Close'} Close
     %button.btn.btn-primary.form-control{type: 'submit'} Save
     - unless @event.new_record?
       = link_to 'Delete', event_path(@event), class: 'btn btn-danger form-control', data: {confirm: 'Are you sure?'}, remote: true, method: :delete

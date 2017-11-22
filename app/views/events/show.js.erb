@@ -1,4 +1,5 @@
-$('.js-form').html('<%= escape_javascript render('form') %>');
+$('.modal-body').html('<%= escape_javascript render('form') %>');
+$('.modal').modal();
 
 <%= render_react_applet 'RatingApplet', rating: @event.rating.to_i, prevRating: @event.rating.to_i, top: Event::TOP %>
 

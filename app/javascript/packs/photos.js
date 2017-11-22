@@ -13,7 +13,7 @@ const PhotoUpload = function(props, context) {
         h('progress', {value: isNaN(props.progress) ? 0 : props.progress, max: 100}),
         h('small', null, 'Drop a photo here'),
         h('p', null, 'or'),
-        h('button', {className: "btn btn-primary btn-xs form-control"}, 'Select a file')
+        h('button', {className: "btn btn-primary btn-sm form-control"}, 'Select a file')
       ])
     )
   );
