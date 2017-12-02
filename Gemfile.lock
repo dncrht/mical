@@ -312,6 +312,7 @@ DEPENDENCIES
   hamlit
   jquery-rails
   listen
+  mime-types
   pg
   pry
   pry-byebug

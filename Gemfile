@@ -27,6 +27,7 @@ gem 'sal-engine'
 
 gem 'dragonfly', '~>1.0.3'
 gem 'dragonfly-s3_data_store'
+gem 'mime-types'
 
 gem 'rails_12factor', group: :production
 
