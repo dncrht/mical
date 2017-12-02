@@ -17,18 +17,12 @@
       = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description)
 
 - if signed_in? && current_user.can_see_legend
-  .legend
+  .legend.d-none.d-lg-block
     - @activities.each do |i|
       %p
         %span{class: "badge activity#{i.id}"}= ' '
         = i.count_during_year(@year)
         = i.name
-
-- if signed_in? && current_user.can_edit_event
-  .modal.fade(tabindex="-1" role="dialog")
-    .modal-dialog.modal-lg(role="document")
-      .modal-content
-        .modal-body
 
 - content_for :footer do
   - if signed_in? && current_user.can_download
