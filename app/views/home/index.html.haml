@@ -1,14 +1,14 @@
 - content_for :header_day do
-  .col-sm-3.header-day{"data-day" => "#{@today.day}", "data-month" => "#{l(@today, format: :month)}"}
+  .header-day{"data-day" => "#{@today.day}", "data-month" => "#{l(@today, format: :month)}"}
     = @today.day
     %p.header-month= l(@today, format: :month)
 
 - content_for :header_year do
-  .col-sm-6
-    %span.header-year.js-year-selection= @year
-    %ul.header-years-dropdown.row
+  %span.header-year.js-year-selection= @year
+  %ul.header-years-dropdown
+    .row
       - @years.to_a.reverse.each do |year|
-        %li.col-sm-4.d-inline-block
+        %li.col-4.text-center
           = link_to year, year_path(year)
 
 = (1..12).to_a.in_groups_of(4) do |months|
@@ -26,7 +26,7 @@
 
 - if signed_in? && current_user.can_edit_event
   .modal.fade(tabindex="-1" role="dialog")
-    .modal-dialog(role="document")
+    .modal-dialog.modal-lg(role="document")
       .modal-content
         .modal-body
 

@@ -24,7 +24,7 @@ const Photo = function(props, context) {
     h('div', {className: "col-sm-3 event-form-photo"}, [
       h('a', {onClick: ()=>context.bus$.push({type: PHOTO_DELETED, url: props.deleteUrl}), role: "button"}, '✗'),
       h('a', {onClick: ()=>{$('.gallery').colorbox({rel: 'gallery', maxWidth: $(window).width(), maxHeight: $(window).height()});}, href: props.href, className: "gallery"},
-        h('img', {src: props.src, className: "img-responsive"})
+        h('img', {src: props.src, className: "img-fluid"})
       )
     ])
   );

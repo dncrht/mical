@@ -1,9 +1,5 @@
-- content_for :header_day do
-  .col-sm-3
-
 - content_for :header_year do
-  .col-sm-6
-    %span.header-year Login
+  %span.header-year Login
 
 .row.justify-content-center
   = form_with scope: :session, url: session_path, class: 'col-4' do |f|
