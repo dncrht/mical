@@ -11,10 +11,9 @@
         %li.col-4.text-center
           = link_to year, year_path(year)
 
-= (1..12).to_a.in_groups_of(4) do |months|
-  .row
-    - months.each do |month|
-      = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description)
+.row
+  - (1..12).each do |month|
+    = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description)
 
 - if signed_in? && current_user.can_see_legend
   .legend.d-none.d-lg-block

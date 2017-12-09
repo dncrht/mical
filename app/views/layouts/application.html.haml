@@ -3,26 +3,29 @@
   %head
     %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
     %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     %title mical
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
     %style
       = activities_style(@activities) if defined? @activities
-  %body
-    %section.container
-      %header
-        .row
-          .col-sm-3.d-none.d-lg-block= yield :header_day
-          .col-lg-6= yield :header_year
-          .col-sm-3.d-none.d-lg-block.header-user-info
-            %div
-              Welcome,
-              %strong= current_user_account
-              %br
-              = render 'layouts/header_user_info_links'
-      %main
-        = content_for?(:main) ? yield(:main) : yield
-        = yield :footer
+  %body.m-3
+    .row.justify-content-center
+      .col-md-10
+        %section.container
+          %header
+            .row
+              .col-sm-3.d-none.d-lg-block= yield :header_day
+              .col-lg-6= yield :header_year
+              .col-sm-3.d-none.d-lg-block.header-user-info
+                %div
+                  Welcome,
+                  %strong= current_user_account
+                  %br
+                  = render 'layouts/header_user_info_links'
+          %main
+            = content_for?(:main) ? yield(:main) : yield
+            = yield :footer
 
     .modal.fade(tabindex="-1" role="dialog")
       .modal-dialog.modal-lg(role="document")

@@ -2,24 +2,13 @@
 //** COLLAPSABLE FORM TO MANAGE EVENTS
 //******************************************************************************
 
-.event-form
-  position: absolute
-  display: none
-  padding: 20px 10px 0
-  width: 440px
-  overflow: hidden
-  top: 0
-  left: 163px
-  border: 1px solid $brown
-  border-top: 0
-  box-shadow: 0 7px 10px $gray-800
-  @include gradient(top, $gray-800 0px, $dropdown-bg 9px)
-
 .event-form-inputs
-  border-right: 1px solid $table-border-color
+  @include media-breakpoint-up(sm)
+    border-right: 1px solid $table-border-color
 
 .event-form-photos
-  border-top: 1px solid $table-border-color
+  @include media-breakpoint-up(sm)
+    border-top: 1px solid $table-border-color
 .event-form-photo
   margin-top: 10px
 
