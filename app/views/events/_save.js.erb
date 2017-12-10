@@ -1,0 +1,7 @@
+$('.modal-body').html('<%= escape_javascript render('form') %>');
+
+<%= render_react_applet 'RatingApplet', rating: @event.rating.to_i, prevRating: @event.rating.to_i, top: Event::TOP %>
+
+<% unless @event.new_record? %>
+  <%= render_react_applet 'PhotosApplet', progress: 0, photos: @photos, url: photos_path(event_id: @event.id) %>
+<% end %>

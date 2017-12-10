@@ -29,7 +29,7 @@ RSpec.describe EventsController do
     before do
       event = build(:event)
       sign_in_as user
-      post :create, params: {id: event.day, event: event.attributes}
+      post :create, format: :js, params: {id: event.day, event: event.attributes}
     end
 
     context 'when not logged in' do
@@ -47,14 +47,14 @@ RSpec.describe EventsController do
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(response).to redirect_to year_path(today.year) }
+      it { expect(response).to render_template '_save' }
     end
   end
 
   describe '#update' do
     before do
       sign_in_as user
-      patch :update, params: {id: event.id, event: {description: 'different'}}
+      patch :update, format: :js, params: {id: event.id, event: {description: 'different'}}
     end
 
     context 'when not logged in' do
@@ -72,7 +72,7 @@ RSpec.describe EventsController do
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(response).to redirect_to year_path(today.year) }
+      it { expect(response).to render_template '_save' }
     end
   end
 

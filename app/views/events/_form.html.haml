@@ -1,4 +1,4 @@
-= form_with model: @event, class: 'row' do |f|
+= form_with model: @event, class: 'row', local: false do |f|
   .event-form-inputs.col-sm-9
     .form-group
       = f.label :activity_id
@@ -14,9 +14,12 @@
 
     = f.hidden_field :day
 
-  .event-form-buttons.col-sm-3
-    %button.btn.btn-light.form-control{type: 'button', 'data-dismiss' => 'modal', 'aria-label' => 'Close'} Close
-    %button.btn.btn-primary.form-control{type: 'submit'} Save
+  .col-sm-3
+    - if action_name != 'show'
+      = link_to 'Close', year_path(@event.day.year), class: 'btn btn-light form-control mb-3'
+    - else
+      %button.btn.btn-light.form-control.mb-3{'data-dismiss' => 'modal', 'aria-label' => 'Close'} Close
+    = f.submit 'Save', class: 'btn btn-primary form-control mb-3'
     - unless @event.new_record?
       = link_to 'Delete', event_path(@event), class: 'btn btn-danger form-control', data: {confirm: 'Are you sure?'}, remote: true, method: :delete
 
