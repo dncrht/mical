@@ -18,6 +18,7 @@
 - if signed_in? && current_user.can_see_legend
   .legend.d-none.d-lg-block
     - @activities.each do |i|
+      - next if i.count_during_year(@year).zero?
       %p
         %span{class: "badge activity#{i.id}"}= ' '
         = i.count_during_year(@year)
