@@ -10,7 +10,6 @@ RSpec.describe Admin::ActivitiesController do
     describe '#index' do
       before { get :index }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:activities)).to eq [activity] }
       it { expect(response).to render_template 'index' }
     end
@@ -24,7 +23,6 @@ RSpec.describe Admin::ActivitiesController do
     describe '#edit' do
       before { get :edit, params: {id: activity.id} }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:activity)).to eq activity }
       it { expect(response).to render_template 'edit' }
     end
@@ -41,7 +39,6 @@ RSpec.describe Admin::ActivitiesController do
       context 'invalid activity' do
         let(:activity_attributes) { activity.attributes.merge('name' => nil) }
 
-        it { expect(response).to be_success }
         it { expect(assigns(:activity)).to eq activity }
         it { expect(response).to render_template 'edit' }
       end
@@ -61,7 +58,6 @@ RSpec.describe Admin::ActivitiesController do
     describe '#new' do
       before { get :new }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:activity)).to be_an Activity }
       it { expect(response).to render_template 'new' }
     end
@@ -78,7 +74,6 @@ RSpec.describe Admin::ActivitiesController do
       context 'invalid activity' do
         let(:activity_attributes) { activity.attributes.merge('name' => nil) }
 
-        it { expect(response).to be_success }
         it { expect(assigns(:activity)).to be_an Activity }
         it { expect(response).to render_template 'new' }
       end

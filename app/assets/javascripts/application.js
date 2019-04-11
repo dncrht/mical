@@ -17,4 +17,20 @@
 //= require bootstrap/tooltip
 //= require bootstrap/modal
 //= require jquery.colorbox-min
-//= require mical
+
+$(document).on('ready', function() {
+  $('.month-day').tooltip();
+  $('.alert').prepend('<button type="button" class="close js-close">×</button>');
+
+  $('body').on(
+    'click',
+    '.js-year-selection',
+    function() {$('.header-years-dropdown').slideToggle();}
+  );
+
+  $('body').on(
+    'click',
+    '.js-close',
+    function(event) {$(event.currentTarget).parent().fadeOut();}
+  );
+});

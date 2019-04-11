@@ -17,7 +17,6 @@ RSpec.describe HomeController do
       it { expect(assigns(:today)).to eq today }
       it { expect(assigns(:year)).to eq today.year }
       it { expect(assigns(:events)).to eq({event.day.to_s => event}) }
-      it { expect(response).to be_success }
       it { expect(response).to render_template 'index' }
     end
 
@@ -35,7 +34,6 @@ RSpec.describe HomeController do
       it { expect(assigns(:today)).to eq today }
       it { expect(assigns(:year)).to eq selected }
       it { expect(assigns(:events)).to eq Hash.new }
-      it { expect(response).to be_success }
       it { expect(response).to render_template 'index' }
     end
   end

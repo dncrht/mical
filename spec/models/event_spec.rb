@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Event do
 
-  let(:event) { build(:event) }
+  let(:event) { create(:event) }
 
   it 'has a valid factory' do
     expect(event).to be_valid
@@ -13,10 +13,9 @@ RSpec.describe Event do
   end
 
   it 'day should be unique' do
-    create(:event)
+    event
 
-    expect(event).to_not be_valid
-    expect(event).to have(1).error_on(:day)
+    expect(build(:event, day: nil)).to have(1).error_on(:day)
   end
 
   it 'is invalid without activity' do

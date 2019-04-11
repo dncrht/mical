@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find_by(id: params[:id])
-    @event.update_attributes event_params
+    @event.update event_params
 
     activities_and_photos
 

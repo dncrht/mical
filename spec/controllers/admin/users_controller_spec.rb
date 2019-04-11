@@ -12,7 +12,6 @@ RSpec.describe Admin::UsersController do
     describe '#index' do
       before { get :index }
 
-      it { expect(response).to_not be_success }
       it { expect(assigns(:users)).to be_nil }
     end
   end
@@ -23,7 +22,6 @@ RSpec.describe Admin::UsersController do
     describe '#index' do
       before { get :index }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:users)).to eq [user] }
       it { expect(response).to render_template 'index' }
     end
@@ -37,7 +35,6 @@ RSpec.describe Admin::UsersController do
     describe '#edit' do
       before { get :edit, params: {id: user.id} }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:user)).to eq user }
       it { expect(response).to render_template 'edit' }
     end
@@ -54,7 +51,6 @@ RSpec.describe Admin::UsersController do
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes.merge('email' => nil) }
 
-        it { expect(response).to be_success }
         it { expect(assigns(:user)).to eq other_user }
         it { expect(response).to render_template 'edit' }
       end
@@ -81,7 +77,6 @@ RSpec.describe Admin::UsersController do
     describe '#new' do
       before { get :new }
 
-      it { expect(response).to be_success }
       it { expect(assigns(:user)).to be_a User }
       it { expect(response).to render_template 'new' }
     end
@@ -98,7 +93,6 @@ RSpec.describe Admin::UsersController do
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes }
 
-        it { expect(response).to be_success }
         it { expect(assigns(:user)).to be_a User }
         it { expect(response).to render_template 'new' }
       end

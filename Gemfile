@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
-ruby '2.4.1' # Heroku's ruby version
+ruby '2.6.3'
 
-gem 'rails', '5.1.2'
+gem 'rails', '6.0.2.2'
 
 gem 'pg'
 
 gem 'sass-rails'
 gem 'uglifier'
 gem 'webpacker'
+gem 'sprockets-rails', '2.3.3'
 
 gem 'bootstrap'
 
-gem 'coffee-rails'
 gem 'jquery-rails'
 
 gem 'puma'
@@ -28,8 +28,6 @@ gem 'sal-engine'
 gem 'dragonfly', '~>1.0.3'
 gem 'dragonfly-s3_data_store'
 gem 'mime-types'
-
-gem 'rails_12factor', group: :production
 
 group :development do
   gem 'listen'
@@ -49,8 +47,8 @@ group :test do
   gem 'rspec-cells'
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
-  gem 'factory_girl_rails'
+  gem 'factory_bot'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'turnip'
 end

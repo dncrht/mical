@@ -31,7 +31,7 @@ class Admin::ActivitiesController < AdminController
   def update
     @activity = Activity.find(params[:id])
 
-    if @activity.update_attributes(activity_params)
+    if @activity.update(activity_params)
       redirect_to admin_activities_path, notice: 'Activity updated'
     else
       render 'edit'

@@ -1,7 +1,7 @@
 steps_for :calendar do
 
   step "there isn't an event for today" do
-    FactoryGirl.create :activity
+    FactoryBot.create :activity
   end
 
   step 'I visit the calendar' do
@@ -13,7 +13,7 @@ steps_for :calendar do
   end
 
   step "there's an event for today" do
-    FactoryGirl.create :event
+    FactoryBot.create :event
   end
 
   step 'I click on today because I want to modify an event' do
@@ -62,7 +62,7 @@ steps_for :calendar do
   end
 
   step 'a logged in user' do
-    user = FactoryGirl.create :user, password: 'kk'
+    user = FactoryBot.create :user, password: 'kk'
     visit sign_in_path
     fill_in 'session[email]', with: user.email
     fill_in 'session[password]', with: 'kk'
