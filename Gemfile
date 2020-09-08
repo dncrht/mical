@@ -1,7 +1,9 @@
+ruby File.read('.ruby-version').chomp
 source 'https://rubygems.org'
-ruby '2.6.3'
 
-gem 'rails', '6.0.2.2'
+gem 'rails'
+
+gem 'dotenv-rails'
 
 gem 'pg'
 
@@ -34,11 +36,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dotenv-rails'
-  gem 'pry'
-  gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'rspec-rails'
 end
 
 group :test do
@@ -46,6 +44,7 @@ group :test do
   gem 'rspec-cells'
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
+  gem 'rspec-rails'
   gem 'factory_bot'
   gem 'capybara'
   gem 'webdrivers'
