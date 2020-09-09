@@ -9,7 +9,7 @@ const PhotoUpload = function(props, context) {
 
   return (
     h('div', {className: props.size},
-      h(Dropzone, {className: "upload-dropzone", activeClassName: "upload-dropzone-active", disablePreview: true, onDrop: (files)=>context.bus$.push({type: PHOTO_DROPPED, file: files[0]}), multiple: false, accept: 'image/*'}, [
+      h(Dropzone, {className: "upload-dropzone", activeClassName: "upload-dropzone-active", disablePreview: true, onDrop: (files)=>context.bus$.push({type: PHOTO_DROPPED, files: files}), multiple: true, accept: 'image/*'}, [
         h('progress', {value: isNaN(props.progress) ? 0 : props.progress, max: 100}),
         h('small', null, 'Drop a photo here'),
         h('p', null, 'or'),
@@ -22,7 +22,7 @@ const PhotoUpload = function(props, context) {
 const Photo = function(props, context) {
   return (
     h('div', {className: "col-sm-3 event-form-photo"}, [
-      h('a', {onClick: ()=>context.bus$.push({type: PHOTO_DELETED, url: props.deleteUrl}), role: "button"}, '✗'),
+      h('a', {onClick: ()=>context.bus$.push({type: PHOTO_DELETED, url: props.deleteUrl}), role: 'button'}, '✗'),
       h('a', {onClick: ()=>{$('.gallery').colorbox({rel: 'gallery', maxWidth: $(window).width(), maxHeight: $(window).height()});}, href: props.href, className: "gallery"},
         h('img', {src: props.src, className: "img-fluid"})
       )
@@ -61,22 +61,24 @@ const PhotosApplet = {
         }.bind(this));
         break;
       case PHOTO_DROPPED:
-        request
-          .post(this.model().url)
-          .set('X-CSRF-Token', $.rails.csrfToken())
-          .on('progress', function(e) {
-            this.updateModel({progress: e.percent});
-          }.bind(this))
-          .field('photo[image]', message.file)
-          .end(function(err, response) {
-            if (err) {
-              console.error(err);
-            }
+        for (var file of message.files) {
+          request
+            .post(this.model().url)
+            .set('X-CSRF-Token', $.rails.csrfToken())
+            .on('progress', function(e) {
+              this.updateModel({progress: e.percent});
+            }.bind(this))
+            .field('photo[image]', file)
+            .end(function(err, response) {
+              if (err) {
+                console.error(err);
+              }
 
-            var photos = this.model().photos;
-            photos.push(JSON.parse(response.text));
-            this.updateModel({photos: photos, progress: 0});
-          }.bind(this));
+              var photos = this.model().photos;
+              photos.push(JSON.parse(response.text));
+              this.updateModel({photos: photos, progress: 0});
+            }.bind(this));
+        }
         break;
     }
   }
