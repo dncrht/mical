@@ -26,7 +26,7 @@ gem 'clearance'
 
 gem 'sal-engine'
 
-gem 'dragonfly', '~>1.0.3'
+gem 'dragonfly', '~>1.4.0'
 gem 'dragonfly-s3_data_store'
 gem 'mime-types'
 
