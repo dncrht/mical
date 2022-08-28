@@ -1,4 +1,4 @@
-class UpgradeClearanceToDiesel < ActiveRecord::Migration
+class UpgradeClearanceToDiesel < ActiveRecord::Migration[5.0]
   def self.up
     change_table :users  do |t|
       t.string :encrypted_password, limit: 128

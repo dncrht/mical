@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
+    "@rails/webpacker": "^5.4.3",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "react-color": "^2.13.8",

@@ -1,7 +1,6 @@
 require 'csv'
 
 class HomeController < ApplicationController
-
   before_action :clean_current_year_url, :set_year, only: :index
 
   # GET /(:year)

@@ -1,18 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe Admin::UsersController do
+RSpec.describe Admin::UsersController, type: :request do
 
   let(:user) { create(:user) }
 
-  before { sign_in_as user }
-
   context 'with a non admin user' do
-    let(:user) { build(:user, is_admin: false) }
+    let(:user) { create(:user, is_admin: false) }
 
     describe '#index' do
-      before { get :index }
+      before { get admin_users_path(as: user) }
 
-      it { expect(assigns(:users)).to be_nil }
+      it { expect(response.status).to eq 403 }
     end
   end
 
@@ -20,27 +18,33 @@ RSpec.describe Admin::UsersController do
     let(:other_user) { create(:user) }
 
     describe '#index' do
-      before { get :index }
+      before { get admin_users_path(as: user) }
 
-      it { expect(assigns(:users)).to eq [user] }
-      it { expect(response).to render_template 'index' }
+      specify do
+        expect(response.body).to have_link('Users', class: 'active')
+        expect(response.body).to have_link('New user')
+        expect(response.body).to have_text('@domain.tld')
+      end
     end
 
     describe '#show' do
-      before { get :show, params: {id: user.id} }
+      before { get admin_user_path(as: user, id: user.id) }
 
       it { expect(response).to redirect_to edit_admin_user_path(user.id) }
     end
 
     describe '#edit' do
-      before { get :edit, params: {id: user.id} }
+      before { get edit_admin_user_path(as: user, id: user.id) }
 
-      it { expect(assigns(:user)).to eq user }
-      it { expect(response).to render_template 'edit' }
+      specify do
+        expect(response.body).to have_link('Users', class: 'active')
+        expect(response.body).to have_text('Edit user')
+        expect(response.body).to have_css('span.uneditable-input', exact_text: user.email)
+      end
     end
 
     describe '#update' do
-      before { patch :update, params: {id: other_user.id, user: user_attributes} }
+      before { patch admin_user_path(as: user, id: user_attributes['id']), params: {user: user_attributes} }
 
       context 'valid user' do
         let(:user_attributes) { other_user.attributes }
@@ -51,8 +55,7 @@ RSpec.describe Admin::UsersController do
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes.merge('email' => nil) }
 
-        it { expect(assigns(:user)).to eq other_user }
-        it { expect(response).to render_template 'edit' }
+        it { expect(response.body).to have_text('Edit user') }
       end
 
       context 'accept a blank password if the user exists' do
@@ -64,10 +67,10 @@ RSpec.describe Admin::UsersController do
 
     describe '#destroy' do
       # Try to delete other user because he's the last admin
-      before { delete :destroy, params: {id: other_user.id} }
+      before { delete admin_user_path(as: user, id: other_user.id) }
 
       it { expect(response).to redirect_to admin_users_path }
-      it { expect(User.exists?(other_user.id)).to be_falsey }
+      it { expect(User.exists?(other_user.id)).to be false }
     end
   end
 
@@ -75,14 +78,13 @@ RSpec.describe Admin::UsersController do
     let(:other_user) { build(:user) }
 
     describe '#new' do
-      before { get :new }
+      before { get new_admin_user_path(as: user) }
 
-      it { expect(assigns(:user)).to be_a User }
-      it { expect(response).to render_template 'new' }
+      it { expect(response.body).to have_text('New user') }
     end
 
     describe '#create' do
-      before { post :create, params: {user: user_attributes} }
+      before { post admin_users_path(as: user), params: {user: user_attributes} }
 
       context 'valid user' do
         let(:user_attributes) { other_user.attributes.merge('password' => 'any') }
@@ -93,8 +95,7 @@ RSpec.describe Admin::UsersController do
       context 'invalid user' do
         let(:user_attributes) { other_user.attributes }
 
-        it { expect(assigns(:user)).to be_a User }
-        it { expect(response).to render_template 'new' }
+        it { expect(response.body).to have_text('New user') }
       end
     end
   end

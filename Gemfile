@@ -6,6 +6,7 @@ gem 'rails'
 gem 'dotenv-rails'
 
 gem 'pg'
+gem 'sqlite3'
 
 gem 'sassc-rails'
 gem 'uglifier'
@@ -30,6 +31,8 @@ gem 'dragonfly', '~>1.0.3'
 gem 'dragonfly-s3_data_store'
 gem 'mime-types'
 
+gem 'rexml'
+
 group :development do
   gem 'listen'
   gem 'spring-commands-rspec'
@@ -40,13 +43,12 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rails-controller-testing'
   gem 'rspec-cells'
   gem 'rspec-collection_matchers'
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_bot'
   gem 'capybara'
   gem 'webdrivers'
+  gem 'timecop'
   gem 'turnip'
 end

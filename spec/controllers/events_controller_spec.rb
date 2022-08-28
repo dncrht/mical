@@ -1,35 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe EventsController do
+RSpec.describe EventsController, type: :request do
 
   let(:today) { Date.current }
-  let(:admin) { build(:user) }
-  let(:guest) { build(:user, can_edit_event: false) }
+  let(:admin) { create(:user) }
+  let(:guest) { create(:user, can_edit_event: false) }
   let!(:event) { create(:event) }
 
   describe '#show' do
-    before { sign_in_as admin }
-
     it 'prepares an empty form' do
-      get :show, xhr: true, params: {id: '1997-06-04'}, format: :js
+      get event_path(as: admin, id: '1997-06-04'), headers: {'ACCEPT' => 'application/javascript'}
 
-      expect(assigns(:activities)).to eq [event.activity]
-      expect(assigns(:event).id).to be_nil
+      expect(response.body).to include 'value=\"1997-06-04\"'
     end
 
     it 'prepares a form for an event' do
-      get :show, xhr: true, params: {id: event.day}, format: :js
+      get event_path(as: admin, id: event.day), headers: {'ACCEPT' => 'application/javascript'}
 
-      expect(assigns(:activities)).to eq [event.activity]
-      expect(assigns(:event)).to eq event
+      expect(response.body).to include %(value=\\"#{Date.current.to_s}\\")
     end
   end
 
   describe '#create' do
     before do
-      event = build(:event)
-      sign_in_as user
-      post :create, format: :js, params: {id: event.day, event: event.attributes}
+      post events_path(as: user), params: {event: event.attributes}, headers: {'ACCEPT' => 'application/javascript'}
     end
 
     context 'when not logged in' do
@@ -47,14 +41,13 @@ RSpec.describe EventsController do
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(response).to render_template '_save' }
+      it { expect(Event.count).to eq 1 }
     end
   end
 
   describe '#update' do
     before do
-      sign_in_as user
-      patch :update, format: :js, params: {id: event.id, event: {description: 'different'}}
+      patch event_path(as: user, id: event.id), params: {event: {description: 'different'}}, headers: {'ACCEPT' => 'application/javascript'}
     end
 
     context 'when not logged in' do
@@ -72,27 +65,26 @@ RSpec.describe EventsController do
     context 'when logged in and can edit event' do
       let(:user) { admin }
 
-      it { expect(response).to render_template '_save' }
+      it { expect(Event.last.description).to eq 'different' }
     end
   end
 
   describe '#delete' do
     before do
-      sign_in_as user
-      delete :destroy, params: {id: event.id}, format: :js
+      delete event_path(as: user, id: event.id), headers: {'ACCEPT' => 'application/javascript'}
     end
 
     context 'when not logged in' do
       let(:user) { nil }
 
-      it { expect(Event.exists?(event.id)).to be_present }
+      it { expect(Event.exists?(event.id)).to be true }
       it { expect(response).to redirect_to root_path }
     end
 
     context "when logged in but can't edit event" do
       let(:user) { guest }
 
-      it { expect(Event.exists?(event.id)).to be_present }
+      it { expect(Event.exists?(event.id)).to be true }
     end
 
     context 'when logged in and can edit event' do

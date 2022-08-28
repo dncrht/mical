@@ -1,5 +1,4 @@
 class PhotosController < ApplicationController
-
   before_action :only_logged_and_capable
 
   def create

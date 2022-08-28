@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
-
   before_action :only_logged_and_capable
-  skip_before_action :verify_authenticity_token, only: :destroy
+  #skip_before_action :verify_authenticity_token, only: :destroy
 
   def show
     @event = Event.find_by(day: params[:id]) || Event.new(day: params[:id])
