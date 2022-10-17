@@ -1,4 +1,4 @@
-- if signed_in?
+- if current_user
   - if @_controller.kind_of? HomeController
     - if current_user.is_admin || current_user.can_edit_activity
       = link_to 'Admin area', admin_path
@@ -6,7 +6,7 @@
   - else
     = link_to '↩ Calendar', root_path
     |
-  = link_to '✖ Logout', sign_out_path, method: :delete
+  = link_to '✖ Logout', sessions_path, data: {'turbo-method': :delete}
 - else
   - if @_controller.kind_of? HomeController
     = link_to 'Log in', admin_path

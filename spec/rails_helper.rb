@@ -5,9 +5,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 
-# Clearance's custom matchers
-require 'clearance/rspec'
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -26,11 +23,12 @@ RSpec.configure do |config|
     driven_by :selenium, using: :firefox
   end
 
-  config.before(:each) { ActionMailer::Base.deliveries.clear }
+  #config.before(:each) { ActionMailer::Base.deliveries.clear }
 
   config.include FactoryBot::Syntax::Methods
 
   config.include Capybara::RSpecMatchers, type: :request
+  config.include LoginHelper, type: :request
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

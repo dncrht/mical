@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ActivitiesController, type: :request do
-
   let(:user) { create(:user) }
+
+  before { log_in user }
 
   context 'with an existing activity' do
     let!(:activity) { create(:activity) }
 
     describe '#index' do
-      before { get admin_activities_path(as: user) }
+      before { get admin_activities_path }
 
       specify do
         expect(response.body).to have_link('Activities', class: 'active')
@@ -19,13 +20,13 @@ RSpec.describe Admin::ActivitiesController, type: :request do
     end
 
     describe '#show' do
-      before { get admin_activity_path(as: user,id: activity.id) }
+      before { get admin_activity_path(id: activity.id) }
 
       it { expect(response).to redirect_to edit_admin_activity_path(activity.id) }
     end
 
     describe '#edit' do
-      before { get edit_admin_activity_path(as: user, id: activity.id) }
+      before { get edit_admin_activity_path(id: activity.id) }
 
       specify do
         expect(response.body).to have_link('Activities', class: 'active')
@@ -35,12 +36,12 @@ RSpec.describe Admin::ActivitiesController, type: :request do
     end
 
     describe '#update' do
-      before { patch admin_activity_path(as: user, id: activity.id), params: {activity: activity_attributes} }
+      before { patch admin_activity_path(id: activity.id), params: {activity: activity_attributes} }
 
       context 'valid activity'  do
         let(:activity_attributes) { activity.attributes }
 
-        it { expect(response).to redirect_to admin_activities_path }
+        it { expect(response.body).to include admin_activities_path }
       end
 
       context 'invalid activity' do
@@ -51,7 +52,7 @@ RSpec.describe Admin::ActivitiesController, type: :request do
     end
 
     describe '#destroy' do
-      before { delete admin_activity_path(as: user, id: activity.id) }
+      before { delete admin_activity_path(id: activity.id) }
 
       it { expect(response).to redirect_to admin_activities_path }
       it { expect(Activity.exists?(activity.id)).to be false }
@@ -62,18 +63,18 @@ RSpec.describe Admin::ActivitiesController, type: :request do
     let(:activity) { build(:activity) }
 
     describe '#new' do
-      before { get new_admin_activity_path(as: user) }
+      before { get new_admin_activity_path }
 
       it { expect(response.body).to have_text('New activity') }
     end
 
     describe '#create' do
-      before { post admin_activities_path(as: user), params: {activity: activity_attributes} }
+      before { post admin_activities_path, params: {activity: activity_attributes} }
 
       context 'valid activity' do
         let(:activity_attributes) { activity.attributes }
 
-        it { expect(response).to redirect_to admin_activities_path }
+        it { expect(response.body).to include admin_activities_path }
       end
 
       context 'invalid activity' do

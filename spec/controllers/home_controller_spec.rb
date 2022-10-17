@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe HomeController, type: :request do
-
   let(:today) { Date.current }
   let(:admin) { build(:user) }
   let(:guest) { build(:user, can_edit_event: false) }

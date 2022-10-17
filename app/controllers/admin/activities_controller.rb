@@ -42,7 +42,7 @@ class Admin::ActivitiesController < AdminController
     @activity = Activity.find(params[:id])
 
     @activity.destroy
-    redirect_to admin_activities_path, notice: 'Activity deleted'
+    redirect_to admin_activities_path, notice: 'Activity deleted', status: :see_other
   end
 
   private

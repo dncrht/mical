@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     @activities = Activity.order('position')
 
     respond_to do |format|
-      if signed_in? && current_user.can_download
+      if current_user&.can_download
         format.csv do
           headers['Content-Disposition'] = %(attachment; filename="events_#@year.csv")
           self.response_body = Enumerator.new do |response|

@@ -1,27 +1,26 @@
-= form_with model: @event, class: 'row', local: false do |f|
+= form_with model: @event, class: 'row' do |f|
   .event-form-inputs.col-sm-9
-    .form-group
-      = f.label :activity_id
+    .mb-2= rating(@event.rating.to_i, Event::TOP)
+
+    .mb-2.form-floating
       = f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id), {}, class: 'form-control'
+      = f.label :activity_id
 
-    .form-group
+    .mb-2.form-floating
+      = f.text_area :description, class: 'form-control', placeholder: '…'
       = f.label :description
-      = f.text_area :description, class: 'form-control'
-
-    .form-group
-      = f.label :rating
-      #js-rating.event-form-rating
 
     = f.hidden_field :day
 
   .col-sm-3
     - if action_name != 'show'
-      = link_to 'Close', year_path(@event.day.year), class: 'btn btn-light form-control mb-3'
+      = link_to 'Close', year_path(@event.day.year), class: 'btn btn-light form-control mb-3', data: {'turbo-frame': '_top'}
     - else
-      %button.btn.btn-light.form-control.mb-3{'data-dismiss' => 'modal', 'aria-label' => 'Close'} Close
+      %button.btn.btn-light.form-control.mb-3{type: 'button', onclick: 'document.getElementById("modal").close()'} Close
     = f.submit 'Save', class: 'btn btn-primary form-control mb-3'
     - unless @event.new_record?
-      = link_to 'Delete', event_path(@event), class: 'btn btn-danger form-control', data: {confirm: 'Are you sure?'}, remote: true, method: :delete
+      = link_to 'Delete', event_path(@event), class: 'btn btn-danger form-control', data: {'turbo-method': :delete, 'turbo-confirm': 'Are you sure?', 'turbo-frame': '_top'}
 
 - unless @event.new_record?
-  #js-photos.event-form-photos
+  = turbo_frame_tag 'photos' do
+    = render 'photos', photos: @event.photos, event_id: @event.id

@@ -1,0 +1,14 @@
+= form_with url: photos_path(event_id: event_id), class: 'event-form-photos', multipart: true, data: {controller: 'upload', action: 'dragleave->upload#dragleave dragover->upload#dragover drop->upload#drop', 'upload-target': 'form'} do |f|
+  .row
+    - photos.each do |photo|
+      .col-sm-3.event-form-photo
+        = link_to '✗', photo_path(photo.id), role: 'button', data: {'turbo-method': :delete}, class: 'text-decoration-none'
+        = link_to photo.image.remote_url, target: '_blank' do
+          = image_tag photo.image.thumb('320x240#').url, class: 'img-fluid'
+
+    .event-form-photo{class: photos.empty? ? 'col-sm-12' : 'col-sm-3'}
+      .d-flex.flex-column.justify-content-between.h-100.upload-dropzone(data-upload-target="area")
+        %span Drop a photo here
+        %small.py-4 or
+        %button.btn.btn-primary.btn-sm.form-control(type="button" data-action="upload#openDialog") Select a file
+        %input(class="d-none" accept="image/*" type="file" multiple="true" autocomplete="off" name="photo[image][]" data-upload-target="file" data-action="change->upload#perform")

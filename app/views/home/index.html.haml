@@ -4,18 +4,18 @@
     %p.header-month= l(@today, format: :month)
 
 - content_for :header_year do
-  %span.header-year.js-year-selection= @year
-  %ul.header-years-dropdown
-    .row
-      - @years.to_a.reverse.each do |year|
-        %li.col-4.text-center
-          = link_to year, year_path(year)
+  %section(data-controller="dropdown")
+    %span.header-year(data-dropdown-target="toHide")= @year
+    .header-panel-info.d-none(data-dropdown-target="toShow")
+      %section.row
+        - @years.to_a.reverse.each do |year|
+          %h3.col-2= link_to year, year_path(year)
 
 .row
   - (1..12).each do |month|
-    = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: signed_in? && current_user.can_see_description)
+    = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: current_user&.can_see_description)
 
-- if signed_in? && current_user.can_see_legend
+- if current_user&.can_see_legend
   .legend.d-none.d-lg-block
     - @activities.each do |i|
       - next if i.count_during_year(@year).zero?
@@ -25,5 +25,10 @@
         = i.name
 
 - content_for :footer do
-  - if signed_in? && current_user.can_download
+  - if current_user&.can_download
     = link_to "↯ Export #{@year} events as .csv", "#@year.csv"
+
+:javascript
+  document.addEventListener('turbo:load', function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });

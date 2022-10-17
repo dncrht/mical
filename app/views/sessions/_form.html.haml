@@ -1,0 +1,15 @@
+= turbo_frame_tag 'form' do
+  = form_with model: @user, url: sessions_path do |f|
+
+    - unless alert.blank?
+      .alert.alert-danger= alert
+
+    .form-floating.mb-2
+      = f.text_field :email, class: 'form-control', placeholder: '…'
+      = f.label :email
+
+    .form-floating.mb-2
+      = f.password_field :password, class: 'form-control', placeholder: '…'
+      = f.label :password
+
+    = f.submit 'Log me in!', class: 'btn btn-primary'

@@ -1,24 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :request do
-
   let(:user) { create(:user) }
+
+  before { log_in user }
 
   context 'with a non admin user' do
     let(:user) { create(:user, is_admin: false) }
 
     describe '#index' do
-      before { get admin_users_path(as: user) }
+      before { get admin_users_path }
 
       it { expect(response.status).to eq 403 }
     end
   end
 
   context 'with an existing user' do
-    let(:other_user) { create(:user) }
+    let!(:other_user) { create(:user) }
 
     describe '#index' do
-      before { get admin_users_path(as: user) }
+      before { get admin_users_path }
 
       specify do
         expect(response.body).to have_link('Users', class: 'active')
@@ -28,23 +29,25 @@ RSpec.describe Admin::UsersController, type: :request do
     end
 
     describe '#show' do
-      before { get admin_user_path(as: user, id: user.id) }
+      before { get admin_user_path(id: user.id) }
 
       it { expect(response).to redirect_to edit_admin_user_path(user.id) }
     end
 
     describe '#edit' do
-      before { get edit_admin_user_path(as: user, id: user.id) }
+      before { get edit_admin_user_path(id: user.id) }
 
       specify do
         expect(response.body).to have_link('Users', class: 'active')
         expect(response.body).to have_text('Edit user')
-        expect(response.body).to have_css('span.uneditable-input', exact_text: user.email)
+        expect(response.body).to have_css(%(input[value="#{user.email}"]))
       end
     end
 
     describe '#update' do
-      before { patch admin_user_path(as: user, id: user_attributes['id']), params: {user: user_attributes} }
+      let(:user) { other_user }
+
+      before { patch admin_user_path(id: user_attributes['id']), params: {user: user_attributes} }
 
       context 'valid user' do
         let(:user_attributes) { other_user.attributes }
@@ -67,7 +70,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     describe '#destroy' do
       # Try to delete other user because he's the last admin
-      before { delete admin_user_path(as: user, id: other_user.id) }
+      before { delete admin_user_path(id: other_user.id) }
 
       it { expect(response).to redirect_to admin_users_path }
       it { expect(User.exists?(other_user.id)).to be false }
@@ -78,18 +81,18 @@ RSpec.describe Admin::UsersController, type: :request do
     let(:other_user) { build(:user) }
 
     describe '#new' do
-      before { get new_admin_user_path(as: user) }
+      before { get new_admin_user_path }
 
       it { expect(response.body).to have_text('New user') }
     end
 
     describe '#create' do
-      before { post admin_users_path(as: user), params: {user: user_attributes} }
+      before { post admin_users_path, params: {user: user_attributes} }
 
       context 'valid user' do
         let(:user_attributes) { other_user.attributes.merge('password' => 'any') }
 
-        it { expect(response).to redirect_to admin_users_path }
+        it { expect(response.body).to include admin_users_path }
       end
 
       context 'invalid user' do

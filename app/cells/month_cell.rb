@@ -17,7 +17,7 @@ class MonthCell < Cell::ViewModel
       out << %(<td data-day="#{day.to_s}" #{day_attributes(day.to_s)}>)
 
       if show_desc
-        out << link_to(day.day, event_path(id: day.to_s), remote: true) << '</td>'
+        out << link_to(day.day, event_path(id: day.to_s), 'data-controller' => 'modal') << '</td>'
       else
         out << "#{day.day}</td>"
       end
@@ -57,7 +57,7 @@ class MonthCell < Cell::ViewModel
     end
 
     clazz << ' month-day_current' if day == today.to_s
-    out << %(class="#{clazz}")
+    out << %(class="#{clazz}" data-toggle="tooltip")
 
     out.join(' ')
   end

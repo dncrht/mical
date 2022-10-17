@@ -1,7 +1,7 @@
 = messages_bar
 
 %p
-  = link_to 'New user', new_admin_user_path, class: 'btn btn-link btn-lg'
+  = link_to 'New user', new_admin_user_path, class: 'btn btn-light btn-lg'
 
 %table.table.table-striped.table-bordered.table-sm
   %thead
@@ -24,4 +24,4 @@
         %td= tick_or_x i.can_see_description
         %td= tick_or_x i.can_download
         %td= tick_or_x i.is_admin
-        %td= link_to 'Delete', admin_user_path(i), class: 'btn btn-danger', data: {confirm: "Clicking 'Yes' will delete user #{i.email}. Are you sure?"}, method: :delete
+        %td= link_to 'Delete', admin_user_path(i), class: 'btn btn-danger', data: {'turbo-method': :delete, 'turbo-confirm': "Clicking 'Yes' will delete user #{i.email}. Are you sure?"}

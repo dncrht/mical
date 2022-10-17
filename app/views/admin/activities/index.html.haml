@@ -1,7 +1,8 @@
-= messages_bar
+= alert_with_effect do
+  = messages_bar
 
 %p
-  = link_to 'New activity', new_admin_activity_path, class: 'btn btn-link btn-lg'
+  = link_to 'New activity', new_admin_activity_path, class: 'btn btn-light btn-lg'
 
 %table.table.table-striped.table-bordered
   %thead
@@ -17,4 +18,4 @@
         %td
           %span.uneditable-input{style: "background:#{i.color}"}= i.color
         %td= i.position
-        %td= link_to 'Delete', admin_activity_path(i), class: 'btn btn-danger', data: {confirm: "Clicking 'Yes' will delete activity #{i.name}. Are you sure?"}, method: :delete
+        %td= link_to 'Delete', admin_activity_path(i), class: 'btn btn-danger', data: {'turbo-method': :delete, 'turbo-confirm': "Clicking 'Yes' will delete activity #{i.name}. Are you sure?"}

@@ -2,21 +2,22 @@
 
   = errors_bar @activity
 
-  .form-group.row
+  .row.mb-2
     = f.label :name, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = f.text_field :name, class: 'form-control'
 
-  .form-group.row
+  .row.mb-2
     = f.label :color, class: 'col-sm-2 col-form-label'
     .col-sm-6
-      = react_applet 'ColorApplet', color: @activity.color
+      = f.text_field :color, class: 'form-control'
 
-  .form-group.row
+  .row.mb-2
     = f.label :position, class: 'col-sm-2 col-form-label'
     .col-sm-6
       = f.text_field :position, class: 'form-control'
 
-  .col-sm-10.ml-sm-auto
-    = submit_tag 'Save', class: 'btn btn-primary'
-    = link_to 'Cancel', admin_activities_path, class: 'btn btn-link'
+  .row
+    .col-sm-10.offset-2
+      = submit_tag 'Save', class: 'btn btn-primary'
+      = link_to 'Cancel', admin_activities_path, class: 'btn btn-link', data: { 'turbo-frame': '_top' }

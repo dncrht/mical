@@ -10,6 +10,7 @@ Dragonfly.app.configure do
 
   case Rails.env
   when 'development'
+    verify_urls false
     datastore :file,
       root_path: Rails.root.join('public/system'),
       server_root: Rails.root.join('public')

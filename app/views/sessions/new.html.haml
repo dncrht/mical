@@ -2,17 +2,4 @@
   %span.header-year Login
 
 .row.justify-content-center
-  = form_with scope: :session, url: session_path, class: 'col-4' do |f|
-
-    - unless notice.blank?
-      .alert.alert-danger= notice
-
-    .form-group
-      = f.label :email
-      = f.text_field :email, class: 'form-control'
-
-    .form-group
-      = f.label :password
-      = f.password_field :password, class: 'form-control'
-
-    = f.submit 'Log me in!', class: 'btn btn-primary'
+  .col-4= render 'form'

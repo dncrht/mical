@@ -18,6 +18,7 @@ class Admin::UsersController < AdminController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:notice] = 'User created'
       redirect_to admin_users_path, notice: 'User created'
     else
       render 'new'
@@ -43,7 +44,7 @@ class Admin::UsersController < AdminController
 
     begin
       @user.destroy
-      redirect_to admin_users_path, notice: 'User deleted'
+      redirect_to admin_users_path, notice: 'User deleted', status: :see_other
     rescue => error
       redirect_to admin_users_path, alert: error.message
     end

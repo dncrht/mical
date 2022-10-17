@@ -1,3 +1,4 @@
 %h3 New activity
 
-= render 'form'
+= turbo_frame_tag 'form' do
+  = render 'form'
