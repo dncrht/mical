@@ -27,8 +27,3 @@
 - content_for :footer do
   - if current_user&.can_download
     = link_to "↯ Export #{@year} events as .csv", "#@year.csv"
-
-:javascript
-  document.addEventListener('turbo:load', function() {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
