@@ -157,8 +157,6 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
-    jsbundling-rails (1.0.3)
-      railties (>= 6.0.0)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -348,7 +346,6 @@ DEPENDENCIES
   factory_bot
   hamlit
   importmap-rails (~> 1.1)
-  jsbundling-rails
   mime-types
   pg
   pry-byebug
