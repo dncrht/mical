@@ -4,7 +4,7 @@ require 'dragonfly'
 Dragonfly.app.configure do
   plugin :imagemagick
 
-  secret Rails.application.secrets.secret_key_base
+  secret Rails.application.secret_key_base
 
   url_format "/media/:job/:name"
 
