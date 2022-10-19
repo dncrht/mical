@@ -9,14 +9,14 @@ class EventsController < ApplicationController
   def create
     @event = Event.create(event_params)
 
-    render 'save'
+    render 'show'
   end
 
   def update
     @event = Event.find_by(id: params[:id])
     @event.update event_params
 
-    render 'save'
+    render 'show'
   end
 
   def destroy

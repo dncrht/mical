@@ -26,7 +26,7 @@ RSpec.describe EventsController, type: :request do
 
   describe '#create' do
     before do
-      post events_path, params: {event: event.attributes}
+      post events_path(format: :turbo_stream), params: {event: event.attributes}
     end
 
     context 'when not logged in' do
@@ -50,7 +50,7 @@ RSpec.describe EventsController, type: :request do
 
   describe '#update' do
     before do
-      patch event_path(id: event.id), params: {event: {description: 'different'}}
+      patch event_path(id: event.id, format: :turbo_stream), params: {event: {description: 'different'}}
     end
 
     context 'when not logged in' do
