@@ -34,7 +34,7 @@
             = content_for?(:main) ? yield(:main) : yield
             = yield :footer
 
-    %dialog(id="modal")= turbo_frame_tag 'modal'
+    %dialog#modal= turbo_frame_tag 'modal'
 
     / * Remove at your will *
     - unless current_user
