@@ -9,6 +9,6 @@
   = link_to '✖ Logout', sessions_path, data: {'turbo-method': :delete}
 - else
   - if @_controller.kind_of? HomeController
-    = link_to 'Log in', admin_path
+    = link_to 'Log in', new_sessions_path
   - else
     = link_to 'Back to calendar', root_path

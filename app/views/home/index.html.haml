@@ -25,5 +25,7 @@
         = i.name
 
 - content_for :footer do
+  - unless current_user
+    = link_to 'Log in', new_sessions_path, class: 'd-block d-lg-none'
   - if current_user&.can_download
     = link_to "↯ Export #{@year} events as .csv", "#@year.csv"
