@@ -2,14 +2,16 @@
   .row
     - photos.each do |photo|
       .col-sm-3.event-form-photo
-        - if photo.image.image?
-          = link_to '✗ 📸', photo_path(photo.id), role: 'button', data: {'turbo-method': :delete}, class: 'text-decoration-none'
-          = link_to photo.image.remote_url, target: '_blank' do
-            = image_tag photo.image.thumb('320x240#').url, class: 'img-fluid'
-        - else
-          = link_to '✗ 🎥', photo_path(photo.id), role: 'button', data: {'turbo-method': :delete}, class: 'text-decoration-none'
-          = link_to photo.image.remote_url, target: '_blank' do
-            %video{src: photo.image.remote_url, class: 'img-fluid', preload: 'auto'} 🚫
+        .d-flex.flex-column.align-items-start.h-100
+          - if photo.image.image?
+            = link_to '✗', photo_path(photo.id), role: 'button', data: {'turbo-method': :delete}, class: 'text-decoration-none'
+            .my-auto
+              = link_to photo.image.remote_url, target: '_blank' do
+                = image_tag photo.image.thumb('320x240#').url, class: 'img-fluid'
+          - else
+            = link_to '✗', photo_path(photo.id), role: 'button', data: {'turbo-method': :delete}, class: 'text-decoration-none'
+            %h1.my-auto.w-100
+              .text-center= link_to '🎥', photo.image.remote_url, target: '_blank', class: 'text-decoration-none'
 
     .event-form-photo{class: photos.empty? ? 'col-sm-12' : 'col-sm-3'}
       .d-flex.flex-column.justify-content-between.h-100.upload-dropzone(data-upload-target="area")
