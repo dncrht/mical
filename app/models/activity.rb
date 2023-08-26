@@ -4,7 +4,8 @@ class Activity < ApplicationRecord
   validates :name, presence: true
   validates :color, format: /\A#[0-9A-Fa-f]{6}\z/
 
-  has_many :events, dependent: :destroy
+  has_many :event_activities, dependent: :destroy
+  has_many :events, through: :event_activities
 
   def count_during_year(year)
     Event

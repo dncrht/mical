@@ -5,7 +5,8 @@ class Event < ApplicationRecord
   validates :day, uniqueness: true
   validates :rating, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: TOP}, allow_nil: true
 
-  belongs_to :activity
+  has_many :event_activities
+  has_many :activities, through: :event_activities
   has_many :photos
 
   scope :in_year, ->(year) { where('day >= ? AND day <= ?', "#{year}-01-01", "#{year}-12-31").order('day') }
