@@ -20,7 +20,7 @@
     - @activities.each do |i|
       - next if i.count_during_year(@year).zero?
       %p
-        %span{class: "badge activity#{i.id}"}= ' '
+        %span{class: 'badge', style: "background: #{i.color}"}= ' '
         = i.count_during_year(@year)
         = i.name
 

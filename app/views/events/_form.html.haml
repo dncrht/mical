@@ -3,7 +3,7 @@
     .mb-2= rating(@event.rating.to_i, Event::TOP)
 
     .mb-2.form-floating
-      = f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activity_id), {}, class: 'form-control'
+      = f.select :activity_id, options_from_collection_for_select(@activities, :id, :name, f.object.activities.pluck(:id)), {}, class: 'form-control h-100', multiple: true
       = f.label :activity_id
 
     .mb-2.form-floating

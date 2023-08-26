@@ -48,16 +48,18 @@ class MonthCell < Cell::ViewModel
   def day_attributes(day)
     out = []
     clazz = 'month-day'
+    style = ''
 
     if events.has_key?(day)
-      clazz << " activity#{events[day].activity_id}"
-      out << %(data-activity="#{events[day].activity_id}")
+      style = "background: #{events[day].activities.first.color}"
+      clazz << ' activity'
+      #out << %(data-activity="#{events[day].activity_id}")
       rating = events[day].rating.to_i.zero? ? nil : "#{events[day].rating}★\n"
       out << %(title="#{rating}#{events[day].description}") if show_desc
     end
 
     clazz << ' month-day_current' if day == today.to_s
-    out << %(class="#{clazz}" data-toggle="tooltip")
+    out << %(class="#{clazz}" data-toggle="tooltip" style="#{style}")
 
     out.join(' ')
   end

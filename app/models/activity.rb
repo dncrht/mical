@@ -8,7 +8,8 @@ class Activity < ApplicationRecord
   has_many :events, through: :event_activities
 
   def count_during_year(year)
-    Event
+    EventActivity
+      .joins(:event)
       .where(
         'activity_id = ? AND day >= ? AND day <= ?',
         id,
