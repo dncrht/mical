@@ -51,7 +51,7 @@ class MonthCell < Cell::ViewModel
     style = ''
 
     if events.has_key?(day)
-      style = "background: #{events[day].activities.first.color}"
+      style = background(events[day].activities)
       clazz << ' activity'
       #out << %(data-activity="#{events[day].activity_id}")
       rating = events[day].rating.to_i.zero? ? nil : "#{events[day].rating}★\n"
@@ -86,5 +86,13 @@ class MonthCell < Cell::ViewModel
 
   def show_desc
     options[:show_desc]
+  end
+
+  def background(activities)
+    if activities.size == 1
+      return "background: #{activities.first.color}"
+    end
+
+    "background: linear-gradient(to right, #{activities.map(&:color).join(', ')})"
   end
 end
