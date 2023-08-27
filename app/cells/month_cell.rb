@@ -93,6 +93,13 @@ class MonthCell < Cell::ViewModel
       return "background: #{activities.first.color}"
     end
 
-    "background: linear-gradient(to right, #{activities.map(&:color).join(', ')})"
+    size = 100 / activities.size # it always returns integer
+    colors = activities.map.with_index do |activity, i|
+      ["#{activity.color} #{(i * size)}%"].tap do |el|
+        el << "#{activity.color} #{((i + 1) * size)}%" unless (i + 1) == activities.size
+      end
+    end
+
+    "background: linear-gradient(to right, #{colors.join(', ')})"
   end
 end
