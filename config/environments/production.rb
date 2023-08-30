@@ -52,6 +52,9 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
+  # Suppress action cable logs
+  config.action_cable.logger = Logger.new(nil)
+
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
