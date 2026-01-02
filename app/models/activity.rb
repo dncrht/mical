@@ -7,6 +7,8 @@ class Activity < ApplicationRecord
   has_many :event_activities, dependent: :destroy
   has_many :events, through: :event_activities
 
+  default_scope { order(:position) }
+
   def count_during_year(year)
     EventActivity
       .joins(:event)

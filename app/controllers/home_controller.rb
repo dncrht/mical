@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     @event = Event.new
 
     # Prepares the activities list
-    @activities = Activity.order('position')
+    @activities = Activity.all
 
     respond_to do |format|
       if current_user&.can_download

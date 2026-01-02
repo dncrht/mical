@@ -53,7 +53,7 @@ class MonthCell < Cell::ViewModel
     if events.has_key?(day)
       style = background(events[day].activities)
       clazz << ' activity'
-      #out << %(data-activity="#{events[day].activity_id}")
+      out << %(data-activity="#{events[day].activities.pluck(:id).join(',')}")
       rating = events[day].rating.to_i.zero? ? nil : "#{events[day].rating}★\n"
       out << %(title="#{rating}#{events[day].description}") if show_desc
     end
