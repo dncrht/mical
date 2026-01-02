@@ -16,12 +16,12 @@
     = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: current_user&.can_see_description)
 
 - if current_user&.can_see_legend
-  .legend.d-none.d-lg-block
+  .row.legend
     - @activities.each do |i|
       - next if i.count_during_year(@year).zero?
-      %p
+      .col
         %span{class: 'badge', style: "background: #{i.color}"}= ' '
-        = i.count_during_year(@year)
+        %strong= i.count_during_year(@year)
         = i.name
 
 - content_for :footer do
