@@ -6,7 +6,11 @@ class HomeController < ApplicationController
   # GET /(:year)
   def index
     # Prepares the years list
-    @years = Event.first_year..@today.year
+    @years = if Event.exists?
+               Event.order(day: :asc).first.day.year..Event.order(day: :desc).first.day.year
+             else
+               [Date.current.year]
+             end
 
     # Prepares the event list of the requested year
     @events = Event.to_h(Event.in_year(@year))
@@ -41,7 +45,7 @@ class HomeController < ApplicationController
   end
 
   def today
-    @today ||= Date.current
+    @today = Date.current
   end
 
   # Determines the requested year

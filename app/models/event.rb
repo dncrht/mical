@@ -17,10 +17,6 @@ class Event < ApplicationRecord
 
   after_commit :manage_event_activities
 
-  def self.first_year
-    Event.first.nil? ? Date.current.year : Event.first.day.year
-  end
-
   def self.to_h(events)
     Hash[*events.map { |event| [event.day.to_s, event] }.flatten] #http://snippets.dzone.com/posts/show/302
   end

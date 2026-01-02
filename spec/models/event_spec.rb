@@ -31,15 +31,4 @@ RSpec.describe Event do
     expect(build(:event, rating: 99)).to_not be_valid
     expect(build(:event, rating: 'x')).to_not be_valid
   end
-
-  it 'first_year should return current year if there are no events' do
-    expect(Event.first_year).to eq Date.current.year
-  end
-
-  it 'first_year should return the year of the first event if there are several events' do
-    first_event = create(:event, day: '1979-03-12')
-    create(:event)
-
-    expect(Event.first_year).to eq first_event.day.year
-  end
 end

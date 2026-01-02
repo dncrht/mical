@@ -18,10 +18,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_101343) do
   end
 
   create_table "event_activities", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "activity_id"
+    t.integer "event_id", null: false
+    t.integer "activity_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_event_activities_on_activity_id"
+    t.index ["event_id"], name: "index_event_activities_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
