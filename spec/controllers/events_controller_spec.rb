@@ -4,7 +4,8 @@ RSpec.describe EventsController, type: :request do
   let(:today) { Date.current }
   let(:admin) { create(:user) }
   let(:guest) { create(:user, can_edit_event: false) }
-  let!(:event) { create(:event) }
+  let(:event) { create(:event) }
+  let(:activity) { create(:activity) }
 
   before { log_in user }
 
@@ -26,7 +27,7 @@ RSpec.describe EventsController, type: :request do
 
   describe '#create' do
     before do
-      post events_path(format: :turbo_stream), params: {event: event.attributes}
+      post events_path(format: :turbo_stream), params: {event: build(:event).attributes.merge(activities_ids: [activity.id])}
     end
 
     context 'when not logged in' do
@@ -50,7 +51,7 @@ RSpec.describe EventsController, type: :request do
 
   describe '#update' do
     before do
-      patch event_path(id: event.id, format: :turbo_stream), params: {event: {description: 'different'}}
+      patch event_path(id: event.id, format: :turbo_stream), params: {event: {description: 'different', activities_ids: [activity.id]}}
     end
 
     context 'when not logged in' do

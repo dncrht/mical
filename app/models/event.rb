@@ -15,7 +15,7 @@ class Event < ApplicationRecord
 
   scope :in_year, ->(year) { where('day >= ? AND day <= ?', "#{year}-01-01", "#{year}-12-31").order('day') }
 
-  after_commit :manage_event_activities
+  after_commit :manage_event_activities, on: %i(create update)
 
   def self.to_h(events)
     Hash[*events.map { |event| [event.day.to_s, event] }.flatten] #http://snippets.dzone.com/posts/show/302

@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(event_params.to_h.slice!('activity_id'))
+    @event = Event.create(event_params)
     @event.reload
 
     render 'show'

@@ -19,7 +19,7 @@ RSpec.describe Event do
   end
 
   it 'is invalid without activity' do
-    expect(build(:event, activity_id: nil)).to_not be_valid
+    expect(build(:event, activities_ids: [])).to_not be_valid
   end
 
   it 'is invalid without description' do
