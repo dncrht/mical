@@ -21,8 +21,13 @@
       - next if i.count_during_year(@year).zero?
       .col
         %span{class: 'badge', style: "background: #{i.color}"}= ' '
-        %strong= i.count_during_year(@year)
         = i.name
+
+  .row.legend
+    - @activities_group.each do |activities, times|
+      .col
+        %strong= "#{activities}:"
+        = times
 
 - content_for :footer do
   - if current_user&.can_download

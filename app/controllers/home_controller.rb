@@ -18,6 +18,10 @@ class HomeController < ApplicationController
 
     # Prepares the activities list
     @activities = Activity.all
+    @activities_group = Hash.new(0)
+    @events.each do |day, event|
+      @activities_group[event.activities.pluck(:name).join('+')] += 1
+    end
 
     respond_to do |format|
       if current_user&.can_download
