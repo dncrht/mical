@@ -16,18 +16,29 @@
     = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: current_user&.can_see_description)
 
 - if current_user&.can_see_legend
-  .row.legend
-    - @activities.each do |i|
-      - next if i.count_during_year(@year).zero?
-      .col
-        %span{class: 'badge', style: "background: #{i.color}"}= ' '
-        = i.name
+  %div(data-controller="activities")
+    .row.legend
+      - @activities.each do |i|
+        - next if i.count_during_year(@year).zero?
+        .col
+          %label
+            %span{class: 'badge', style: "background: #{i.color}"}= ' '
+            %input{type: "checkbox", data: {activity_id: i.id, action: 'activities#update'}}
+            = i.name
 
-  .row.legend
-    - @activities_group.each do |activities, times|
-      .col
-        %strong= "#{activities}:"
-        = times
+    .row.legend
+      - @activities_group.each do |activities, times|
+        .col
+          %strong= "#{activities}:"
+          = times
+
+    .d-none{data: {activities_target: 'totalRow'}}
+      %hr
+      %strong Total combined:
+      %span{data: {activities_target: 'combined'}}
+      %br
+      %strong Total unique days:
+      %span{data: {activities_target: 'unique'}}
 
 - content_for :footer do
   - if current_user&.can_download
