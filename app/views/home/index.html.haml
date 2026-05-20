@@ -16,24 +16,27 @@
     = cell(:month, nil, year: @year, month: month, today: @today, events: @events, show_desc: current_user&.can_see_description)
 
 - if current_user&.can_see_legend
-  %div(data-controller="activities")
-    .row.legend
+  .row.legend.mb-3(data-controller="activities")
+    .col
       - @activities.each do |i|
         - next if i.count_during_year(@year).zero?
-        .col
-          %label
-            %span{class: 'badge', style: "background: #{i.color}"}= ' '
-            %input{type: "checkbox", data: {activity_id: i.id, action: 'activities#update'}}
-            = i.name
+        %label
+          %span{class: 'badge mr-1', style: "background: #{i.color}"}= ' '
+          %input{type: "checkbox", data: {activity_id: i.id, action: 'activities#update'}}
+          = i.name
+        %br
 
-    .row.legend
+    .vr.mr-5
+
+    .col
       - @activities_group.each do |activities, times|
-        .col
-          %strong= "#{activities}:"
-          = times
+        %strong= "#{activities}:"
+        = times
+        %br
 
-    .d-none{data: {activities_target: 'totalRow'}}
-      %hr
+    .vr.mr-5
+
+    .col.d-none{data: {activities_target: 'totalRow'}}
       %strong Total combined:
       %span{data: {activities_target: 'combined'}}
       %br
