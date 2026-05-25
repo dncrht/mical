@@ -4,12 +4,13 @@
     %p.header-month= l(@today, format: :month)
 
 - content_for :header_year do
-  %section(data-controller="dropdown")
-    %span.header-year(data-dropdown-target="toHide")= @year
-    .header-panel-info.d-none(data-dropdown-target="toShow")
-      %section.row
-        - @years.to_a.reverse.each do |year|
-          %h3.col-2= link_to year, year_path(year)
+  %section{data: {controller: 'years', years_list: @years.to_a.sort.to_json}}
+    .d-flex.justify-content-center
+      .header-year(data-years-target="prev" data-action="click->years#prev") ◀
+      %h3.header-year(data-years-target="curr")= @year
+      .header-year(data-years-target="next" data-action="click->years#next") ▶
+    .text-center.mt-n3
+      = link_to 'Go!', year_path(@year), data: {years_target: 'link'}
 
 .row
   - (1..12).each do |month|
